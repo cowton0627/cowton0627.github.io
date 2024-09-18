@@ -3,54 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>電影列表</title>
+    <title>個人履歷介紹</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
         }
-        th, td {
+        .content {
+            padding: 20px;
+            margin-top: 10px;
+            background: white;
             border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
         }
-        th {
-            background-color: #f2f2f2;
+        .section-title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .info-item {
+            margin-bottom: 5px;
         }
     </style>
 </head>
 <body>
-    <h1>電影列表</h1>
-    <table>
-        <tr>
-            <th>電影名稱</th>
-            <th>圖片</th>
-            <th>導演</th>
-            <th>演員</th>
-            <th>年份</th>
-            <th>IMDB 評分</th>
-        </tr>
-        <tr>
-            <td>指环王</td>
-            <td><img src="path_to_image.jpg" alt="指环王" style="width:100px;height:auto;"></td>
-            <td>彼得·杰克逊</td>
-            <td>伊利亚·伍德, 伊恩·麦克莱恩</td>
-            <td>2001</td>
-            <td>8.8</td>
-        </tr>
-        <tr>
-            <td>星際大戰：帝國反擊戰</td>
-            <td><img src="path_to_image.jpg" alt="星際大戰：帝國反擊戰" style="width:100px;height:auto;"></td>
-            <td>艾文·克什纳</td>
-            <td>馬克·哈米爾, 嘉莉·費雪</td>
-            <td>1980</td>
-            <td>8.7</td>
-        </tr>
-        <!-- 可以添加更多行來列出其他電影 -->
-    </table>
+    <div class="header">
+        <h1>個人履歷</h1>
+    </div>
+    <div class="content">
+        <div class="section">
+            <h2 class="section-title">基本資訊</h2>
+            <p class="info-item"><strong>姓名：</strong>王小明</p>
+            <p class="info-item"><strong>電子郵件：</strong>wang@example.com</p>
+            <p class="info-item"><strong>電話：</strong>123-456-7890</p>
+        </div>
+        <div class="section">
+            <h2 class="section-title">簡介</h2>
+            <p>我是一位經驗豐富的軟體開發者，專長於開發創新程式以提升組織的效率和效果。擅長快速學習新技術並應用於實際問題解決中。</p>
+        </div>
+        <div class="section">
+            <h2 class="section-title">職業經歷</h2>
+            <div class="info-item">
+                <strong>資深軟體工程師</strong> - ABC 公司<br>
+                <em>2020 - 現在</em>
+                <p>負責多個高影響力專案的開發，領導小組開發創新的解決方案來提升公司的服務質量。</p>
+            </div>
+            <div class="info-item">
+                <strong>軟體開發者</strong> - XYZ 公司<br>
+                <em>2017 - 2020</em>
+                <p>在團隊中負責主要的軟體開發和維護工作，成功提升系統性能30%以上。</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-
