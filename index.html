@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>你好，GitHub</title>
-  </head>
-  <body>
-    <h1>覺得厲害</h1>
-  </body>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>電影列表</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>電影列表</h1>
+    <table>
+        <tr>
+            <th>電影名稱</th>
+            <th>圖片</th>
+            <th>導演</th>
+            <th>演員</th>
+            <th>年份</th>
+            <th>IMDB 評分</th>
+        </tr>
+        <tr>
+            <td>指环王</td>
+            <td><img src="path_to_image.jpg" alt="指环王" style="width:100px;height:auto;"></td>
+            <td>彼得·杰克逊</td>
+            <td>伊利亚·伍德, 伊恩·麦克莱恩</td>
+            <td>2001</td>
+            <td>8.8</td>
+        </tr>
+        <tr>
+            <td>星際大戰：帝國反擊戰</td>
+            <td><img src="path_to_image.jpg" alt="星際大戰：帝國反擊戰" style="width:100px;height:auto;"></td>
+            <td>艾文·克什纳</td>
+            <td>馬克·哈米爾, 嘉莉·費雪</td>
+            <td>1980</td>
+            <td>8.7</td>
+        </tr>
+        <!-- 可以添加更多行來列出其他電影 -->
+    </table>
+</body>
 </html>
+
