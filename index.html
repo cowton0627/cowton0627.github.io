@@ -6,30 +6,57 @@
     <title>個人履歷介紹</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background: #f4f4f4;
+            background: linear-gradient(135deg, #6D5BBA, #8D58BF);
+            color: white;
         }
         .header {
             background: #333;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px 0;
             text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .content {
+            width: 80%;
+            margin: 20px auto;
+            background: rgba(255, 255, 255, 0.8);
             padding: 20px;
-            margin-top: 10px;
-            background: white;
-            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: #333;
+            transition: transform 0.3s ease;
+        }
+        .content:hover {
+            transform: translateY(-5px);
+        }
+        .section {
+            margin-bottom: 20px;
         }
         .section-title {
             color: #333;
             font-size: 24px;
             margin-bottom: 10px;
+            border-bottom: 2px solid #8D58BF;
         }
         .info-item {
             margin-bottom: 5px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #8D58BF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #7A48B3;
         }
     </style>
 </head>
@@ -55,12 +82,4 @@
                 <em>2020 - 現在</em>
                 <p>負責多個高影響力專案的開發，領導小組開發創新的解決方案來提升公司的服務質量。</p>
             </div>
-            <div class="info-item">
-                <strong>軟體開發者</strong> - XYZ 公司<br>
-                <em>2017 - 2020</em>
-                <p>在團隊中負責主要的軟體開發和維護工作，成功提升系統性能30%以上。</p>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+            <div
