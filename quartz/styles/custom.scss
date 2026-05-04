@@ -1,37 +1,533 @@
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.1rem;
-  margin: 1.5rem 0 2rem;
+/* =========================================================================
+   Knowledge base — custom styles
+   Goals:
+   - Notion / Apple Docs level readability
+   - Traditional Chinese (zh-Hant) typography that pairs cleanly with English
+   - Quiet, modern UI: soft shadows, rounded corners, restrained color
+   - Works in both light and dark mode (uses Quartz CSS variables)
+   ========================================================================= */
+
+/* -------------------------------------------------------------------------
+   1. Typography — CJK-aware stack
+   ------------------------------------------------------------------------- */
+
+:root {
+  --kb-cjk-body:
+    "PingFang TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei",
+    "Apple LiGothic", "Heiti TC", sans-serif;
+  --kb-cjk-serif:
+    "Noto Serif TC", "Source Han Serif TC", "Songti TC", "PMingLiU", serif;
+  --kb-latin-body:
+    -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI",
+    Roboto, system-ui, sans-serif;
+  --kb-mono:
+    "JetBrains Mono", "SF Mono", "IBM Plex Mono", "Fira Code", Menlo,
+    Consolas, monospace;
+
+  /* Reading rhythm */
+  --kb-line-height: 1.85;
+  --kb-paragraph-gap: 1.05rem;
+  --kb-content-max: 780px;
 }
 
-.home-card {
-  display: block;
-  padding: 1.2rem;
+body {
+  font-family: var(--kb-latin-body), var(--kb-cjk-body);
+  font-feature-settings: "palt", "kern";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Headings: tighter tracking, slightly heavier weight for CJK readability */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--kb-latin-body), var(--kb-cjk-body);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+}
+
+article > h1,
+article h1 { font-weight: 700; }
+article h2 { font-weight: 650; }
+article h3 { font-weight: 600; }
+
+/* Section dividers under h2 — quiet, not loud */
+article h2 {
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+/* Body text rhythm */
+article p,
+article li,
+article blockquote,
+article td {
+  line-height: var(--kb-line-height);
+  font-size: 1rem;
+}
+
+article p {
+  margin: 0 0 var(--kb-paragraph-gap);
+}
+
+/* Mixed CJK + Latin: add a hair of breathing room around inline code/links */
+article p, article li {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* -------------------------------------------------------------------------
+   2. Layout — comfortable reading column
+   ------------------------------------------------------------------------- */
+
+.page > #quartz-body .center {
+  /* Center the article and cap reading width */
+  & > article,
+  & > .page-header {
+    max-width: var(--kb-content-max);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media all and (min-width: 1200px) {
+  .page > #quartz-body .center {
+    & > article,
+    & > .page-header {
+      margin-left: 2rem;
+      margin-right: auto;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------
+   3. Sidebars — quieter, cleaner
+   ------------------------------------------------------------------------- */
+
+.sidebar {
+  font-size: 0.92rem;
+}
+
+.sidebar .page-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar .page-title a {
+  color: var(--dark);
+}
+
+/* Explorer: tighter list, hover affordance */
+.explorer {
+  font-size: 0.9rem;
+}
+
+.explorer ul,
+.explorer ol {
+  line-height: 1.55;
+}
+
+.explorer li > a,
+.explorer button.folder-button,
+.explorer .folder-outer .folder-container > div > span {
+  border-radius: 6px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.explorer li > a:hover,
+.explorer button.folder-button:hover {
+  background-color: var(--highlight);
+  color: var(--dark);
+}
+
+/* Search bar: card-like input feel */
+#search-container .search-space input,
+.search input,
+input[type="search"] {
+  border-radius: 8px;
   border: 1px solid var(--lightgray);
-  border-radius: 18px;
   background: var(--light);
-  text-decoration: none;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.home-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+input[type="search"]:focus,
+.search input:focus {
+  outline: none;
   border-color: var(--secondary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 18%, transparent);
 }
 
-.home-card-icon {
-  font-size: 1.8rem;
+/* Right rail: ToC, backlinks, graph */
+.toc, .backlinks, .graph {
+  font-size: 0.88rem;
+}
+
+.toc h3, .backlinks h3, .graph h3 {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  margin: 0 0 0.6rem;
+  font-weight: 600;
+}
+
+.toc ul {
+  border-left: 1px solid var(--lightgray);
+  padding-left: 0.85rem;
+}
+
+.toc a {
+  color: var(--darkgray);
+  font-weight: 400;
+  transition: color 0.15s ease;
+}
+
+.toc a:hover,
+.toc .in-view > a {
+  color: var(--secondary);
+}
+
+/* Backlinks: list of small cards-ish chips */
+.backlinks .backlink {
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--lightgray);
+  margin-bottom: 0.35rem;
+  background: transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.backlinks .backlink:hover {
+  background-color: var(--highlight);
+  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+}
+
+/* Graph view: reduce visual weight, make it secondary */
+.graph {
+  margin-top: 0.5rem;
+}
+
+.graph .graph-outer {
+  border-radius: 10px;
+  border: 1px solid var(--lightgray);
+  height: 180px;        /* minimized */
+  overflow: hidden;
+}
+
+.graph .graph-outer:hover {
+  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+}
+
+.graph button#global-graph-icon {
+  opacity: 0.6;
+  transition: opacity 0.15s ease;
+}
+.graph button#global-graph-icon:hover { opacity: 1; }
+
+/* -------------------------------------------------------------------------
+   4. Links — clear, but not noisy
+   ------------------------------------------------------------------------- */
+
+article a {
+  font-weight: 500;
+  color: var(--secondary);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+article a:hover {
+  color: var(--dark);
+  border-bottom-color: var(--secondary);
+}
+
+/* Internal wiki links: subtle pill, like Notion mentions */
+article a.internal {
+  background-color: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
+  padding: 0 0.05rem;
+  border-radius: 0;
+}
+
+article a.internal:hover {
+  background-color: var(--highlight);
+  border-bottom-color: var(--secondary);
+}
+
+article a.internal.broken {
+  color: var(--gray);
+  border-bottom-style: dashed;
+}
+
+/* External link icon stays muted */
+article a.external .external-icon > path {
+  fill: var(--gray);
+}
+
+/* -------------------------------------------------------------------------
+   5. Lists — Notion-style breathing room
+   ------------------------------------------------------------------------- */
+
+article ul,
+article ol {
+  padding-left: 1.4rem;
+  margin: 0.5rem 0 1rem;
+}
+
+article li {
+  margin-bottom: 0.25rem;
+}
+
+article ul > li::marker {
+  color: var(--gray);
+}
+
+/* Nested lists tighter */
+article li > ul,
+article li > ol {
+  margin: 0.25rem 0 0.25rem;
+}
+
+/* -------------------------------------------------------------------------
+   6. Code — soft, modern
+   ------------------------------------------------------------------------- */
+
+code {
+  background: color-mix(in srgb, var(--lightgray) 60%, transparent);
+  color: var(--dark);
+  padding: 0.1rem 0.35rem;
+  border-radius: 5px;
+  font-size: 0.88em;
+  font-family: var(--kb-mono);
+}
+
+pre {
+  border-radius: 10px;
+  border: 1px solid var(--lightgray);
+  background: color-mix(in srgb, var(--lightgray) 35%, var(--light));
+  padding: 0.9rem 1rem;
+  font-family: var(--kb-mono);
+  line-height: 1.55;
+  font-size: 0.92rem;
+}
+
+pre > code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* -------------------------------------------------------------------------
+   7. Blockquotes & callouts
+   ------------------------------------------------------------------------- */
+
+article blockquote {
+  margin: 1.25rem 0;
+  padding: 0.4rem 0 0.4rem 1rem;
+  border-left: 3px solid var(--secondary);
+  color: var(--darkgray);
+  background: color-mix(in srgb, var(--secondary) 6%, transparent);
+  border-radius: 0 8px 8px 0;
+}
+
+article blockquote p { margin: 0.25rem 0; }
+
+/* -------------------------------------------------------------------------
+   8. Tables — clean, dense
+   ------------------------------------------------------------------------- */
+
+.table-container > table {
+  margin: 1rem 0;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+.table-container th {
+  background: color-mix(in srgb, var(--lightgray) 50%, transparent);
+  border-bottom: 1px solid var(--lightgray);
+}
+
+/* -------------------------------------------------------------------------
+   9. Horizontal rule — softer
+   ------------------------------------------------------------------------- */
+
+hr {
+  margin: 2.5rem auto;
+  height: 1px;
+  background: var(--lightgray);
+  opacity: 0.7;
+}
+
+/* -------------------------------------------------------------------------
+   10. Tag list (under article title) — chip-style
+   ------------------------------------------------------------------------- */
+
+.tags {
+  gap: 0.3rem !important;
+  flex-wrap: wrap;
+}
+
+.tags > li > a.tag-link {
+  background: color-mix(in srgb, var(--secondary) 10%, transparent) !important;
+  color: var(--secondary);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem !important;
+  font-size: 0.8rem;
+  border: 1px solid transparent;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.tags > li > a.tag-link:hover {
+  background: color-mix(in srgb, var(--secondary) 18%, transparent) !important;
+  border-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+}
+
+/* -------------------------------------------------------------------------
+   11. Breadcrumbs — quieter
+   ------------------------------------------------------------------------- */
+
+.breadcrumb-container {
+  font-size: 0.82rem;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+
+.breadcrumb-container a {
+  color: var(--gray);
+}
+
+.breadcrumb-container a:hover {
+  color: var(--secondary);
+}
+
+/* -------------------------------------------------------------------------
+   12. Article title & meta
+   ------------------------------------------------------------------------- */
+
+article > h1:first-child,
+.page-header h1.article-title {
+  font-size: 2.1rem;
+  letter-spacing: -0.015em;
+  margin-top: 0.5rem;
   margin-bottom: 0.4rem;
 }
 
-.home-card h3 {
-  margin: 0.2rem 0 0.45rem;
+.content-meta {
+  color: var(--gray);
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
 }
 
-.home-card p {
-  margin: 0;
+/* -------------------------------------------------------------------------
+   13. Homepage — entry point, not marketing
+   Activated by `cssclasses: [home]` in content/index.md frontmatter
+   (Quartz applies cssclasses to <article>)
+   ------------------------------------------------------------------------- */
+
+article.home h1:first-child,
+article.home + .page-header h1.article-title {
+  font-size: 2.4rem;
+  margin-bottom: 0.25rem;
+}
+
+article.home > p:first-of-type,
+article.home > h1:first-child + p {
   color: var(--gray);
-  line-height: 1.65;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
+
+/* On homepage, h2 acts as section label, not heading */
+article.home h2 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  font-weight: 600;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 2.25rem;
+  margin-bottom: 0.4rem;
+}
+
+article.home ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.25rem 0 1rem;
+}
+
+article.home ul > li {
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  margin-bottom: 0.1rem;
+  transition: background-color 0.15s ease;
+}
+
+article.home ul > li:hover {
+  background-color: var(--highlight);
+}
+
+article.home ul > li > a,
+article.home ul > li > a.internal {
+  background: transparent;
+  border-bottom: none;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+article.home ul > li:hover > a,
+article.home ul > li:hover > a.internal {
+  color: var(--secondary);
+}
+
+/* Subtle hr between homepage sections */
+article.home hr {
+  display: none;
+}
+
+/* -------------------------------------------------------------------------
+   14. Footer — quiet
+   ------------------------------------------------------------------------- */
+
+footer {
+  color: var(--gray);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--lightgray);
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+}
+
+footer a { color: var(--gray); }
+footer a:hover { color: var(--secondary); }
+
+/* -------------------------------------------------------------------------
+   15. Selection & focus
+   ------------------------------------------------------------------------- */
+
+::selection {
+  background: color-mix(in srgb, var(--secondary) 30%, transparent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* -------------------------------------------------------------------------
+   16. Dark mode tweaks (Quartz toggles via [saved-theme=dark])
+   ------------------------------------------------------------------------- */
+
+:root[saved-theme="dark"] {
+  pre {
+    background: color-mix(in srgb, var(--lightgray) 25%, var(--light));
+  }
+
+  article blockquote {
+    background: color-mix(in srgb, var(--secondary) 12%, transparent);
+  }
 }

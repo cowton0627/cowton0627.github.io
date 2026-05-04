@@ -1,55 +1,36 @@
 ---
 title: 春麗知識庫
+cssclasses:
+  - home
 ---
 
 # 春麗知識庫
 
-你的第二大腦（Second Brain）
+我的第二大腦 — 用 Obsidian 寫，用 Quartz 發佈。重點不在分類，而在連結與成長。
 
----
-
-## 🔍 搜尋
-
-👉 使用左上角 Search（按 `/`）
-
----
-
-## 🚀 開始探索
+## 開始閱讀
 
 - [[media/A002 自媒體工具 - 生成式 AI]]
 - [[media/A003 客製化訂閱內容 - RSS Reader]]
-- [[podcast/A005 上架 Podcast]]
-
----
-
-## 🧭 主題
-
-### 🎬 自媒體
-- [[media/]]
-
-### 🎙️ Podcast
-- [[podcast/]]
-
-### 📱 社群
-- [[media/social/]]
-
----
-
-## 🆕 最新內容
-
 - [[media/A006 自媒體工具 - 快速發文平台]]
+- [[podcast/A005 上架 Podcast]]
 - [[media/social/A001 萬事起頭難 - 社群第一步]]
 
----
+## 主題
 
-## 🧠 關於這個知識庫
+- [[media/|🎬 自媒體]]
+- [[podcast/|🎙️ Podcast]]
+- [[media/social/|📱 社群]]
 
-這是一個用：
+## 使用方式
 
-- Obsidian 管理
-- Quartz 發佈
-- GitHub Pages 部署
+- 左側 **Search**（快捷鍵 `/`）— 全文搜尋
+- 左側 **Explorer** — 瀏覽所有筆記
+- 右側 **Table of Contents** — 章節導覽
+- 右側 **Backlinks** — 反向連結，看見筆記之間的脈絡
 
-的知識網絡（Digital Garden）
+## 關於
 
-👉 重點不是分類，而是「連結與成長」
+- 來源：[Obsidian](https://obsidian.md) Vault
+- 發佈：[Quartz](https://quartz.jzhao.xyz/) + GitHub Pages
+- 風格：少量、連結、長期累積
