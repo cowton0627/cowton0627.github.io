@@ -1,107 +1,154 @@
 ---
-title: A003 客製化訂閱內容 - RSS Reader
+title: 客製化訂閱內容 - RSS Reader
 ---
-
 # RSS Reader
 
 ## RSS Feed
+請見緣起。
 
 ### 緣起
 
-要了解 RSS Feed 最快的方法還是先透過 RSS Reader，RSS Reader 可以理解為一個訂閱 XML 的閱讀器，每當創作者更新內容時，閱讀器會即時通知。
+要了解 RSS Feed，最快的方法還是先透過 RSS Reader。
 
-這即是說透過這個閱讀器，你可以排除掉各種社群的不必要的推播，只專注在想看的內容上面。
+RSS Reader 可以理解為一個「訂閱 XML 的閱讀器」。每當創作者更新內容時，閱讀器就會抓取最新內容，並在需要時通知你。
 
-如果想知道在 iOS 上，如何自己寫一個 RSS Reader，參考 [Xcode - RSS 裡的 XML](https://cowton0517.medium.com/37-d-n-xcode-rss%E8%A3%A1%E7%9A%84xml-9498ce1fc2b) 這篇文章。
+也就是說，透過 RSS Reader，你可以排除掉各種社群平台不必要的推播，只專注在自己真正想看的內容上。
 
----
+如果想知道在 iOS 上如何自己寫一個 RSS Reader，可以參考這篇文章：
 
-### 使用
-
-1. 以常見的 Feedly 舉例，直接用手機做操作。
-
-![image](https://hackmd.io/_uploads/S1hNDZoZ1x.png)
-
-:::info
-前一張圖是所有更新的訂閱內容，下一張是分類中所有訂閱的頻道。
-:::
-
-![image](https://hackmd.io/_uploads/BJBBv-ibke.png)
-
-:::success
-**Feedly** 即是一個 RSS Reader，在 **Feedly** 中，已經加入各種內容的 RSS 會呈現上圖的結果，若是內容有更新，將會收到通知。
-
-並且可以新增分類，在分類中，加入你想要訂閱的內容。
-:::
-
-2. 首先，點到下方左邊數來第四順位的 Tab，搜尋內容，例如 BBC News。
-
-![image](https://hackmd.io/_uploads/ByKwYZs-yg.png)
-
-接著，我們看到各種內容，選擇想要的點選右邊的 **+** 就可以訂閱，並且設定分組了，如果想要同一個內容在不同分組出現，也是 OK 的。
-
-如此一來，使用 RSS Reader 世界就變得相當美好了，不是嗎？
+[Xcode - RSS 裡的 XML](https://cowton0517.medium.com/37-d-n-xcode-rss%E8%A3%A1%E7%9A%84xml-9498ce1fc2b)
 
 ---
 
-### 議題
+### 使用 RSS Reader
 
-:::warning
-然而，有一些內容無論你怎麼搜尋都是搜尋不到的，比方說某個特定的 Youtube 頻道，或是某個特定的 IG、Threads 的帳號，這時候應該怎麼做呢？
+以下以常見的 RSS Reader：**Feedly** 為例，直接用手機操作。
 
-我們就會使用 **RSS 產生器**，這個產生器的原理即是定時去爬使用者有沒有更新內容，然後附加回 XML 檔，所以訂閱由它產生的 XML，即是訂閱使用者了。
-:::
+![Feedly 所有更新的訂閱內容](https://hackmd.io/_uploads/S1hNDZoZ1x.png)
+
+> [!info]
+> 上圖是所有更新的訂閱內容，下圖則是分類中所有訂閱的頻道。
+
+![Feedly 分類中的訂閱頻道](https://hackmd.io/_uploads/BJBBv-ibke.png)
+
+**Feedly** 是一個 RSS Reader。  
+在 Feedly 中，已經加入的 RSS 內容會依照更新時間呈現。若訂閱內容有更新，就可以收到通知。
+
+Feedly 也可以新增分類，並把不同 RSS Feed 放進不同分類中，方便日後整理與閱讀。
 
 ---
 
-### 接著使用
+### 新增訂閱內容
 
-1. 我們可以使用 [RSS.app](https://rss.app/) 來產生 RSS Feed。
+首先，點到下方左邊數來第四順位的 Tab，搜尋內容，例如：`BBC News`。
 
-![image](https://hackmd.io/_uploads/HyWGy7s-ke.png)
+![Feedly 搜尋 BBC News](https://hackmd.io/_uploads/ByKwYZs-yg.png)
 
-:::success
-同樣地，在這個網站上已經有許多 RSS Feed，這是我分別從各個帳號 (頻道) 去產出的 RSS Feed，有來自 Threads、Instagram、Youtube 的內容。
-:::
+接著會看到各種內容來源。選擇想要訂閱的來源，點選右邊的 **+**，就可以訂閱，並設定分組。
 
-2. 首先，從左邊頁籤看到下方有一個 **+ New Feed**，把它點下去。
+如果想讓同一個內容出現在不同分組中，也可以重複加入不同分類。
 
-![image](https://hackmd.io/_uploads/HyFeJQjWJl.png)
+如此一來，使用 RSS Reader 的世界就變得相當美好了，不是嗎？
 
-:::info
-接著，我們可以看到玲瓏滿目的它支援的內容，往下拉還有。
-:::
+---
 
-![image](https://hackmd.io/_uploads/Skzg-Xs-Jg.png)
+### 議題：搜尋不到的內容怎麼辦？
 
-:::info
-然後就可以去將各種頻道的內容丟進去產生 RSS Feed，如下。
-:::
+> [!warning]
+> 有一些內容無論怎麼搜尋都搜尋不到。
+>
+> 例如：
+>
+> - 某個特定的 YouTube 頻道
+> - 某個特定的 Instagram 帳號
+> - 某個特定的 Threads 帳號
+>
+> 這時候就可以使用 **RSS 產生器**。
 
-![image](https://hackmd.io/_uploads/H1T-MmsZyx.png)
+RSS 產生器的原理，是定時去爬取指定帳號或網站是否有更新內容，再把更新結果包裝成 XML 檔。
 
-![image](https://hackmd.io/_uploads/ryGSGXob1x.png)
+因此，訂閱由 RSS 產生器產出的 XML，就等於訂閱該帳號或網站的更新。
 
-:::info
-製作好 RSS Feed，按下 Save To My Feeds。
-:::
+---
 
-![image](https://hackmd.io/_uploads/rkJozXj-1x.png)
+### 使用 RSS.app 產生 RSS Feed
 
-:::success
-最後就會得到 RSS Feed 的網址，當然，也是我們熟悉的 XML 檔。
-:::
+我們可以使用 [RSS.app](https://rss.app/) 來產生 RSS Feed。
 
-![image](https://hackmd.io/_uploads/BkW2GQs-Jx.png)
+![RSS.app 後台](https://hackmd.io/_uploads/HyWGy7s-ke.png)
 
-:::success
-Copy 這個網址就可以拿去餵到你的 RSS Reader，如剛才的 Feedly，剩下的操作跟開頭的教學一樣。
-:::
+> [!success]
+> 在 RSS.app 中，可以建立多種來源的 RSS Feed。
+>
+> 例如：
+>
+> - Threads
+> - Instagram
+> - YouTube
+> - 一般網站
+
+---
+
+### 建立新的 RSS Feed
+
+首先，從左邊頁籤看到下方有一個 **+ New Feed**，把它點下去。
+
+![RSS.app 新增 Feed](https://hackmd.io/_uploads/HyFeJQjWJl.png)
+
+> [!info]
+> 接著可以看到 RSS.app 支援許多不同平台的內容來源，往下拉還有更多選項。
+
+![RSS.app 支援的平台](https://hackmd.io/_uploads/Skzg-Xs-Jg.png)
+
+---
+
+### 輸入來源並產生 Feed
+
+接著，把想要追蹤的頻道或帳號網址丟進去，產生 RSS Feed。
+
+![RSS.app 輸入來源網址](https://hackmd.io/_uploads/H1T-MmsZyx.png)
+
+![RSS.app 產生 Feed](https://hackmd.io/_uploads/ryGSGXob1x.png)
+
+> [!info]
+> 製作好 RSS Feed 之後，按下 **Save To My Feeds**。
+
+![RSS.app 儲存 Feed](https://hackmd.io/_uploads/rkJozXj-1x.png)
+
+---
+
+### 取得 RSS Feed URL
+
+最後會得到 RSS Feed 的網址，也就是我們熟悉的 XML 檔。
+
+![RSS.app 取得 RSS Feed URL](https://hackmd.io/_uploads/BkW2GQs-Jx.png)
+
+> [!success]
+> 複製這個網址後，就可以拿去餵給你的 RSS Reader，例如 Feedly。
+>
+> 接下來的操作就跟前面 Feedly 的訂閱流程一樣。
 
 ---
 
 ### 實際成果
 
-![image](https://hackmd.io/_uploads/BkHC7Qj-kg.png)
+完成後，就可以在 Feedly 中看到透過 RSS.app 建立的訂閱來源。
+
+![Feedly 實際訂閱成果](https://hackmd.io/_uploads/BkHC7Qj-kg.png)
 
 ---
+
+## 小結
+
+RSS Reader 的核心價值，是讓你重新掌握資訊來源。
+
+透過 RSS Reader，你可以：
+
+- 自己決定要看哪些內容
+- 避開社群平台演算法干擾
+- 將 YouTube、Instagram、Threads、網站更新整合在同一個閱讀器
+- 建立屬於自己的資訊流與知識管理入口
+
+簡單來說：
+
+> RSS 不是過時技術，而是一種「資訊主權」工具。
