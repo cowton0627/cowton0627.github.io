@@ -99,6 +99,13 @@ body {
 /* -----------------------------------------------------------------------------
    2. Reading column — capped at every breakpoint
    ----------------------------------------------------------------------------- */
+
+/* Override Quartz's default 1rem horizontal padding on #quartz-body so we
+   control all gutters from --kb-content-pad. Avoids double-padding. */
+.page > #quartz-body {
+  padding: 0 !important;
+}
+
 .page > #quartz-body .center {
   & > article,
   & > .page-header,
@@ -405,19 +412,23 @@ input[type="search"]:focus,
 
 /* -----------------------------------------------------------------------------
    10. Table of contents
+   The TOC component is rendered TWICE in the layout:
+     - .page-header .toc → top-of-article card (visible on tablet/mobile)
+     - .sidebar.right .toc → sticky right rail (visible on desktop)
+   Visibility is enforced by the responsive section near the bottom of this file.
    ----------------------------------------------------------------------------- */
+
+/* Shared list styles for both TOC instances */
 .toc-content {
   list-style: none;
   padding-left: 0;
   margin: 0;
   position: relative;
-  border-left: 1px solid var(--kb-border-soft);
 }
 .toc-content li {
   margin: 0;
   position: relative;
 }
-
 .toc-content li > a {
   display: block;
   padding: 0.28rem 0 0.28rem 0.85rem;
@@ -435,13 +446,11 @@ input[type="search"]:focus,
 .toc-content li > a:hover {
   color: var(--dark);
 }
-
 .toc-content .in-view > a {
   color: var(--secondary);
   border-left-color: var(--secondary);
   font-weight: 500;
 }
-
 .toc-content .depth-1 > a {
   padding-left: 0.85rem;
 }
@@ -453,6 +462,48 @@ input[type="search"]:focus,
 }
 .toc-content .depth-4 > a {
   padding-left: 3.1rem;
+}
+
+/* Right-rail TOC: gets the vertical guide line + uppercase eyebrow header */
+.sidebar.right .toc-content {
+  border-left: 1px solid var(--kb-border-soft);
+}
+
+/* Article-top TOC: rendered as a quiet card */
+.page-header .toc {
+  margin: 1.5rem 0 0.5rem;
+  padding: 0.85rem 1.1rem 0.95rem;
+  border: 1px solid var(--kb-border-soft);
+  border-radius: 10px;
+  background: var(--kb-surface-1);
+  box-shadow: var(--kb-shadow-sm);
+  /* Override Quartz's flex column constraint so the card sizes to content */
+  flex: initial;
+  overflow-y: visible;
+  min-height: 0;
+}
+.page-header .toc button.toc-header {
+  width: 100%;
+  justify-content: space-between;
+}
+.page-header .toc button.toc-header h3 {
+  font-family: var(--kb-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0;
+}
+.page-header .toc .toc-content {
+  margin-top: 0.55rem;
+  max-height: none;
+  overflow: visible;
+}
+.page-header .toc .toc-content li > a {
+  padding-top: 0.18rem;
+  padding-bottom: 0.18rem;
+  font-size: 0.86rem;
 }
 
 /* -----------------------------------------------------------------------------
@@ -896,94 +947,144 @@ input:focus-visible {
 
 /* =============================================================================
    25. RESPONSIVE — explicit breakpoint overrides
+
+   Strategy
+   ────────
+   ▸ Single source of truth for gutters: --kb-content-pad
+   ▸ Single source of truth for reading width: --kb-content-max
+   ▸ Sidebar widths use clamp(min, vw, max) so they scale smoothly without
+     awkward jumps at boundary widths
+   ▸ Two TOCs in DOM, only one shown per breakpoint:
+       desktop  ≥1200px → right-rail TOC visible, top-card TOC hidden
+       tablet  800-1199 → top-card TOC visible, right-rail TOC hidden
+       mobile    <800px → top-card TOC visible, right-rail TOC + graph hidden
    ============================================================================= */
 
 /* -----------------------------------------------------------------------------
    25.a  MOBILE  ( viewport < 800px )
-   - Single column, sidebar collapses to top
-   - Tighter gutters
-   - ToC hidden (Quartz default), backlinks below content
+   Single column. Sidebar.left collapses to a horizontal row at the top
+   (Quartz default). Right rail flows below the article.
    ----------------------------------------------------------------------------- */
 @media (max-width: 799.98px) {
   :root {
     --kb-content-pad: 1.1rem;
+    --kb-content-max: 100%;
   }
 
-  /* Sidebar at top: tidy spacing, no full-height stickiness */
+  /* Top sidebar: tidy spacing */
   .sidebar.left {
     border-right: none;
-    padding: 1.5rem 1.1rem 1rem !important;
-    gap: 0.8rem !important;
+    padding: 1.25rem 1.1rem 1rem !important;
+    gap: 0.6rem !important;
+    align-items: center;
   }
-
-  /* Brand title left-aligned, search row stays compact */
   .sidebar .page-title {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
-  /* Right rail (backlinks only) appears below article in single column.
-     ToC + Graph are not useful on mobile — kill them. */
+  /* Right rail (under article): only backlinks. Hide TOC + graph.
+     Top-card TOC at the top of the article handles navigation. */
   .sidebar.right {
     border-left: none;
     padding: 0 1.1rem 1.5rem !important;
-    gap: 1.5rem !important;
+    gap: 1.25rem !important;
   }
   .sidebar.right > .toc,
   .sidebar.right > .graph {
     display: none !important;
   }
 
-  /* Article spacing: keep reading column comfortable */
+  /* Article spacing */
+  .page > #quartz-body .center > .page-header {
+    padding-top: 0.5rem;
+  }
   .page > #quartz-body .center > article {
     padding-top: 0.25rem;
     padding-bottom: 2.5rem;
   }
 
+  /* Heading scale-down */
   article h1 {
-    font-size: 1.7rem;
+    font-size: 1.65rem;
   }
   article h2 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
+  }
+  article h3 {
+    font-size: 1.05rem;
   }
   .page-header h1.article-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
   /* Homepage hero scales down */
   article.home > h1:first-child {
-    font-size: 2rem;
+    font-size: 1.85rem;
   }
   article.home > p:first-of-type {
     font-size: 0.98rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
-  /* Tables don't try to be card-shaped on mobile */
+  /* Top TOC card: tighter padding on mobile */
+  .page-header .toc {
+    margin-top: 1.25rem;
+    padding: 0.7rem 0.85rem 0.8rem;
+  }
+
+  /* Misc */
   .table-container > table {
     font-size: 0.88rem;
   }
-
-  /* Footer */
   footer {
     margin-top: 2.5rem;
   }
 }
 
+/* Very narrow phones (<400px) */
+@media (max-width: 399.98px) {
+  :root {
+    --kb-content-pad: 0.85rem;
+  }
+  .sidebar.left {
+    padding: 1rem 0.85rem 0.75rem !important;
+  }
+  .sidebar .page-title {
+    font-size: 1rem;
+  }
+  article.home > h1:first-child {
+    font-size: 1.65rem;
+  }
+}
+
 /* -----------------------------------------------------------------------------
    25.b  TABLET  ( 800px – 1199px )
-   - Left rail fixed (260px from variables.scss)
-   - ToC hidden, backlinks/graph appear under article (Quartz default)
-   - Content column fluid; article centered with internal cap
+   Two-column grid. Left rail fluid via clamp() so a 12" iPad portrait or a
+   1100px window both feel right. Right-rail components flow below article.
    ----------------------------------------------------------------------------- */
 @media (min-width: 800px) and (max-width: 1199.98px) {
-  /* Hairline divider only between left rail and content */
+  :root {
+    --kb-content-pad: 1.25rem;
+    --kb-content-max: 720px;
+  }
+
+  /* Sidebar fluid:
+       800px viewport → 200px sidebar, content cell ~576px
+       1024px         → 225px,         content cell ~775px
+       1199px         → 260px (clamp), content cell ~915px
+  */
+  .page > #quartz-body {
+    grid-template-columns: clamp(200px, 22vw, 260px) minmax(0, 1fr) !important;
+    column-gap: 1.5rem !important;
+  }
+
+  /* Hairline divider between left rail and content */
   .sidebar.left {
     border-right: 1px solid var(--kb-border-soft);
   }
 
-  /* Right rail collapses below the article. ToC isn't useful when stacked
-     under the article (you can just scroll), so hide it. Backlinks + Graph
-     sit side-by-side as supporting cards. */
+  /* Right rail flows below content as a horizontal row of backlinks + graph.
+     Hide the right-rail TOC (the top-card TOC inside .page-header takes over). */
   .sidebar.right {
     border-left: none;
     padding: 1rem 0 0 0 !important;
@@ -997,20 +1098,6 @@ input:focus-visible {
     flex: 1;
   }
 
-  /* Slightly narrower reading column for tablet so prose lines stay short */
-  :root {
-    --kb-content-max: 720px;
-  }
-
-  /* Center column starts at the right edge of the sidebar — keep prose
-     centered in the available space rather than left-anchored */
-  .page > #quartz-body .center > article,
-  .page > #quartz-body .center > .page-header,
-  .page > #quartz-body .center > footer {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   article.home > h1:first-child {
     font-size: 2.2rem;
   }
@@ -1018,22 +1105,29 @@ input:focus-visible {
 
 /* -----------------------------------------------------------------------------
    25.c  DESKTOP  ( viewport >= 1200px )
-   - 3-column grid with hairline rails on either side
-   - Article 760px capped, centered in the middle cell
-   - Sidebar widths fluid via clamp() so 1200–1500px viewports stay sane
+   Three-column grid. Top-card TOC hidden — right-rail TOC takes over.
+   Sidebar widths fluid via clamp() so we don't squeeze content at 1200px.
+
+       1200px viewport → 200px sidebars,  content cell ~736px (article fills)
+       1280px          → 205px,           content cell ~806px (article centered)
+       1440px          → 230px,           content cell ~916px
+       1500px (cap)    → 240px,           content cell ~956px
    ----------------------------------------------------------------------------- */
 @media (min-width: 1200px) {
-  /* Override Quartz's fixed 260/auto/260 with fluid clamp for nicer scaling.
-     At 1200px viewport: sidebars ~216px, center ~960px; at 1500px: ~270/950. */
-  .page > #quartz-body {
-    grid-template-columns:
-      clamp(220px, 18vw, 280px)
-      minmax(0, 1fr)
-      clamp(220px, 18vw, 280px) !important;
-    column-gap: 2rem !important;
+  :root {
+    --kb-content-pad: 1.5rem;
+    --kb-content-max: 760px;
   }
 
-  /* Hairline dividers between rails and content */
+  .page > #quartz-body {
+    grid-template-columns:
+      clamp(200px, 16vw, 260px)
+      minmax(0, 1fr)
+      clamp(200px, 16vw, 260px) !important;
+    column-gap: 1.75rem !important;
+  }
+
+  /* Hairline rails on both sides */
   .sidebar.left {
     border-right: 1px solid var(--kb-border-soft);
   }
@@ -1041,12 +1135,12 @@ input:focus-visible {
     border-left: 1px solid var(--kb-border-soft);
   }
 
-  /* Article column: ensure 760px cap and proper centering */
-  :root {
-    --kb-content-max: 760px;
+  /* Top-card TOC hidden — right rail has it sticky */
+  .page-header .toc {
+    display: none;
   }
 
-  /* Tighter sidebar typography density — desktop has space for it */
+  /* Tighter sidebar typography density */
   .sidebar {
     font-size: 0.88rem;
   }
@@ -1057,8 +1151,8 @@ input:focus-visible {
 
 /* -----------------------------------------------------------------------------
    25.d  WIDE DESKTOP  ( viewport >= 1500px )
-   - Page hits Quartz's max-width cap (1500px from base.scss)
-   - Article gets generous breathing room within the centered page
+   Page hits Quartz's max-width cap (1500px). Bump article slightly for
+   breathing room.
    ----------------------------------------------------------------------------- */
 @media (min-width: 1500px) {
   :root {

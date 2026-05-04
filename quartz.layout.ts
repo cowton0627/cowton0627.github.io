@@ -32,6 +32,13 @@ const isHome = (page: { fileData: { slug?: string } }) =>
   page.fileData.slug === "index";
 
 // Single-note pages
+//
+// We render the table of contents in TWO places, then control visibility
+// with CSS:
+//   - in beforeBody  → shown ONLY on tablet / mobile (article-top TOC card)
+//   - in right rail  → shown ONLY on desktop (sticky sidebar)
+// This way readers always see the TOC near the top of the article on small
+// screens, and on desktop it lives in its proper sidebar.
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
@@ -47,11 +54,15 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => !isHome(page),
     }),
     Component.TagList(),
+    Component.ConditionalRender({
+      component: Component.TableOfContents(),
+      condition: (page) => !isHome(page),
+    }),
   ],
   left: leftSidebar,
   right: [
     Component.ConditionalRender({
-      component: Component.DesktopOnly(Component.TableOfContents()),
+      component: Component.TableOfContents(),
       condition: (page) => !isHome(page),
     }),
     Component.ConditionalRender({
@@ -59,7 +70,7 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => !isHome(page),
     }),
     Component.ConditionalRender({
-      component: Component.DesktopOnly(Component.Graph()),
+      component: Component.Graph(),
       condition: (page) => !isHome(page),
     }),
   ],
