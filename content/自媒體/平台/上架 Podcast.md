@@ -17,19 +17,19 @@ title: 上架 Podcast
 3. 反過來，我們也可以使用**聚合內容**，來讓不同平台上架**相同**的你的創作，這點就在 Podcast 上架時體現。
 4. 作法是透過 RSS Feed，這即是說使用 RSS Feed 上架 Podcast，只需要更新一次，不需要多平台複製貼上，而多平台發文的話，可以使用 [dlvr.it](https://dlvrit.com/) 這個工具網站，後面會有專文。
 
-:::info
-下面先來看看 RSS 長得如何
-:::
+>[!info]
+>下面先來看看 RSS 長得如何
+
 
 ![image](https://hackmd.io/_uploads/Hkegv1PZ1g.png)
 
-:::success
-RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標籤式語言目的在於排列結構，方面檢視、安排以 **<>** 作為開頭，**</>** 作為結尾的標籤的內容。
-:::
+>[!success]
+>RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標籤式語言目的在於排列結構，方面檢視、安排以 **<>** 作為開頭，**</>** 作為結尾的標籤的內容。
 
-:::info
-在 SoundOn 的管理後台，平台發佈頁籤可以看見 RSS 網址，這就是前段說的 RSS Feed，我們可以透過 SoundOn 裡的 RSS Feed 餵食給不同的平台，如 Spotify、Apple Podcast 等。
-:::
+
+>[!info]
+>在 SoundOn 的管理後台，平台發佈頁籤可以看見 RSS 網址，這就是前段說的 RSS Feed，我們可以透過 SoundOn 裡的 RSS Feed 餵食給不同的平台，如 Spotify、Apple Podcast 等。
+
 
 ![image](https://hackmd.io/_uploads/H1kAw1vZyl.png)
 
@@ -47,11 +47,11 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/Sy4HgxwZ1x.png)
 
-:::success
+>[!success]
 第一次建立帳號的使用者就選擇**建立新節目**，將來任何單集的更新就從 SoundOn 來變更、增加就行了。
+>
+>這即是說 SoundOn 是一個 Podcast 的**託管平台**，但它同時也是一個**收聽平台** (如 Spotify、Apple Podcast)，透過 SooundOn 產生的 RSS Feed，我們可以一次上架到不同平台。
 
-這即是說 SoundOn 是一個 Podcast 的**託管平台**，但它同時也是一個**收聽平台** (如 Spotify、Apple Podcast)，透過 SooundOn 產生的 RSS Feed，我們可以一次上架到不同平台。
-:::
 
 ![image](https://hackmd.io/_uploads/B1Uw-VxGkl.png)
 
@@ -59,13 +59,13 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/Hyq9bEgMJx.png)
 
-:::success
+>[!success]
 建立 Podcast 就是建立節目，比方說**超級星期天**是一個週末的電視節目。
-
-接著，你可以安排你的單集，他可以是一個單元，也可以是一個單元裡面的其中一集，比方說**超級任務** (卜學亮幫忙尋人的節目) 就是一個單元，尋找金城武的國小三年級導師，就是這個單元裡其中一集。
-
+>
+>接著，你可以安排你的單集，他可以是一個單元，也可以是一個單元裡面的其中一集，比方說**超級任務** (卜學亮幫忙尋人的節目) 就是一個單元，尋找金城武的國小三年級導師，就是這個單元裡其中一集。
+>
 如果每一集都是一個單元，這個單集也叫做單元，好比 X 檔案裡，殺人蜂既是一個單集，也是一個單元，這個單元結束後就不再有跟殺人蜂相關的其他集。
-:::
+
 
 4. 類別的部份，點下去就會有分類標籤選項，建立節目只要將左上有**紅色星號**的欄位都填完即可。而描述的部份就是你這個節目會有什麼樣的內容，簡單描述即可。
 
@@ -75,9 +75,9 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 > 本頻道的所有內容，包括但不限於音頻、圖像、文本、設計、標誌及其他相關素材，均由頻道創建者 「」 共同擁有並保護。
 
-:::success
+>[!success]
 將「」內換成該節目主創者的人名、暱稱、稱號等即可。
-:::
+
 
 ---
 
@@ -101,9 +101,9 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/S1x7_5fXkg.png)
 
-:::success
+>[!success]
 最後，按下右上角的儲存，這個單集的內容就會出現在你的 RSS Feed 中，並且等待一會兒，也會在 SoundOn 這個平台上架囉！
-:::
+
 
 ---
 
@@ -143,15 +143,14 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/SJnGRcMmJx.png)
 
-:::success
+>[!success]
 最後按下右下角的繼續，等待剛才填入的 RSS Feed 與 Spotify 串接起來（會寄送驗證碼到你帳號的信箱中），你的 Podcast 頻道及所有單集就都在 Spotify 上了！
-:::
 
-:::info
+
+>[!info]
 按下在頻道最上方的分享按鈕，我們可以直接把節目分享出去，或者一集一集分享出去，OK！上架 Spotify 完成了。
-
-而其餘的步驟請看 SoundOn 的[說明頁](https://intercom.help/soundon/zh-TW/articles/4133015-%E5%A6%82%E4%BD%95%E5%B0%87%E7%AF%80-%E6%8F%90%E4%BA%A4%E4%B8%8A%E6%9E%B6-spotify-podcast)。
-:::
+>
+>而其餘的步驟請看 SoundOn 的[說明頁](https://intercom.help/soundon/zh-TW/articles/4133015-%E5%A6%82%E4%BD%95%E5%B0%87%E7%AF%80-%E6%8F%90%E4%BA%A4%E4%B8%8A%E6%9E%B6-spotify-podcast)。
 
 ![image](https://hackmd.io/_uploads/HJsrkoMQ1g.png)
 
