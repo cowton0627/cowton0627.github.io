@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Quartz 4</title>
+      <link>https://quartz.jzhao.xyz</link>
+      <description>Last 10 notes on Quartz 4</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>A002 自媒體工具 - 生成式 AI</title>
+    <link>https://quartz.jzhao.xyz/gear/A002-%E8%87%AA%E5%AA%92%E9%AB%94%E5%B7%A5%E5%85%B7---%E7%94%9F%E6%88%90%E5%BC%8F-AI</link>
+    <guid>https://quartz.jzhao.xyz/gear/A002-%E8%87%AA%E5%AA%92%E9%AB%94%E5%B7%A5%E5%85%B7---%E7%94%9F%E6%88%90%E5%BC%8F-AI</guid>
+    <description><![CDATA[ 生成式 AI 重新申請一個 Google 帳號 未免與自己本來的帳號相衝突，或社群操作時，影響到本來的帳號，建議申請一個新的 Google 帳號，每當使用新服務時，就利用此帳號登入。 對話機器人 緣起 大型語言模型 (LLM)是利用機器學習、深度學習的數學原理，訓練出來的模型。 我們希望輸入問題，得到答案，而模型的作用為輸入泛用、類似問題，能得到泛用解答。 現有對話機器人 (如 ChatGPT)，都是使用一個介面，無論網頁介面、手機 APP 介面來做應答，而 LLM 是這個介面的基礎建設。 對話機器人的白話解釋，就是一個文字接龍的工具。 使用 由於 LLM 訓練時有使用各種技術，詞嵌入 (Wo... ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A003 客製化訂閱內容 - RSS Reader</title>
+    <link>https://quartz.jzhao.xyz/gear/A003-%E5%AE%A2%E8%A3%BD%E5%8C%96%E8%A8%82%E9%96%B1%E5%85%A7%E5%AE%B9---RSS-Reader</link>
+    <guid>https://quartz.jzhao.xyz/gear/A003-%E5%AE%A2%E8%A3%BD%E5%8C%96%E8%A8%82%E9%96%B1%E5%85%A7%E5%AE%B9---RSS-Reader</guid>
+    <description><![CDATA[ RSS Reader RSS Feed 緣起 要了解 RSS Feed 最快的方法還是先透過 RSS Reader，RSS Reader 可以理解為一個訂閱 XML 的閱讀器，每當創作者更新內容時，閱讀器會即時通知。 這即是說透過這個閱讀器，你可以排除掉各種社群的不必要的推播，只專注在想看的內容上面。 如果想知道在 iOS 上，如何自己寫一個 RSS Reader，參考 Xcode - RSS 裡的 XML 這篇文章。 使用 以常見的 Feedly 舉例，直接用手機做操作。 :::info 前一張圖是所有更新的訂閱內容，下一張是分類中所有訂閱的頻道。 ::: :::success Feedly... ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A004 Suno AI</title>
+    <link>https://quartz.jzhao.xyz/gear/A004-Suno-AI</link>
+    <guid>https://quartz.jzhao.xyz/gear/A004-Suno-AI</guid>
+    <description><![CDATA[ Suno AI 創造屬於自己的音樂 基礎知識 Suno AI 雖然可以直接使用對歌曲的描述創造相關的音樂或歌曲，但這樣並不夠客製化。BTW，Instrumental 這個 Switch 是用來切換僅樂器聲與否，這即是說，如果你不要歌曲，要消去人聲可以把它選起來。 在 Suno AI 中，我們可以看到模型的版本，越新的自然可理解為越強的模型，雖然 v3.5 可以長到四分鐘，但我們也可以用 v3 的兩分鐘再去加長。 進到 Custom，我們可以看到幾個區塊，第一個是 Lyrics (歌詞)，接著是 Style of Music (音樂風格)，再來是 Persona (人物模板)，最後一個是 Tit... ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A006 自媒體工具 - 快速發文平台</title>
+    <link>https://quartz.jzhao.xyz/gear/A006-%E8%87%AA%E5%AA%92%E9%AB%94%E5%B7%A5%E5%85%B7---%E5%BF%AB%E9%80%9F%E7%99%BC%E6%96%87%E5%B9%B3%E5%8F%B0</link>
+    <guid>https://quartz.jzhao.xyz/gear/A006-%E8%87%AA%E5%AA%92%E9%AB%94%E5%B7%A5%E5%85%B7---%E5%BF%AB%E9%80%9F%E7%99%BC%E6%96%87%E5%B9%B3%E5%8F%B0</guid>
+    <description><![CDATA[ 🧾 重新申請一個 Google 帳號（建議） 為了避免影響你原本的個人帳號，建議先準備一個「專用帳號」來做自媒體經營。 為什麼要這樣做？ 避免社群操作（發文、測試）影響原帳號 多平台串接時更乾淨 未來可作為「品牌帳號」使用 👉 建議： 之後所有新服務（社群平台、工具）都用這個帳號登入 🚀 快速發文平台：dlvrit 📌 為什麼需要它？ 當你開始經營自媒體後，會遇到一個問題： 同一篇內容，要發到很多平台（FB、IG、Threads…） 如果每次都手動貼： 浪費時間 容易出錯 無法同步管理 👉 dlvrit 的用途：一次發文 → 多平台同步 👉 平台連結： app.dlvrit.com... ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>春麗自媒體知識庫</title>
+    <link>https://quartz.jzhao.xyz/</link>
+    <guid>https://quartz.jzhao.xyz/</guid>
+    <description><![CDATA[ 春麗自媒體知識庫 這裡整理自媒體經營相關內容： 📚 分類 🎥 自媒體器材 👉 前往 🎙️ Podcast 上架 👉 前往 🚀 多平台發文 👉 前往 ✨ 說明 這是一個透過 Obsidian + Quartz 建立的知識庫網站。 你可以在左側找到所有文章。. ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A005 上架 Podcast</title>
+    <link>https://quartz.jzhao.xyz/podcast/A005-%E4%B8%8A%E6%9E%B6-Podcast</link>
+    <guid>https://quartz.jzhao.xyz/podcast/A005-%E4%B8%8A%E6%9E%B6-Podcast</guid>
+    <description><![CDATA[ 上架 Podcast 重新申請一個 Google 帳號 未免與自己本來的帳號相衝突，或社群操作時，影響到本來的帳號，建議申請一個新的 Google 帳號，每當使用新服務時，就利用此帳號登入。 透過 SoundOn、Fistory、Anchor 上架多平台，以 SoundOn 為例。 什麼是 RSS Feed? RSS 是一種聚合內容，是 XML 檔，每當原內容改變時，訂閱內容的使用者便會接到內容更新通知。 前段是說使用者透過訂閱 RSS，便可不斷獲取想閱讀、收聽、收看的內容而不讓平台恣意以演算法強推各種相關內容給你，若能如此，我們將不再需要番茄時鐘，專注在想看的內容上面。 反過來，我們也可以使... ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A001 萬事起頭難 - 社群第一步</title>
+    <link>https://quartz.jzhao.xyz/social/A001-%E8%90%AC%E4%BA%8B%E8%B5%B7%E9%A0%AD%E9%9B%A3---%E7%A4%BE%E7%BE%A4%E7%AC%AC%E4%B8%80%E6%AD%A5</link>
+    <guid>https://quartz.jzhao.xyz/social/A001-%E8%90%AC%E4%BA%8B%E8%B5%B7%E9%A0%AD%E9%9B%A3---%E7%A4%BE%E7%BE%A4%E7%AC%AC%E4%B8%80%E6%AD%A5</guid>
+    <description><![CDATA[ 選擇平台 理清手中的資源 已有一般帳號 1. Google 帳號 2. Meta 聯盟：Facebook、Instagram、Threads、WhatsApp 3. Line 帳號 4. WeChat 帳號 5. 電話：公司用號碼、室話號碼、個人號碼 已有品牌帳號 1. ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item><item>
+    <title>A008 - 自媒體器材參考</title>
+    <link>https://quartz.jzhao.xyz/social/A008---%E8%87%AA%E5%AA%92%E9%AB%94%E5%99%A8%E6%9D%90%E5%8F%83%E8%80%83</link>
+    <guid>https://quartz.jzhao.xyz/social/A008---%E8%87%AA%E5%AA%92%E9%AB%94%E5%99%A8%E6%9D%90%E5%8F%83%E8%80%83</guid>
+    <description><![CDATA[ 🎥 自媒體創作：新手器材挑選指南 這份清單整理了目前主流的自媒體拍攝器材，幫助你根據創作內容（Vlog、Podcast、旅遊）選擇最合適的工具。 1. ]]></description>
+    <pubDate>Mon, 04 May 2026 05:34:44 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>
