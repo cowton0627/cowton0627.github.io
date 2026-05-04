@@ -13,7 +13,7 @@ cssclasses:
 - [[media/A002 自媒體工具 - 生成式 AI]]
 - [[media/A003 客製化訂閱內容 - RSS Reader]]
 - [[media/A006 自媒體工具 - 快速發文平台]]
-- [[podcast/A005 上架 Podcast]]
+- [[上架 Podcast]]
 - [[media/social/A001 萬事起頭難 - 社群第一步]]
 
 ## 主題
