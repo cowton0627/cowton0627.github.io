@@ -1,5 +1,5 @@
 ---
-title: A004 Suno AI
+title: 生成式 AI - Suno AI
 ---
 
 # Suno AI
@@ -8,133 +8,377 @@ title: A004 Suno AI
 
 ### 基礎知識
 
-1. Suno AI 雖然可以直接使用對歌曲的**描述**創造相關的音樂或歌曲，但這樣並不夠客製化。BTW，Instrumental 這個 Switch 是用來切換僅樂器聲與否，這即是說，如果你不要歌曲，要消去人聲可以把它選起來。
+Suno AI 可以直接透過「歌曲描述」產生音樂或歌曲，不過如果只使用描述，通常不夠客製化。
+
+如果想要更精準地控制歌曲內容、段落、風格與人聲，就需要使用 **Custom** 模式。
+
+#### Instrumental
+
+**Instrumental** 這個 Switch 是用來切換是否只產生樂器聲。
+
+也就是說，如果你不需要歌曲人聲，只想產生純音樂，就可以把 Instrumental 打開。
 
 ![image](https://hackmd.io/_uploads/SJP1TRGzyg.png)
 
-2. 在 Suno AI 中，我們可以看到模型的版本，越新的自然可理解為越強的模型，雖然 v3.5 可以長到四分鐘，但我們也可以用 v3 的兩分鐘再去加長。
+---
+
+### 模型版本
+
+在 Suno AI 中，可以看到模型版本。
+
+一般來說，越新的模型可以理解為能力越強。例如 v3.5 可以產生較長的歌曲，約可長到四分鐘。
+
+不過實際使用時，也可以先用 v3 產生約兩分鐘的版本，再透過延長功能繼續加長。
 
 ![image](https://hackmd.io/_uploads/BJiu6Affke.png)
 
-3. 進到 Custom，我們可以看到幾個區塊，第一個是 Lyrics (歌詞)，接著是 Style of Music (音樂風格)，再來是 Persona (人物模板)，最後一個是 Title (歌曲名)。
+---
 
-4. Persona 是一個進階使用者 (需要付費)的功能，可以創造專屬的歌手。
+### Custom 模式
+
+進到 **Custom** 之後，可以看到幾個主要區塊：
+
+1. **Lyrics**：歌詞
+2. **Style of Music**：音樂風格
+3. **Persona**：人物模板
+4. **Title**：歌曲名稱
+
+其中，**Persona** 是進階使用者功能，需要付費使用，可以用來創造專屬歌手或固定的人聲角色。
 
 ![image](https://hackmd.io/_uploads/rkUIkJXMJl.png)
 
-5. 我們先了解音樂風格的作用，再進到 Lyrics 的標籤 (tag)，進到 [music style 官方文件](https://www.suno.wiki/faq/style-and-lyrics/styles-and-genres/)後，我們可以看到裡面各種音樂風格，而文件也說了不可能涵蓋所有世界上的音樂類型。
+---
+
+## 音樂風格：Style、Genre、Type
+
+在進入 Lyrics 的標籤設定之前，可以先了解音樂風格的作用。
+
+進到 [music style 官方文件](https://www.suno.wiki/faq/style-and-lyrics/styles-and-genres/) 後，可以看到裡面列出了各種音樂風格。不過官方文件也有說明，不可能涵蓋世界上所有音樂類型。
 
 ![image](https://hackmd.io/_uploads/H1o_lJ7Myg.png)
 
-:::success
-在這邊可以看到三種 music style 的項目，Style 是**風格**，Genre 是**類型**，Type 則是**類別**。
+> [!success]
+> 在 music style 裡面，可以看到三種常見項目：
+>
+> - **Style**：風格
+> - **Genre**：類型
+> - **Type**：類別
+>
+> 一般來說，**Genre** 用於比較嚴格定義的音樂分類，而 **Type** 則比較像大眾化、約定俗成的分類。
 
-一般來說，Genre 用於嚴格定義的分類，而 Type 則比較大眾化的分類，約定俗成。
-:::
+---
 
-:::info
-從 Style 裡面，我們可以看到各種形容詞，例如 Danceable、Dark 等等，如果對音樂風格沒有概念，可以將 Style 鍵入 Youtube 搜尋欄位，當然沒有概念更難驗證是不是找到的歌曲就是屬於 Danceable 的 Groovy，還可以到 [sonoteller](https://sonoteller.ai/) 這個網站上將搜尋到的連結貼上。
-:::
+### Style 的使用方式
+
+從 Style 裡面，可以看到各種形容詞，例如：
+
+- Danceable
+- Dark
+- Groovy
+
+如果對音樂風格沒有概念，可以先將 Style 關鍵字丟到 YouTube 搜尋。
+
+不過，若本來就不熟悉音樂類型，也很難驗證搜尋到的歌曲是否真的屬於該風格。
+
+這時可以搭配音樂分析工具，例如 [Sonoteller](https://sonoteller.ai/)，把搜尋到的音樂連結貼上去分析。
 
 ![image](https://hackmd.io/_uploads/S1LhPJ7zyl.png)
 
-:::warning
-凡事沒能盡善盡美，sonoteller 容易達到 daily limit，所以我們可以找替代方案，例如 [SubmitHub](https://www.submithub.com/)。
-:::
+> [!warning]
+> Sonoteller 容易達到 daily limit，所以也可以使用替代方案，例如 [SubmitHub](https://www.submithub.com/)。
 
-:::info
-在 SubmitHub 裡，一樣可以貼上連結去分析音樂，從下方圖片來看，裡面就包含了多種類型，Dance Pop 機率最高，如果還是不確定，就從下方點選看看是不是你要的音樂，描述不來，我們總能用聽的吧？
-:::
+---
+
+### 使用 SubmitHub 分析音樂
+
+在 SubmitHub 裡，也可以貼上音樂連結進行分析。
+
+從下方圖片可以看到，它會分析出多種音樂類型，其中 **Dance Pop** 的機率最高。
+
+如果還是不確定是不是自己要的音樂，就可以從下方推薦項目點進去聽。
+
+描述不出來的風格，至少可以先用聽的方式確認。
 
 ![image](https://hackmd.io/_uploads/S1TIqyXMkg.png)
 
 ![image](https://hackmd.io/_uploads/BJ7op17fyl.png)
 
-再來是 Genre 跟 Type，Genre 裡面有 Electric、Jazz/Soul 這就相當好懂，而 Type 裡面就有 Composer (合成器) 等。
+---
+
+### Genre 與 Type
+
+再來是 **Genre** 和 **Type**。
+
+Genre 裡面的分類，例如：
+
+- Electric
+- Jazz / Soul
+
+這些相對好理解。
+
+Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項目。
 
 ---
 
-### Meta Tags
+## Meta Tags
 
-1. 接著要講到 Lyrics 內使用的 Tag，如果想要將歌曲客製化成自己喜歡的樣子，我們可以先參照下面的 Tag。
+接著要介紹 Lyrics 內使用的 Tag。
 
-:::info
+如果想要將歌曲客製化成自己喜歡的樣子，可以先參照下面這種結構：
+
+```
 [Start]
 [Instrumental Intro]
+
 [Verse - Taiwanese]
-**你的歌詞**
+你的歌詞
+
 [Verse 2 - Taiwanese]
-**你的歌詞**
+你的歌詞
+
 [Verse 3 - Taiwanese]
-**你的歌詞**
+你的歌詞
+
 [Guitar Solo]
+
 [Chorus - Taiwanese]
-**你的歌詞**
+你的歌詞
+
 [Instrumental Bridge]
+
 [Verse 4 - Taiwanese]
-**你的歌詞**
+你的歌詞
+
 [Instrumental Outro]
+
 [End]
-:::
+```
 
 ### 版權問題？
 
-1. 下方節錄至維基百科。
+下方內容節錄自維基百科：
 
-> 法律問題
+> 法律問題  
 > 在 2024 年 6 月，由美國錄音工業協會主導的訴訟對 Suno 和 Udio 提出，指控其大規模侵犯版權音樂錄音。該訴訟試圖禁止這些公司在版權音樂上進行訓練，並要求對已經發生的侵權行為索賠最高 150,000 美元的賠償。[9][10]
 
-2. 由於模型的訓練並不會公開，所以錄音工會的主張是裡面一定有版權物，不然不可能有大數據，過去 AI Model 不夠強可能有幾點，一是算力不夠強，二是數據不夠多，現在備齊了，可以說是社會氛圍與軟硬體兼備，那麼就是技術成果的展現了。
+這裡的核心爭議在於：**模型訓練資料是否使用了受版權保護的音樂錄音**。
 
-3. 但由於法律本來就跟不上技術發展，所以必須要等看將來如何修正。
+由於模型的訓練資料通常不會完整公開，因此錄音工會的主張是：如果模型沒有使用大量音樂資料，就不太可能生成這麼多不同風格的音樂。
 
-4. 在這個大前提下，訓練模型的大公司才會是標的，使用模型的使用者則不需要擔心這點，可以盡情產出拿去使用，目前就當作全民公測中。
+過去 AI Model 不夠強，可能有幾個原因：
+
+1. 算力不夠強
+2. 數據不夠多
+3. 模型技術尚未成熟
+
+如今算力、數據與模型技術逐漸成熟，再加上社會對生成式 AI 的接受度提高，AI 音樂生成才開始變成一種明顯的技術成果。
+
+不過，法律本來就常常跟不上技術發展，因此相關爭議仍需要等待後續訴訟結果與法規修正。
+
+在這個大前提下，主要被追究的對象通常會是**訓練模型的大公司**。一般使用者如果只是使用模型產出音樂，目前不需要過度擔心；不過如果要商業使用，仍建議避免刻意模仿特定歌手、特定歌曲，並保留生成紀錄與平台授權條款。
+
+---
 
 ### 各種 Meta Tags 介紹
 
-1. [Verse] vs. [Chorus]，Verse 是主歌，是一首的主要調性，在進到歌曲澎拜之前的起與承。
+#### Verse vs. Chorus
 
-2. 情感描述 - 在 Suno AI 中，教學文章告訴我們使用 [Sad Verse]、[Happy Chorus] 來去描述主歌與副歌，如果希望主歌是有哀傷的調性使用 Sad，比方說周杰倫的《黑色毛衣》就是 Sad，如果是《告白氣球》則是 Happy。
+`[Verse]` 是主歌，通常是一首歌主要敘事與情緒鋪陳的段落。
 
-3. 音樂流派 - 在 Suno AI 中，直接使用 [Rapped Verse] 可以造出 Rap 歌曲風格，[Powerpop Chorus] 可以造出一種搖滾風格。
+在進到歌曲最澎湃的副歌之前，Verse 負責建立歌曲的背景、情緒與故事。
 
-4. [Pre-chorus] 是在進到 [Chorus] 的連接，等進到 [Chorus] 時會更感覺澎湃，以周杰倫的《龍族戰士》而言，歌詞在『對敵人謙卑，抱歉，我不會，而遠方龍戰於野；咆哮聲不自覺，橫越過了幾條街」，這一段就是 Pre-chorus。
+`[Chorus]` 是副歌，通常是一首歌最容易被記住、情緒最集中的段落。
 
-5. 而我們可以用各種形容詞標籤來將歌詞拆分出來，例如 [Shout] 表示這段歌詞要咆哮，[Melancholy] 來表示這段歌詞是憂鬱的等等，這種標籤的使用法叫做 [Bridge]。
+簡單來說：
 
-> 參照 [Suno AI Docs](https://www.suno.wiki/faq/metatags/pre-chorus-and-bridge/)
+- `[Verse]`：主歌，負責鋪陳
+- `[Chorus]`：副歌，負責高潮與記憶點
 
-6. 歌曲結構標籤，[Intro] 代表開場；[Hook] 是一首歌代表性印記，比方說你的歌名叫做《風鈴》，在 [chrous] 的最後一句可能是 「風鈴不再隨風搖曳」，這句就是 [Hook]；[Break] 是停頓之處；[Interlude] 表示間奏；[Outro] 就是歌曲的結尾，可以是留下懸念又重複一次，這時候我們會用 [Outro]、[Refrain]、[Big Finish] 來安排，舉例來說，王力宏的《你不在》最後三句 「像空氣般不存在的存在，在沒有痕跡的愛 你不在，當我需要你的愛 你不在」就是如此；[End] 表示你要如何結束這首歌，跟剪輯的 Fade 一樣用法，[Fade Out]、[Fade to End]。
+---
 
-7. 接著是 instrumental tags，即是用來調整樂器的 meta tags，可以參照 [Suno AI Docs](https://www.suno.wiki/faq/metatags/instrumental-tags/)，
+#### 情感描述
 
-:::info
-在樂器標籤這裡很有趣，不僅僅是透過描述來調整樂器，還能讓樂器有節奏感，尤其如下：
+在 Suno AI 中，可以使用情感標籤描述主歌與副歌，例如：
 
-**[Percussion Break]**
+```text
+[Sad Verse]
+[Happy Chorus]
+```
+
+如果希望主歌帶有哀傷的調性，可以使用 `[Sad Verse]`。
+
+例如：
+
+- 周杰倫《黑色毛衣》可以理解為偏 Sad 的情緒方向
+- 周杰倫《告白氣球》則比較接近 Happy 的情緒方向
+
+---
+
+#### 音樂流派
+
+在 Suno AI 中，也可以直接使用音樂流派標籤來影響段落風格，例如：
+
+```text
+[Rapped Verse]
+[Powerpop Chorus]
+```
+
+- `[Rapped Verse]`：讓主歌偏向 Rap 歌曲風格
+- `[Powerpop Chorus]`：讓副歌偏向 Power Pop / 流行搖滾風格
+
+---
+
+#### Pre-chorus
+
+`[Pre-chorus]` 是進到 `[Chorus]` 之前的連接段落。
+
+它的作用是讓情緒逐漸堆疊，等真正進到副歌時，會更有澎湃感。
+
+以周杰倫《龍戰騎士》為例，歌詞中：
+
+> 對敵人謙卑，抱歉，我不會  
+> 而遠方龍戰於野  
+> 咆哮聲不自覺，橫越過了幾條街
+
+這一段就可以理解為 Pre-chorus 的功能。
+
+---
+
+#### Bridge 與形容詞標籤
+
+我們也可以用各種形容詞標籤來拆分歌詞段落，例如：
+
+```text
+[Shout]
+[Melancholy]
+```
+
+- `[Shout]`：表示這段歌詞要更像咆哮、喊出來
+- `[Melancholy]`：表示這段歌詞帶有憂鬱情緒
+
+這類標籤可以搭配 `[Bridge]` 使用，讓歌曲在中段產生轉折或情緒變化。
+
+> 參照：[Suno AI Docs - Pre-chorus and Bridge](https://www.suno.wiki/faq/metatags/pre-chorus-and-bridge/)
+
+---
+
+#### 歌曲結構標籤
+
+常見歌曲結構標籤如下：
+
+```text
+[Intro]
+[Hook]
+[Break]
+[Interlude]
+[Outro]
+[End]
+```
+
+| 標籤 | 說明 |
+| --- | --- |
+| `[Intro]` | 開場 |
+| `[Hook]` | 歌曲中最有記憶點的句子或段落 |
+| `[Break]` | 停頓、節奏中斷或轉換 |
+| `[Interlude]` | 間奏 |
+| `[Outro]` | 結尾段落 |
+| `[End]` | 指定歌曲結束 |
+
+`[Hook]` 是一首歌的代表性印記。
+
+比方說，你的歌名叫做《風鈴》，在 `[Chorus]` 的最後一句可能是：
+
+> 風鈴不再隨風搖曳
+
+這句就可以視為 `[Hook]`。
+
+`[Outro]` 則是歌曲的結尾，可以是留下懸念，也可以重複一次主題。
+
+如果要安排結尾，可以使用：
+
+```text
+[Outro]
+[Refrain]
+[Big Finish]
+```
+
+舉例來說，王力宏《你不在》最後三句：
+
+> 像空氣般不存在的存在  
+> 在沒有痕跡的愛，你不在  
+> 當我需要你的愛，你不在
+
+這種重複主題、逐漸收束情緒的段落，就可以理解為 Outro 的功能。
+
+`[End]` 則表示你希望歌曲如何結束。它有點像剪輯裡的 Fade 用法，可以搭配：
+
+```text
+[Fade Out]
+[Fade to End]
+```
+
+---
+
+#### Instrumental Tags
+
+接著是 Instrumental Tags，也就是用來調整樂器的 Meta Tags。
+
+可以參照：[Suno AI Docs - Instrumental Tags](https://www.suno.wiki/faq/metatags/instrumental-tags/)
+
+在樂器標籤裡面，有些不只是透過描述來調整樂器，還可以讓樂器產生節奏感。
+
+例如：
+
+```text
+[Percussion Break]
 . .! .. .!
 !! ... ! ! !
-:::
+```
 
-:::success
-這個點跟驚嘆號，是擊打的節奏，很有趣吧？
-:::
+> [!success]
+> 這裡的點 `.` 和驚嘆號 `!`，可以理解為擊打節奏的提示。
 
-:::info
-還可以參照如下：
+還可以參照下面這些常用 Instrumental Tags：
 
-[Break] 停頓處
-[Instrumental Interlude] 樂器間奏
-[Melodic Bass] 有旋律的貝斯
-[Percussion Break] 擊打的停頓
-[Fingerstyle Guitar Solo] 吉他的指技
-:::
+```text
+[Break]
+[Instrumental Interlude]
+[Melodic Bass]
+[Percussion Break]
+[Fingerstyle Guitar Solo]
+```
 
-8. 剩下的可以參照 [Suno AI Docs](https://www.suno.wiki/faq/metatags/voice-tags/)，裡面講到我們可以直接提示換掉預設的人聲，例如使用 [Female Narrator]、[Diva Solo] 等。
+| 標籤 | 說明 |
+| --- | --- |
+| `[Break]` | 停頓處 |
+| `[Instrumental Interlude]` | 樂器間奏 |
+| `[Melodic Bass]` | 有旋律的貝斯 |
+| `[Percussion Break]` | 擊打的停頓 |
+| `[Fingerstyle Guitar Solo]` | 吉他的指技 |
 
-:::warning
-為什麼需要換掉？這是因為 Suno AI 告訴我們 Hip-Hop 人聲常見都市男性；鄉村音樂帶有西方口音；流行樂跟 Jazz 通常會出現女性聲音。
-:::
+---
+
+#### Voice Tags
+
+剩下的可以參照：[Suno AI Docs - Voice Tags](https://www.suno.wiki/faq/metatags/voice-tags/)
+
+Voice Tags 可以直接提示模型換掉預設的人聲，例如：
+
+```text
+[Female Narrator]
+[Diva Solo]
+```
+
+> [!warning]
+> 為什麼需要換掉預設人聲？
+>
+> 因為 Suno AI 可能會根據音樂類型套用常見預設：
+>
+> - Hip-Hop：常見都市男性聲音
+> - Country：可能帶有西方口音
+> - Pop / Jazz：通常比較容易出現女性聲音
+>
+> 如果不指定，人聲可能會受到模型預設風格影響。
 
 最後，如果想知道更多 Suno AI 的技巧，可以參照 [Suno Wiki](https://www.suno.wiki/)。
 
@@ -142,9 +386,9 @@ title: A004 Suno AI
 
 ### 實際範例
 
-1. 透過一小段話作為發想，讓校園狗狗的描述變成一首 Rap 歌曲。
+透過一小段話作為發想，讓「校園狗狗」的描述變成一首 Rap 歌曲。
 
-:::info
+```text
 [Start]
 [Instrumental Intro]
 （節奏感強烈的 Beat，帶點輕快的鼓點和電子音效，引領出自由而快樂的氛圍。）
@@ -206,7 +450,8 @@ Yo yo yo，大學狗不簡單
 （輕柔的鋼琴和吉他結束，帶來溫馨的餘韻。）
 
 [End]
+```
 
-:::
+大家可以參照這樣的方式安排自己的 Meta Tags。
 
-2. 大家可以參照這樣的方式去安排自己的 Meta Tags，最後的最後是 [音樂參照](https://suno.com/song/32023c94-abde-46b2-9cb6-5760ddfa52c5)。
+最後附上：[音樂參照](https://suno.com/song/32023c94-abde-46b2-9cb6-5760ddfa52c5)
