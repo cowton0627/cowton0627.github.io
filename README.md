@@ -1,17 +1,27 @@
-# Quartz v4
+# 🌱 春麗知識庫（Chun-Li Knowledge Base）
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+這是一個持續成長的知識庫，用來整理：
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
+- 自媒體經營
+- AI 工具應用
+- 內容創作流程
+- 個人知識管理（PKM）
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+👉 這個網站的目標，是讓知識可以被**重複使用、分享、延伸**。
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+---
 
-## Sponsors
+## 🔗 線上網站
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+👉 https://cowton0627.github.io/
+
+（建議直接使用網站閱讀，體驗較佳）
+
+---
+
+## 🎯 使用方式
+
+這個知識庫不是傳統部落格，而是：
+
+```txt
+👉 可以探索的知識網絡（Digital Garden）
