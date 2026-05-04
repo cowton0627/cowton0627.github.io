@@ -921,11 +921,16 @@ input:focus-visible {
     font-size: 1.15rem;
   }
 
-  /* Right rail (backlinks, graph) appears below article in single column */
+  /* Right rail (backlinks only) appears below article in single column.
+     ToC + Graph are not useful on mobile — kill them. */
   .sidebar.right {
     border-left: none;
     padding: 0 1.1rem 1.5rem !important;
     gap: 1.5rem !important;
+  }
+  .sidebar.right > .toc,
+  .sidebar.right > .graph {
+    display: none !important;
   }
 
   /* Article spacing: keep reading column comfortable */
@@ -976,12 +981,16 @@ input:focus-visible {
     border-right: 1px solid var(--kb-border-soft);
   }
 
-  /* Right rail items sit side-by-side under article (Quartz tablet behavior).
-     Polish the grouping. */
+  /* Right rail collapses below the article. ToC isn't useful when stacked
+     under the article (you can just scroll), so hide it. Backlinks + Graph
+     sit side-by-side as supporting cards. */
   .sidebar.right {
     border-left: none;
     padding: 1rem 0 0 0 !important;
     gap: 1.5rem !important;
+  }
+  .sidebar.right > .toc {
+    display: none !important;
   }
   .sidebar.right > .backlinks,
   .sidebar.right > .graph {
