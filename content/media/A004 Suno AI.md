@@ -1,11 +1,13 @@
 ---
 title: A004 Suno AI
-
 ---
 
 # Suno AI
+
 ## 創造屬於自己的音樂
+
 ### 基礎知識
+
 1. Suno AI 雖然可以直接使用對歌曲的**描述**創造相關的音樂或歌曲，但這樣並不夠客製化。BTW，Instrumental 這個 Switch 是用來切換僅樂器聲與否，這即是說，如果你不要歌曲，要消去人聲可以把它選起來。
 
 ![image](https://hackmd.io/_uploads/SJP1TRGzyg.png)
@@ -13,7 +15,6 @@ title: A004 Suno AI
 2. 在 Suno AI 中，我們可以看到模型的版本，越新的自然可理解為越強的模型，雖然 v3.5 可以長到四分鐘，但我們也可以用 v3 的兩分鐘再去加長。
 
 ![image](https://hackmd.io/_uploads/BJiu6Affke.png)
-
 
 3. 進到 Custom，我們可以看到幾個區塊，第一個是 Lyrics (歌詞)，接著是 Style of Music (音樂風格)，再來是 Persona (人物模板)，最後一個是 Title (歌曲名)。
 
@@ -54,34 +55,34 @@ title: A004 Suno AI
 ---
 
 ### Meta Tags
+
 1. 接著要講到 Lyrics 內使用的 Tag，如果想要將歌曲客製化成自己喜歡的樣子，我們可以先參照下面的 Tag。
 
 :::info
-[Start] 
-[Instrumental Intro] 
-[Verse - Taiwanese] 
+[Start]
+[Instrumental Intro]
+[Verse - Taiwanese]
 **你的歌詞**
 [Verse 2 - Taiwanese]
 **你的歌詞**
 [Verse 3 - Taiwanese]
 **你的歌詞**
-[Guitar Solo] 
-[Chorus - Taiwanese] 
+[Guitar Solo]
+[Chorus - Taiwanese]
 **你的歌詞**
 [Instrumental Bridge]
-[Verse 4 - Taiwanese] 
+[Verse 4 - Taiwanese]
 **你的歌詞**
-[Instrumental Outro] 
+[Instrumental Outro]
 [End]
 :::
 
-
-
 ### 版權問題？
+
 1. 下方節錄至維基百科。
 
 > 法律問題
-在 2024 年 6 月，由美國錄音工業協會主導的訴訟對 Suno 和 Udio 提出，指控其大規模侵犯版權音樂錄音。該訴訟試圖禁止這些公司在版權音樂上進行訓練，並要求對已經發生的侵權行為索賠最高 150,000 美元的賠償。[9][10]
+> 在 2024 年 6 月，由美國錄音工業協會主導的訴訟對 Suno 和 Udio 提出，指控其大規模侵犯版權音樂錄音。該訴訟試圖禁止這些公司在版權音樂上進行訓練，並要求對已經發生的侵權行為索賠最高 150,000 美元的賠償。[9][10]
 
 2. 由於模型的訓練並不會公開，所以錄音工會的主張是裡面一定有版權物，不然不可能有大數據，過去 AI Model 不夠強可能有幾點，一是算力不夠強，二是數據不夠多，現在備齊了，可以說是社會氛圍與軟硬體兼備，那麼就是技術成果的展現了。
 
@@ -90,6 +91,7 @@ title: A004 Suno AI
 4. 在這個大前提下，訓練模型的大公司才會是標的，使用模型的使用者則不需要擔心這點，可以盡情產出拿去使用，目前就當作全民公測中。
 
 ### 各種 Meta Tags 介紹
+
 1. [Verse] vs. [Chorus]，Verse 是主歌，是一首的主要調性，在進到歌曲澎拜之前的起與承。
 
 2. 情感描述 - 在 Suno AI 中，教學文章告訴我們使用 [Sad Verse]、[Happy Chorus] 來去描述主歌與副歌，如果希望主歌是有哀傷的調性使用 Sad，比方說周杰倫的《黑色毛衣》就是 Sad，如果是《告白氣球》則是 Happy。
@@ -139,6 +141,7 @@ title: A004 Suno AI
 ---
 
 ### 實際範例
+
 1. 透過一小段話作為發想，讓校園狗狗的描述變成一首 Rap 歌曲。
 
 :::info
@@ -201,7 +204,6 @@ Yo yo yo，大學狗不簡單
 
 [Instrumental Outro]
 （輕柔的鋼琴和吉他結束，帶來溫馨的餘韻。）
-
 
 [End]
 

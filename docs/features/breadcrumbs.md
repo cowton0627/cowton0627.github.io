@@ -20,7 +20,7 @@ Component.Breadcrumbs({
   rootName: "Home", // name of first/root element
   resolveFrontmatterTitle: true, // whether to resolve folder names through frontmatter titles
   showCurrentPage: true, // whether to display the current page in the breadcrumbs
-})
+});
 ```
 
 When passing in your own options, you can omit any or all of these fields if you'd like to keep the default value for that field.

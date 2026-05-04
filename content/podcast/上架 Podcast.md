@@ -3,10 +3,15 @@ title: 上架 Podcast
 ---
 
 # 上架 Podcast
+
 ## 重新申請一個 Google 帳號
+
 未免與自己本來的帳號相衝突，或社群操作時，影響到本來的帳號，建議申請一個新的 Google 帳號，每當使用新服務時，就利用此帳號登入。
+
 ## 透過 SoundOn、Fistory、Anchor 上架多平台，以 SoundOn 為例。
+
 ### 什麼是 RSS Feed?
+
 1. RSS 是一種聚合內容，是 XML 檔，每當原內容改變時，訂閱內容的使用者便會接到內容更新通知。
 2. 前段是說使用者透過訂閱 RSS，便可不斷獲取想閱讀、收聽、收看的內容而不讓平台恣意以演算法強推各種相關內容給你，若能如此，我們將不再需要**番茄時鐘**，專注在想看的內容上面。
 3. 反過來，我們也可以使用**聚合內容**，來讓不同平台上架**相同**的你的創作，這點就在 Podcast 上架時體現。
@@ -31,7 +36,9 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 ---
 
 ### 使用
+
 #### 建立新的 Podcast 節目
+
 1. 進入 [SoundOn 網站](https://www.soundon.fm/)，下拉至**創作者看這裡**，點擊進去。
 
 ![image](https://hackmd.io/_uploads/HyOU9JPWke.png)
@@ -48,7 +55,7 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/B1Uw-VxGkl.png)
 
-3. 接著按下建立 Podcast，為你的節目上傳正方形的封面，設定名稱、語言等，好記短網址即是你**頻道的網址**，透過 SoundOn 的網址可以收聽你的節目。 
+3. 接著按下建立 Podcast，為你的節目上傳正方形的封面，設定名稱、語言等，好記短網址即是你**頻道的網址**，透過 SoundOn 的網址可以收聽你的節目。
 
 ![image](https://hackmd.io/_uploads/Hyq9bEgMJx.png)
 
@@ -75,6 +82,7 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 ---
 
 #### 建立新的 Podcast 單集
+
 1. 接著在左邊**單集列表**頁籤，選擇右上角的新增單集。
 
 ![image](https://hackmd.io/_uploads/r11JSVgfkl.png)
@@ -100,7 +108,9 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 ---
 
 ### 一同上架其他平台
+
 #### Spotify
+
 1. 在 SoundOn 中，我們從左邊點到平台發布頁籤。
 
 ![image](https://hackmd.io/_uploads/SkfrFcf71x.png)
@@ -117,7 +127,6 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/Hk9LhcMQkg.png)
 
-
 6. 由於我們沒有 Spotify Podcaster 帳號，點選下方的註冊 Spotify，接著使用 Google 帳號註冊。
 
 ![image](https://hackmd.io/_uploads/Sk9ch5zQkx.png)
@@ -125,7 +134,6 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 7. 接著就是下一步下一步完成註冊，接下來的步驟相當重要，點擊**接受條款**。
 
 ![image](https://hackmd.io/_uploads/HyVWa9f7Jl.png)
-
 
 8. [開始建立節目](https://creators.spotify.com/addpodcast) 在這個超連結中，我們可以看到建立新節目與**尋找現有節目**，由於在 SoundOn 我們已經建立了節目，所以必須要進到尋找現有節目選項。
 
@@ -149,8 +157,8 @@ RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標
 
 ![image](https://hackmd.io/_uploads/H1tv1jGQJx.png)
 
-
 #### Apple Podcast
+
 1. 在這個[網址](https://intercom.help/soundon/zh-TW/articles/4133012-%E5%A6%82%E4%BD%95%E5%B0%87%E7%AF%80-%E6%8F%90%E4%BA%A4%E4%B8%8A%E6%9E%B6-apple-podcast)中，主要是告訴我們要申請 Apple ID，有了 Apple ID 就可以使用 [Apple Podcasts Connect](https://podcastsconnect.apple.com/) 來建立你的 Podcast。
 
 2. 假設大家都順利申請帳號並登入了，我們可以看到 Apple Podcasts Connect 最上方有個 Podcasts 按鈕。

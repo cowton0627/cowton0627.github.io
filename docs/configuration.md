@@ -104,7 +104,7 @@ For example, the [[plugins/Latex|Latex]] plugin allows you to pass in a field sp
 transformers: [
   Plugin.FrontMatter(), // use default options
   Plugin.Latex({ renderEngine: "katex" }), // set some custom options
-]
+];
 ```
 
 Some plugins are included by default in the [`quartz.config.ts`](https://github.com/jackyzha0/quartz/blob/v4/quartz.config.ts), but there are more available.

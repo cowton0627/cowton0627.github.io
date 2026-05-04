@@ -1,66 +1,64 @@
 /* =============================================================================
-   春麗知識庫 — Modern docs theme
-   References: Stripe Docs · Linear Docs · Vercel/Geist · Apple Developer Docs
-   - 720px reading column, hard-capped at every breakpoint
-   - Indigo accent on neutral surfaces
-   - Inter (Latin) + PingFang TC / Noto Sans TC (CJK)
-   - Strict image cap, no full-bleed media in prose
-   ============================================================================= */
+   春麗知識庫 — Responsive knowledge-base theme
 
-@use "sass:map";
-@use "./variables.scss" as *;
+   References: Stripe Docs, Linear Docs, Apple Developer Docs, Vercel Geist.
+
+   Breakpoints (matches Quartz default in variables.scss):
+     mobile  : viewport <  800px         single column, sidebar collapses to top
+     tablet  : 800px – 1199px            left rail + content (toc hidden)
+     desktop : viewport >= 1200px        left rail + 760px article + right rail
+
+   Reading column: 760px capped, fluid below.
+   Sidebars on desktop are fluid via clamp() so 1200–1500px viewports stay sane.
+   ============================================================================= */
 
 /* -----------------------------------------------------------------------------
    0. Tokens
    ----------------------------------------------------------------------------- */
 :root {
-  /* Type stacks */
+  /* Type stacks — Inter for Latin, native zh-Hant for CJK */
   --kb-cjk:
-    "PingFang TC", "Noto Sans TC", "Source Han Sans TC",
-    "Microsoft JhengHei", "Heiti TC", sans-serif;
+    "PingFang TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei",
+    "Heiti TC", sans-serif;
   --kb-sans:
-    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Segoe UI", system-ui, sans-serif;
+    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
+    system-ui, sans-serif;
   --kb-display:
     "Inter", "Inter Display", -apple-system, BlinkMacSystemFont,
     "SF Pro Display", "Segoe UI", system-ui, sans-serif;
   --kb-mono:
-    "JetBrains Mono", "SF Mono", ui-monospace, "IBM Plex Mono",
-    Menlo, Consolas, monospace;
+    "JetBrains Mono", "SF Mono", ui-monospace, "IBM Plex Mono", Menlo, Consolas,
+    monospace;
 
   /* Reading rhythm */
-  --kb-content-max: 720px;
+  --kb-content-max: 760px;
   --kb-content-pad: 1.5rem;
-  --kb-line-height: 1.78;
+  --kb-line-height: 1.8;
 
-  /* Surfaces (derive from theme tokens so dark/light track automatically) */
-  --kb-surface-1:    color-mix(in srgb, var(--lightgray) 28%, var(--light));
-  --kb-surface-2:    color-mix(in srgb, var(--lightgray) 55%, var(--light));
-  --kb-border:       color-mix(in srgb, var(--lightgray) 80%, transparent);
-  --kb-border-soft:  color-mix(in srgb, var(--lightgray) 50%, transparent);
-  --kb-accent-soft:  color-mix(in srgb, var(--secondary) 12%, transparent);
-  --kb-accent-ring:  color-mix(in srgb, var(--secondary) 22%, transparent);
+  /* Surfaces — derived from theme tokens so dark/light track automatically */
+  --kb-surface-1: color-mix(in srgb, var(--lightgray) 28%, var(--light));
+  --kb-surface-2: color-mix(in srgb, var(--lightgray) 55%, var(--light));
+  --kb-border: color-mix(in srgb, var(--lightgray) 80%, transparent);
+  --kb-border-soft: color-mix(in srgb, var(--lightgray) 50%, transparent);
+  --kb-accent-soft: color-mix(in srgb, var(--secondary) 12%, transparent);
+  --kb-accent-ring: color-mix(in srgb, var(--secondary) 22%, transparent);
 
   --kb-shadow-sm: 0 1px 2px rgba(15, 17, 26, 0.04);
   --kb-shadow-md:
-    0 4px 16px -4px rgba(15, 17, 26, 0.06),
-    0 1px 3px rgba(15, 17, 26, 0.04);
+    0 4px 16px -4px rgba(15, 17, 26, 0.06), 0 1px 3px rgba(15, 17, 26, 0.04);
   --kb-shadow-lg:
-    0 12px 32px -8px rgba(15, 17, 26, 0.10),
-    0 2px 8px rgba(15, 17, 26, 0.04);
+    0 12px 32px -8px rgba(15, 17, 26, 0.1), 0 2px 8px rgba(15, 17, 26, 0.04);
 }
 
 :root[saved-theme="dark"] {
   --kb-surface-1: color-mix(in srgb, var(--lightgray) 35%, var(--light));
   --kb-surface-2: color-mix(in srgb, var(--lightgray) 65%, var(--light));
-  --kb-border:    color-mix(in srgb, var(--lightgray) 90%, transparent);
-  --kb-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --kb-border: color-mix(in srgb, var(--lightgray) 90%, transparent);
+  --kb-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --kb-shadow-md:
-    0 4px 16px -4px rgba(0, 0, 0, 0.50),
-    0 1px 3px rgba(0, 0, 0, 0.40);
+    0 4px 16px -4px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
   --kb-shadow-lg:
-    0 12px 32px -8px rgba(0, 0, 0, 0.60),
-    0 2px 8px rgba(0, 0, 0, 0.40);
+    0 12px 32px -8px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* -----------------------------------------------------------------------------
@@ -82,23 +80,25 @@ body {
   background: var(--light);
 }
 
-/* Subtle aurora in dark mode (Linear-style) */
+/* Subtle aurora glow in dark mode (Linear-style) */
 :root[saved-theme="dark"] body {
   background-image:
-    radial-gradient(ellipse 70% 55% at 0% 0%,
+    radial-gradient(
+      ellipse 70% 55% at 0% 0%,
       color-mix(in srgb, var(--secondary) 7%, transparent) 0%,
-      transparent 60%),
-    radial-gradient(ellipse 55% 45% at 100% 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 100% 0%,
       color-mix(in srgb, var(--tertiary) 5%, transparent) 0%,
-      transparent 55%);
+      transparent 55%
+    );
   background-attachment: fixed;
 }
 
 /* -----------------------------------------------------------------------------
-   2. Reading column — STRICT 720px, centered, padded, at every breakpoint
+   2. Reading column — capped at every breakpoint
    ----------------------------------------------------------------------------- */
-
-/* The .center grid cell holds the article. Cap and center its children. */
 .page > #quartz-body .center {
   & > article,
   & > .page-header,
@@ -113,7 +113,6 @@ body {
   }
 }
 
-/* Top breathing room before article begins */
 .page > #quartz-body .center > .page-header {
   padding-top: 1.25rem;
 }
@@ -122,13 +121,8 @@ body {
   padding-bottom: 4rem;
 }
 
-/* Mobile: a touch less padding so prose doesn't feel wasted */
-@media all and (max-width: 800px) {
-  :root { --kb-content-pad: 1.1rem; }
-}
-
 /* -----------------------------------------------------------------------------
-   3. Typography — body
+   3. Body typography
    ----------------------------------------------------------------------------- */
 article p,
 article li,
@@ -143,7 +137,8 @@ article p {
   text-wrap: pretty;
 }
 
-article p, article li {
+article p,
+article li {
   word-break: break-word;
   overflow-wrap: anywhere;
 }
@@ -154,9 +149,14 @@ article > p:first-child {
 }
 
 /* -----------------------------------------------------------------------------
-   4. Typography — headings
+   4. Headings
    ----------------------------------------------------------------------------- */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--kb-display), var(--kb-cjk);
   letter-spacing: -0.018em;
   line-height: 1.3;
@@ -189,8 +189,12 @@ article h4 {
   margin-top: 1.5rem;
 }
 
-/* Anchor link on hover — quiet # */
-h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+h5[id],
+h6[id] {
   & > a[href^="#"] {
     color: var(--gray);
     font-weight: 400;
@@ -199,7 +203,6 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   }
 }
 
-/* ArticleTitle component (rendered on non-home pages) */
 .page-header h1.article-title {
   font-family: var(--kb-display), var(--kb-cjk);
   font-size: 2.2rem;
@@ -219,7 +222,7 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
 }
 
 /* -----------------------------------------------------------------------------
-   5. IMAGES — strictly capped, never full-bleed
+   5. Images — strictly capped, never full-bleed in prose
    ----------------------------------------------------------------------------- */
 article img {
   max-width: 100%;
@@ -228,25 +231,21 @@ article img {
   margin: 1.75rem auto;
   border-radius: 10px;
   border: 1px solid var(--kb-border-soft);
-  box-shadow: var(--kb-shadow-sm);
   background: var(--kb-surface-1);
 }
 
-/* Cap visual width even when article column is wider than 600px */
 article p > img,
 article > img,
 article figure > img {
   max-width: min(100%, 640px);
 }
 
-/* Image inside a wikilink: drop link chrome */
 article a:has(> img) {
   background: transparent !important;
   border-bottom: none !important;
   padding: 0 !important;
 }
 
-/* Video / audio same treatment */
 article video,
 article audio {
   max-width: 100%;
@@ -255,7 +254,6 @@ article audio {
   border-radius: 10px;
 }
 
-/* Italic caption directly under image (Markdown convention: ![alt](src) *caption*) */
 article p > img + em,
 article p > a > img + em {
   display: block;
@@ -267,33 +265,13 @@ article p > a > img + em {
 }
 
 /* -----------------------------------------------------------------------------
-   6. Sidebars
+   6. Sidebars — base
    ----------------------------------------------------------------------------- */
 .sidebar {
   font-size: 0.9rem;
   gap: 1rem !important;
 }
 
-.sidebar.left {
-  border-right: 1px solid var(--kb-border-soft);
-}
-
-.sidebar.right {
-  border-left: 1px solid var(--kb-border-soft);
-}
-
-@media all and (max-width: 1200px) {
-  .sidebar.right {
-    border-left: none;
-  }
-}
-@media all and (max-width: 800px) {
-  .sidebar.left {
-    border-right: none;
-  }
-}
-
-/* Brand title in left rail */
 .sidebar .page-title {
   font-family: var(--kb-display), var(--kb-cjk);
   font-size: 1.05rem;
@@ -302,7 +280,9 @@ article p > a > img + em {
   margin: 0 0 0.25rem;
   line-height: 1.3;
 }
-.sidebar .page-title a { color: var(--dark); }
+.sidebar .page-title a {
+  color: var(--dark);
+}
 
 /* -----------------------------------------------------------------------------
    7. Search input
@@ -322,9 +302,12 @@ input[type="search"] {
     background-color 0.15s ease;
 }
 
-input[type="search"]::placeholder { color: var(--gray); }
-input[type="search"]:hover { background: var(--kb-surface-2); }
-
+input[type="search"]::placeholder {
+  color: var(--gray);
+}
+input[type="search"]:hover {
+  background: var(--kb-surface-2);
+}
 input[type="search"]:focus,
 .search input:focus {
   outline: none;
@@ -341,10 +324,13 @@ input[type="search"]:focus,
   overflow: hidden;
 }
 
-.darkmode, .readermode {
+.darkmode,
+.readermode {
   border-radius: 10px;
   transition: background-color 0.15s ease;
-  &:hover { background: var(--kb-surface-2); }
+  &:hover {
+    background: var(--kb-surface-2);
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -354,7 +340,8 @@ input[type="search"]:focus,
   font-size: 0.88rem;
 }
 
-.explorer h1, .explorer h2 {
+.explorer h1,
+.explorer h2 {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -365,15 +352,22 @@ input[type="search"]:focus,
   border: none;
 }
 
-.explorer ul, .explorer ol { line-height: 1.5; }
-.explorer li { padding: 0; }
+.explorer ul,
+.explorer ol {
+  line-height: 1.5;
+}
+.explorer li {
+  padding: 0;
+}
 
 .explorer li > a,
 .explorer button.folder-button,
 .explorer .folder-container > div > span {
   border-radius: 6px;
   padding: 0.2rem 0.45rem;
-  transition: background-color 0.12s ease, color 0.12s ease;
+  transition:
+    background-color 0.12s ease,
+    color 0.12s ease;
   color: var(--darkgray);
   font-weight: 400;
   border-bottom: none;
@@ -389,11 +383,15 @@ input[type="search"]:focus,
 /* -----------------------------------------------------------------------------
    9. Right rail labels
    ----------------------------------------------------------------------------- */
-.toc, .backlinks, .graph {
+.toc,
+.backlinks,
+.graph {
   font-size: 0.86rem;
 }
 
-.toc h3, .backlinks h3, .graph h3 {
+.toc h3,
+.backlinks h3,
+.graph h3 {
   font-family: var(--kb-display);
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -406,7 +404,7 @@ input[type="search"]:focus,
 }
 
 /* -----------------------------------------------------------------------------
-   10. Table of contents — guide line + active marker
+   10. Table of contents
    ----------------------------------------------------------------------------- */
 .toc-content {
   list-style: none;
@@ -415,7 +413,10 @@ input[type="search"]:focus,
   position: relative;
   border-left: 1px solid var(--kb-border-soft);
 }
-.toc-content li { margin: 0; position: relative; }
+.toc-content li {
+  margin: 0;
+  position: relative;
+}
 
 .toc-content li > a {
   display: block;
@@ -426,10 +427,14 @@ input[type="search"]:focus,
   line-height: 1.45;
   border-left: 2px solid transparent;
   margin-left: -1px;
-  transition: color 0.12s ease, border-color 0.12s ease;
+  transition:
+    color 0.12s ease,
+    border-color 0.12s ease;
   border-bottom: none;
 }
-.toc-content li > a:hover { color: var(--dark); }
+.toc-content li > a:hover {
+  color: var(--dark);
+}
 
 .toc-content .in-view > a {
   color: var(--secondary);
@@ -437,13 +442,21 @@ input[type="search"]:focus,
   font-weight: 500;
 }
 
-.toc-content .depth-1 > a { padding-left: 0.85rem; }
-.toc-content .depth-2 > a { padding-left: 1.6rem; }
-.toc-content .depth-3 > a { padding-left: 2.35rem; }
-.toc-content .depth-4 > a { padding-left: 3.1rem; }
+.toc-content .depth-1 > a {
+  padding-left: 0.85rem;
+}
+.toc-content .depth-2 > a {
+  padding-left: 1.6rem;
+}
+.toc-content .depth-3 > a {
+  padding-left: 2.35rem;
+}
+.toc-content .depth-4 > a {
+  padding-left: 3.1rem;
+}
 
 /* -----------------------------------------------------------------------------
-   11. Backlinks — quiet card list
+   11. Backlinks
    ----------------------------------------------------------------------------- */
 .backlinks ul {
   list-style: none;
@@ -453,7 +466,9 @@ input[type="search"]:focus,
   flex-direction: column;
   gap: 0.4rem;
 }
-.backlinks li { margin: 0; }
+.backlinks li {
+  margin: 0;
+}
 
 .backlinks li > a {
   display: block;
@@ -480,7 +495,7 @@ input[type="search"]:focus,
 }
 
 /* -----------------------------------------------------------------------------
-   12. Graph — supporting role
+   12. Graph
    ----------------------------------------------------------------------------- */
 .graph .graph-outer {
   height: 180px;
@@ -488,7 +503,9 @@ input[type="search"]:focus,
   border: 1px solid var(--kb-border-soft);
   background: var(--kb-surface-1);
   overflow: hidden;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 .graph .graph-outer:hover {
   border-color: var(--secondary);
@@ -498,7 +515,9 @@ input[type="search"]:focus,
   opacity: 0.55;
   transition: opacity 0.15s ease;
 }
-.graph button#global-graph-icon:hover { opacity: 1; }
+.graph button#global-graph-icon:hover {
+  opacity: 1;
+}
 
 /* -----------------------------------------------------------------------------
    13. Links
@@ -508,7 +527,10 @@ article a {
   color: var(--secondary);
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
-  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background-color 0.15s ease;
 }
 article a:hover {
   color: var(--dark);
@@ -531,19 +553,28 @@ article a.internal.broken {
   opacity: 0.7;
 }
 
-article a.external .external-icon > path { fill: var(--gray); }
+article a.external .external-icon > path {
+  fill: var(--gray);
+}
 
 /* -----------------------------------------------------------------------------
    14. Lists
    ----------------------------------------------------------------------------- */
-article ul, article ol {
+article ul,
+article ol {
   padding-left: 1.4rem;
   margin: 0.5rem 0 1rem;
 }
-article li { margin-bottom: 0.3rem; }
-article ul > li::marker { color: var(--gray); }
+article li {
+  margin-bottom: 0.3rem;
+}
+article ul > li::marker {
+  color: var(--gray);
+}
 article li > ul,
-article li > ol { margin: 0.3rem 0; }
+article li > ol {
+  margin: 0.3rem 0;
+}
 
 /* -----------------------------------------------------------------------------
    15. Code
@@ -595,7 +626,9 @@ article blockquote {
   border-radius: 0 10px 10px 0;
   color: var(--darkgray);
 }
-article blockquote p { margin: 0.25rem 0; }
+article blockquote p {
+  margin: 0.25rem 0;
+}
 
 /* -----------------------------------------------------------------------------
    17. Tables
@@ -629,7 +662,9 @@ article blockquote p { margin: 0.25rem 0; }
   padding: 0.45rem 0.85rem;
   border-bottom: 1px solid var(--kb-border-soft);
 }
-.table-container tr:last-child td { border-bottom: none; }
+.table-container tr:last-child td {
+  border-bottom: none;
+}
 
 /* -----------------------------------------------------------------------------
    18. HR
@@ -660,7 +695,10 @@ hr {
   padding: 0.15rem 0.65rem !important;
   font-size: 0.78rem;
   font-weight: 500;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 .tags > li > a.tag-link:hover {
   background: color-mix(in srgb, var(--secondary) 18%, transparent) !important;
@@ -682,7 +720,9 @@ hr {
   border-bottom: none;
   font-weight: 400;
 }
-.breadcrumb-container a:hover { color: var(--secondary); }
+.breadcrumb-container a:hover {
+  color: var(--secondary);
+}
 
 /* -----------------------------------------------------------------------------
    21. Homepage hero (cssclasses: [home])
@@ -690,10 +730,10 @@ hr {
 article.home {
   & > h1:first-child {
     font-family: var(--kb-display), var(--kb-cjk);
-    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 2.8rem);
     font-weight: 700;
     letter-spacing: -0.035em;
-    line-height: 1.08;
+    line-height: 1.1;
     margin: 0.25rem 0 0.6rem;
     background: linear-gradient(
       135deg,
@@ -707,7 +747,7 @@ article.home {
 
   & > p:first-of-type {
     color: var(--gray);
-    font-size: 1.08rem;
+    font-size: 1.05rem;
     line-height: 1.6;
     margin: 0 0 2.5rem;
     letter-spacing: -0.005em;
@@ -739,7 +779,9 @@ article.home {
     transition: background-color 0.12s ease;
     position: relative;
   }
-  & ul > li:hover { background: var(--kb-surface-1); }
+  & ul > li:hover {
+    background: var(--kb-surface-1);
+  }
 
   & ul > li > a {
     display: block;
@@ -749,9 +791,13 @@ article.home {
     font-size: 0.98rem;
     border-bottom: none;
     background: transparent;
-    transition: color 0.12s ease, padding-left 0.15s ease;
+    transition:
+      color 0.12s ease,
+      padding-left 0.15s ease;
   }
-  & ul > li > a.internal { background: transparent; }
+  & ul > li > a.internal {
+    background: transparent;
+  }
   & ul > li:hover > a {
     color: var(--secondary);
     padding-left: 0.85rem;
@@ -766,7 +812,9 @@ article.home {
     color: var(--gray);
     font-size: 0.85rem;
     opacity: 0;
-    transition: opacity 0.15s ease, transform 0.15s ease;
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
     pointer-events: none;
   }
   & ul > li:hover::after {
@@ -775,7 +823,9 @@ article.home {
     color: var(--secondary);
   }
 
-  & hr { display: none; }
+  & hr {
+    display: none;
+  }
 }
 
 /* -----------------------------------------------------------------------------
@@ -794,10 +844,12 @@ footer a {
   border-bottom: none;
   font-weight: 400;
 }
-footer a:hover { color: var(--secondary); }
+footer a:hover {
+  color: var(--secondary);
+}
 
 /* -----------------------------------------------------------------------------
-   23. Selection, focus, scrollbars
+   23. Selection / focus / scrollbars
    ----------------------------------------------------------------------------- */
 ::selection {
   background: color-mix(in srgb, var(--secondary) 28%, transparent);
@@ -812,14 +864,21 @@ input:focus-visible {
   border-radius: 4px;
 }
 
-*::-webkit-scrollbar { width: 10px; height: 10px; }
-*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
 *::-webkit-scrollbar-thumb {
   background: var(--kb-border);
   border-radius: 999px;
   border: 2px solid var(--light);
 }
-*::-webkit-scrollbar-thumb:hover { background: var(--gray); }
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
+}
 
 * {
   scrollbar-width: thin;
@@ -835,8 +894,171 @@ input:focus-visible {
   box-shadow: 0 0 8px color-mix(in srgb, var(--secondary) 50%, transparent);
 }
 
+/* =============================================================================
+   25. RESPONSIVE — explicit breakpoint overrides
+   ============================================================================= */
+
 /* -----------------------------------------------------------------------------
-   25. Dark mode adjustments
+   25.a  MOBILE  ( viewport < 800px )
+   - Single column, sidebar collapses to top
+   - Tighter gutters
+   - ToC hidden (Quartz default), backlinks below content
+   ----------------------------------------------------------------------------- */
+@media (max-width: 799.98px) {
+  :root {
+    --kb-content-pad: 1.1rem;
+  }
+
+  /* Sidebar at top: tidy spacing, no full-height stickiness */
+  .sidebar.left {
+    border-right: none;
+    padding: 1.5rem 1.1rem 1rem !important;
+    gap: 0.8rem !important;
+  }
+
+  /* Brand title left-aligned, search row stays compact */
+  .sidebar .page-title {
+    font-size: 1.15rem;
+  }
+
+  /* Right rail (backlinks, graph) appears below article in single column */
+  .sidebar.right {
+    border-left: none;
+    padding: 0 1.1rem 1.5rem !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Article spacing: keep reading column comfortable */
+  .page > #quartz-body .center > article {
+    padding-top: 0.25rem;
+    padding-bottom: 2.5rem;
+  }
+
+  article h1 {
+    font-size: 1.7rem;
+  }
+  article h2 {
+    font-size: 1.25rem;
+  }
+  .page-header h1.article-title {
+    font-size: 1.8rem;
+  }
+
+  /* Homepage hero scales down */
+  article.home > h1:first-child {
+    font-size: 2rem;
+  }
+  article.home > p:first-of-type {
+    font-size: 0.98rem;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Tables don't try to be card-shaped on mobile */
+  .table-container > table {
+    font-size: 0.88rem;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 2.5rem;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   25.b  TABLET  ( 800px – 1199px )
+   - Left rail fixed (260px from variables.scss)
+   - ToC hidden, backlinks/graph appear under article (Quartz default)
+   - Content column fluid; article centered with internal cap
+   ----------------------------------------------------------------------------- */
+@media (min-width: 800px) and (max-width: 1199.98px) {
+  /* Hairline divider only between left rail and content */
+  .sidebar.left {
+    border-right: 1px solid var(--kb-border-soft);
+  }
+
+  /* Right rail items sit side-by-side under article (Quartz tablet behavior).
+     Polish the grouping. */
+  .sidebar.right {
+    border-left: none;
+    padding: 1rem 0 0 0 !important;
+    gap: 1.5rem !important;
+  }
+  .sidebar.right > .backlinks,
+  .sidebar.right > .graph {
+    flex: 1;
+  }
+
+  /* Slightly narrower reading column for tablet so prose lines stay short */
+  :root {
+    --kb-content-max: 720px;
+  }
+
+  /* Center column starts at the right edge of the sidebar — keep prose
+     centered in the available space rather than left-anchored */
+  .page > #quartz-body .center > article,
+  .page > #quartz-body .center > .page-header,
+  .page > #quartz-body .center > footer {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  article.home > h1:first-child {
+    font-size: 2.2rem;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   25.c  DESKTOP  ( viewport >= 1200px )
+   - 3-column grid with hairline rails on either side
+   - Article 760px capped, centered in the middle cell
+   - Sidebar widths fluid via clamp() so 1200–1500px viewports stay sane
+   ----------------------------------------------------------------------------- */
+@media (min-width: 1200px) {
+  /* Override Quartz's fixed 260/auto/260 with fluid clamp for nicer scaling.
+     At 1200px viewport: sidebars ~216px, center ~960px; at 1500px: ~270/950. */
+  .page > #quartz-body {
+    grid-template-columns:
+      clamp(220px, 18vw, 280px)
+      minmax(0, 1fr)
+      clamp(220px, 18vw, 280px) !important;
+    column-gap: 2rem !important;
+  }
+
+  /* Hairline dividers between rails and content */
+  .sidebar.left {
+    border-right: 1px solid var(--kb-border-soft);
+  }
+  .sidebar.right {
+    border-left: 1px solid var(--kb-border-soft);
+  }
+
+  /* Article column: ensure 760px cap and proper centering */
+  :root {
+    --kb-content-max: 760px;
+  }
+
+  /* Tighter sidebar typography density — desktop has space for it */
+  .sidebar {
+    font-size: 0.88rem;
+  }
+  .explorer {
+    font-size: 0.86rem;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   25.d  WIDE DESKTOP  ( viewport >= 1500px )
+   - Page hits Quartz's max-width cap (1500px from base.scss)
+   - Article gets generous breathing room within the centered page
+   ----------------------------------------------------------------------------- */
+@media (min-width: 1500px) {
+  :root {
+    --kb-content-max: 780px;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   26. Dark mode adjustments
    ----------------------------------------------------------------------------- */
 :root[saved-theme="dark"] {
   article.home > h1:first-child {

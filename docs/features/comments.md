@@ -58,46 +58,46 @@ Quartz also exposes a few of the other Giscus options as well and you can provid
 
 ```ts
 type Options = {
-  provider: "giscus"
+  provider: "giscus";
   options: {
-    repo: `${string}/${string}`
-    repoId: string
-    category: string
-    categoryId: string
+    repo: `${string}/${string}`;
+    repoId: string;
+    category: string;
+    categoryId: string;
 
     // Url to folder with custom themes
     // defaults to 'https://${cfg.baseUrl}/static/giscus'
-    themeUrl?: string
+    themeUrl?: string;
 
     // filename for light theme .css file
     // defaults to 'light'
-    lightTheme?: string
+    lightTheme?: string;
 
     // filename for dark theme .css file
     // defaults to 'dark'
-    darkTheme?: string
+    darkTheme?: string;
 
     // how to map pages -> discussions
     // defaults to 'url'
-    mapping?: "url" | "title" | "og:title" | "specific" | "number" | "pathname"
+    mapping?: "url" | "title" | "og:title" | "specific" | "number" | "pathname";
 
     // use strict title matching
     // defaults to true
-    strict?: boolean
+    strict?: boolean;
 
     // whether to enable reactions for the main post
     // defaults to true
-    reactionsEnabled?: boolean
+    reactionsEnabled?: boolean;
 
     // where to put the comment input box relative to the comments
     // defaults to 'bottom'
-    inputPosition?: "top" | "bottom"
+    inputPosition?: "top" | "bottom";
 
     // set your preference language here
     // defaults to 'en'
-    lang?: string
-  }
-}
+    lang?: string;
+  };
+};
 ```
 
 #### Custom CSS theme

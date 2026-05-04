@@ -17,7 +17,7 @@ You can also listen to the `themechange` event to perform any custom logic when 
 
 ```js
 document.addEventListener("themechange", (e) => {
-  console.log("Theme changed to " + e.detail.theme) // either "light" or "dark"
+  console.log("Theme changed to " + e.detail.theme); // either "light" or "dark"
   // your logic here
-})
+});
 ```

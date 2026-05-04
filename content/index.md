@@ -22,13 +22,6 @@ cssclasses:
 - [[podcast/|🎙️ Podcast]]
 - [[media/social/|📱 社群]]
 
-## 使用方式
-
-- 左側 **Search**（快捷鍵 `/`）— 全文搜尋
-- 左側 **Explorer** — 瀏覽所有筆記
-- 右側 **Table of Contents** — 章節導覽
-- 右側 **Backlinks** — 反向連結，看見筆記之間的脈絡
-
 ## 關於
 
 - 來源：[Obsidian](https://obsidian.md) Vault

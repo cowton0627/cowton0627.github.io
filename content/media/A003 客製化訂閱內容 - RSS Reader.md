@@ -1,11 +1,13 @@
 ---
 title: A003 客製化訂閱內容 - RSS Reader
-
 ---
 
 # RSS Reader
+
 ## RSS Feed
+
 ### 緣起
+
 要了解 RSS Feed 最快的方法還是先透過 RSS Reader，RSS Reader 可以理解為一個訂閱 XML 的閱讀器，每當創作者更新內容時，閱讀器會即時通知。
 
 這即是說透過這個閱讀器，你可以排除掉各種社群的不必要的推播，只專注在想看的內容上面。
@@ -15,6 +17,7 @@ title: A003 客製化訂閱內容 - RSS Reader
 ---
 
 ### 使用
+
 1. 以常見的 Feedly 舉例，直接用手機做操作。
 
 ![image](https://hackmd.io/_uploads/S1hNDZoZ1x.png)
@@ -35,7 +38,6 @@ title: A003 客製化訂閱內容 - RSS Reader
 
 ![image](https://hackmd.io/_uploads/ByKwYZs-yg.png)
 
-
 接著，我們看到各種內容，選擇想要的點選右邊的 **+** 就可以訂閱，並且設定分組了，如果想要同一個內容在不同分組出現，也是 OK 的。
 
 如此一來，使用 RSS Reader 世界就變得相當美好了，不是嗎？
@@ -53,6 +55,7 @@ title: A003 客製化訂閱內容 - RSS Reader
 ---
 
 ### 接著使用
+
 1. 我們可以使用 [RSS.app](https://rss.app/) 來產生 RSS Feed。
 
 ![image](https://hackmd.io/_uploads/HyWGy7s-ke.png)

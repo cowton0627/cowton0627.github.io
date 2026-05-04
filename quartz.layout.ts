@@ -1,5 +1,5 @@
-import { PageLayout, SharedLayout } from "./quartz/cfg"
-import * as Component from "./quartz/components"
+import { PageLayout, SharedLayout } from "./quartz/cfg";
+import * as Component from "./quartz/components";
 
 // Components shared across all pages
 export const sharedPageComponents: SharedLayout = {
@@ -12,7 +12,7 @@ export const sharedPageComponents: SharedLayout = {
       Obsidian: "https://obsidian.md",
     },
   }),
-}
+};
 
 // Left rail: identity + search bar + tools + explorer
 const leftSidebar = [
@@ -26,9 +26,10 @@ const leftSidebar = [
     ],
   }),
   Component.Explorer(),
-]
+];
 
-const isHome = (page: { fileData: { slug?: string } }) => page.fileData.slug === "index"
+const isHome = (page: { fileData: { slug?: string } }) =>
+  page.fileData.slug === "index";
 
 // Single-note pages
 export const defaultContentPageLayout: PageLayout = {
@@ -62,11 +63,15 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => !isHome(page),
     }),
   ],
-}
+};
 
 // List pages (tags, folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [
+    Component.Breadcrumbs(),
+    Component.ArticleTitle(),
+    Component.ContentMeta(),
+  ],
   left: leftSidebar,
   right: [],
-}
+};

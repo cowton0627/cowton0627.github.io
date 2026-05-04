@@ -54,20 +54,20 @@ All functions you can pass work with the `FileTrieNode` class, which has the fol
 
 ```ts title="quartz/components/Explorer.tsx"
 class FileTrieNode {
-  isFolder: boolean
-  children: Array<FileTrieNode>
-  data: ContentDetails | null
+  isFolder: boolean;
+  children: Array<FileTrieNode>;
+  data: ContentDetails | null;
 }
 ```
 
 ```ts title="quartz/plugins/emitters/contentIndex.tsx"
 export type ContentDetails = {
-  slug: FullSlug
-  title: string
-  links: SimpleSlug[]
-  tags: string[]
-  content: string
-}
+  slug: FullSlug;
+  title: string;
+  links: SimpleSlug[];
+  tags: string[];
+  content: string;
+};
 ```
 
 Every function you can pass is optional. By default, only a `sort` function will be used:
@@ -80,16 +80,16 @@ Component.Explorer({
       return a.displayName.localeCompare(b.displayName, undefined, {
         numeric: true,
         sensitivity: "base",
-      })
+      });
     }
 
     if (!a.isFolder && b.isFolder) {
-      return 1
+      return 1;
     } else {
-      return -1
+      return -1;
     }
   },
-})
+});
 ```
 
 ---
@@ -101,9 +101,9 @@ For more information on how to use `sort`, `filter` and `map`, you can check [Ar
 Type definitions look like this:
 
 ```ts
-type SortFn = (a: FileTrieNode, b: FileTrieNode) => number
-type FilterFn = (node: FileTrieNode) => boolean
-type MapFn = (node: FileTrieNode) => void
+type SortFn = (a: FileTrieNode, b: FileTrieNode) => number;
+type FilterFn = (node: FileTrieNode) => boolean;
+type MapFn = (node: FileTrieNode) => void;
 ```
 
 ## Basic examples
@@ -117,9 +117,9 @@ Using this example, the explorer will alphabetically sort everything.
 ```ts title="quartz.layout.ts"
 Component.Explorer({
   sortFn: (a, b) => {
-    return a.displayName.localeCompare(b.displayName)
+    return a.displayName.localeCompare(b.displayName);
   },
-})
+});
 ```
 
 ### Change display names (`map`)
@@ -129,10 +129,10 @@ Using this example, the display names of all `FileNodes` (folders + files) will 
 ```ts title="quartz.layout.ts"
 Component.Explorer({
   mapFn: (node) => {
-    node.displayName = node.displayName.toUpperCase()
-    return node
+    node.displayName = node.displayName.toUpperCase();
+    return node;
   },
-})
+});
 ```
 
 ### Remove list of elements (`filter`)
@@ -144,14 +144,14 @@ Note that this example filters on the title but you can also do it via slug or a
 Component.Explorer({
   filterFn: (node) => {
     // set containing names of everything you want to filter out
-    const omit = new Set(["authoring content", "tags", "advanced"])
+    const omit = new Set(["authoring content", "tags", "advanced"]);
 
     // can also use node.slug or by anything on node.data
     // note that node.data is only present for files that exist on disk
     // (e.g. implicit folder nodes that have no associated index.md)
-    return !omit.has(node.displayName.toLowerCase())
+    return !omit.has(node.displayName.toLowerCase());
   },
-})
+});
 ```
 
 ### Remove files by tag
@@ -162,9 +162,9 @@ You can access the tags of a file by `node.data.tags`.
 Component.Explorer({
   filterFn: (node) => {
     // exclude files with the tag "explorerexclude"
-    return node.data?.tags?.includes("explorerexclude") !== true
+    return node.data?.tags?.includes("explorerexclude") !== true;
   },
-})
+});
 ```
 
 ### Show every element in explorer
@@ -175,7 +175,7 @@ To override the default filter function, you can set the filter function to `und
 ```ts title="quartz.layout.ts"
 Component.Explorer({
   filterFn: undefined, // apply no filter function, every file and folder will visible
-})
+});
 ```
 
 ## Advanced examples
@@ -186,24 +186,24 @@ Component.Explorer({
 > and passing it in.
 >
 > ```ts title="quartz.layout.ts"
-> import { Options } from "./quartz/components/Explorer"
+> import { Options } from "./quartz/components/Explorer";
 >
 > export const mapFn: Options["mapFn"] = (node) => {
 >   // implement your function here
-> }
+> };
 > export const filterFn: Options["filterFn"] = (node) => {
 >   // implement your function here
-> }
+> };
 > export const sortFn: Options["sortFn"] = (a, b) => {
 >   // implement your function here
-> }
+> };
 >
 > Component.Explorer({
 >   // ... your other options
 >   mapFn,
 >   filterFn,
 >   sortFn,
-> })
+> });
 > ```
 
 ### Add emoji prefix
@@ -214,10 +214,10 @@ To add emoji prefixes (📁 for folders, 📄 for files), you could use a map fu
 Component.Explorer({
   mapFn: (node) => {
     if (node.isFolder) {
-      node.displayName = "📁 " + node.displayName
+      node.displayName = "📁 " + node.displayName;
     } else {
-      node.displayName = "📄 " + node.displayName
+      node.displayName = "📄 " + node.displayName;
     }
   },
-})
+});
 ```

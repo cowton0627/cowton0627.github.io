@@ -52,7 +52,7 @@ Component.Graph({
     showTags: true, // whether to show tags in the graph
     enableRadial: true, // whether to constrain the graph, similar to Obsidian
   },
-})
+});
 ```
 
 When passing in your own options, you can omit any or all of these fields if you'd like to keep the default value for that field.
