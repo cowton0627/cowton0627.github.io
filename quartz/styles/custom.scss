@@ -1,61 +1,135 @@
-/* =========================================================================
-   Knowledge base — custom styles
-   Goals:
-   - Notion / Apple Docs level readability
-   - Traditional Chinese (zh-Hant) typography that pairs cleanly with English
-   - Quiet, modern UI: soft shadows, rounded corners, restrained color
-   - Works in both light and dark mode (uses Quartz CSS variables)
-   ========================================================================= */
+/* =============================================================================
+   春麗知識庫 — Modern docs theme
+   References: Stripe Docs · Linear Docs · Vercel/Geist · Apple Developer Docs
+   - 720px reading column, hard-capped at every breakpoint
+   - Indigo accent on neutral surfaces
+   - Inter (Latin) + PingFang TC / Noto Sans TC (CJK)
+   - Strict image cap, no full-bleed media in prose
+   ============================================================================= */
 
-/* -------------------------------------------------------------------------
-   1. Typography — CJK-aware stack
-   ------------------------------------------------------------------------- */
+@use "sass:map";
+@use "./variables.scss" as *;
 
+/* -----------------------------------------------------------------------------
+   0. Tokens
+   ----------------------------------------------------------------------------- */
 :root {
-  --kb-cjk-body:
-    "PingFang TC", "Noto Sans TC", "Source Han Sans TC", "Microsoft JhengHei",
-    "Apple LiGothic", "Heiti TC", sans-serif;
-  --kb-cjk-serif:
-    "Noto Serif TC", "Source Han Serif TC", "Songti TC", "PMingLiU", serif;
-  --kb-latin-body:
-    -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Text", "Segoe UI",
-    Roboto, system-ui, sans-serif;
+  /* Type stacks */
+  --kb-cjk:
+    "PingFang TC", "Noto Sans TC", "Source Han Sans TC",
+    "Microsoft JhengHei", "Heiti TC", sans-serif;
+  --kb-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Segoe UI", system-ui, sans-serif;
+  --kb-display:
+    "Inter", "Inter Display", -apple-system, BlinkMacSystemFont,
+    "SF Pro Display", "Segoe UI", system-ui, sans-serif;
   --kb-mono:
-    "JetBrains Mono", "SF Mono", "IBM Plex Mono", "Fira Code", Menlo,
-    Consolas, monospace;
+    "JetBrains Mono", "SF Mono", ui-monospace, "IBM Plex Mono",
+    Menlo, Consolas, monospace;
 
   /* Reading rhythm */
-  --kb-line-height: 1.85;
-  --kb-paragraph-gap: 1.05rem;
-  --kb-content-max: 780px;
+  --kb-content-max: 720px;
+  --kb-content-pad: 1.5rem;
+  --kb-line-height: 1.78;
+
+  /* Surfaces (derive from theme tokens so dark/light track automatically) */
+  --kb-surface-1:    color-mix(in srgb, var(--lightgray) 28%, var(--light));
+  --kb-surface-2:    color-mix(in srgb, var(--lightgray) 55%, var(--light));
+  --kb-border:       color-mix(in srgb, var(--lightgray) 80%, transparent);
+  --kb-border-soft:  color-mix(in srgb, var(--lightgray) 50%, transparent);
+  --kb-accent-soft:  color-mix(in srgb, var(--secondary) 12%, transparent);
+  --kb-accent-ring:  color-mix(in srgb, var(--secondary) 22%, transparent);
+
+  --kb-shadow-sm: 0 1px 2px rgba(15, 17, 26, 0.04);
+  --kb-shadow-md:
+    0 4px 16px -4px rgba(15, 17, 26, 0.06),
+    0 1px 3px rgba(15, 17, 26, 0.04);
+  --kb-shadow-lg:
+    0 12px 32px -8px rgba(15, 17, 26, 0.10),
+    0 2px 8px rgba(15, 17, 26, 0.04);
+}
+
+:root[saved-theme="dark"] {
+  --kb-surface-1: color-mix(in srgb, var(--lightgray) 35%, var(--light));
+  --kb-surface-2: color-mix(in srgb, var(--lightgray) 65%, var(--light));
+  --kb-border:    color-mix(in srgb, var(--lightgray) 90%, transparent);
+  --kb-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.40);
+  --kb-shadow-md:
+    0 4px 16px -4px rgba(0, 0, 0, 0.50),
+    0 1px 3px rgba(0, 0, 0, 0.40);
+  --kb-shadow-lg:
+    0 12px 32px -8px rgba(0, 0, 0, 0.60),
+    0 2px 8px rgba(0, 0, 0, 0.40);
+}
+
+/* -----------------------------------------------------------------------------
+   1. Document baseline
+   ----------------------------------------------------------------------------- */
+html {
+  font-size: 15.5px;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--kb-latin-body), var(--kb-cjk-body);
-  font-feature-settings: "palt", "kern";
+  font-family: var(--kb-sans), var(--kb-cjk);
+  font-feature-settings: "cv11", "ss01", "ss03", "kern", "palt";
+  font-variant-ligatures: contextual common-ligatures;
+  letter-spacing: -0.005em;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background: var(--light);
 }
 
-/* Headings: tighter tracking, slightly heavier weight for CJK readability */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--kb-latin-body), var(--kb-cjk-body);
-  letter-spacing: -0.01em;
-  line-height: 1.35;
+/* Subtle aurora in dark mode (Linear-style) */
+:root[saved-theme="dark"] body {
+  background-image:
+    radial-gradient(ellipse 70% 55% at 0% 0%,
+      color-mix(in srgb, var(--secondary) 7%, transparent) 0%,
+      transparent 60%),
+    radial-gradient(ellipse 55% 45% at 100% 0%,
+      color-mix(in srgb, var(--tertiary) 5%, transparent) 0%,
+      transparent 55%);
+  background-attachment: fixed;
 }
 
-article > h1,
-article h1 { font-weight: 700; }
-article h2 { font-weight: 650; }
-article h3 { font-weight: 600; }
+/* -----------------------------------------------------------------------------
+   2. Reading column — STRICT 720px, centered, padded, at every breakpoint
+   ----------------------------------------------------------------------------- */
 
-/* Section dividers under h2 — quiet, not loud */
-article h2 {
-  padding-bottom: 0.35rem;
-  border-bottom: 1px solid var(--lightgray);
+/* The .center grid cell holds the article. Cap and center its children. */
+.page > #quartz-body .center {
+  & > article,
+  & > .page-header,
+  & > footer {
+    max-width: var(--kb-content-max);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--kb-content-pad);
+    padding-right: var(--kb-content-pad);
+    box-sizing: border-box;
+    width: 100%;
+  }
 }
 
-/* Body text rhythm */
+/* Top breathing room before article begins */
+.page > #quartz-body .center > .page-header {
+  padding-top: 1.25rem;
+}
+.page > #quartz-body .center > article {
+  padding-top: 0.5rem;
+  padding-bottom: 4rem;
+}
+
+/* Mobile: a touch less padding so prose doesn't feel wasted */
+@media all and (max-width: 800px) {
+  :root { --kb-content-pad: 1.1rem; }
+}
+
+/* -----------------------------------------------------------------------------
+   3. Typography — body
+   ----------------------------------------------------------------------------- */
 article p,
 article li,
 article blockquote,
@@ -65,169 +139,370 @@ article td {
 }
 
 article p {
-  margin: 0 0 var(--kb-paragraph-gap);
+  margin: 0 0 1.05rem;
+  text-wrap: pretty;
 }
 
-/* Mixed CJK + Latin: add a hair of breathing room around inline code/links */
 article p, article li {
   word-break: break-word;
   overflow-wrap: anywhere;
 }
 
-/* -------------------------------------------------------------------------
-   2. Layout — comfortable reading column
-   ------------------------------------------------------------------------- */
-
-.page > #quartz-body .center {
-  /* Center the article and cap reading width */
-  & > article,
-  & > .page-header {
-    max-width: var(--kb-content-max);
-    margin-left: auto;
-    margin-right: auto;
-  }
+article > p:first-of-type,
+article > p:first-child {
+  margin-top: 0;
 }
 
-@media all and (min-width: 1200px) {
-  .page > #quartz-body .center {
-    & > article,
-    & > .page-header {
-      margin-left: 2rem;
-      margin-right: auto;
-    }
-  }
+/* -----------------------------------------------------------------------------
+   4. Typography — headings
+   ----------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--kb-display), var(--kb-cjk);
+  letter-spacing: -0.018em;
+  line-height: 1.3;
+  color: var(--dark);
 }
 
-/* -------------------------------------------------------------------------
-   3. Sidebars — quieter, cleaner
-   ------------------------------------------------------------------------- */
-
-.sidebar {
-  font-size: 0.92rem;
-}
-
-.sidebar .page-title {
-  font-size: 1.15rem;
+article h1 {
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.25rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+article h2 {
+  font-size: 1.4rem;
+  font-weight: 650;
+  margin-top: 2.25rem;
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--kb-border-soft);
+}
+article h3 {
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin-top: 1.85rem;
+  margin-bottom: 0.7rem;
+}
+article h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
 }
 
-.sidebar .page-title a {
+/* Anchor link on hover — quiet # */
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
+  & > a[href^="#"] {
+    color: var(--gray);
+    font-weight: 400;
+    font-family: var(--kb-mono);
+    margin: 0 0 0 0.4rem;
+  }
+}
+
+/* ArticleTitle component (rendered on non-home pages) */
+.page-header h1.article-title {
+  font-family: var(--kb-display), var(--kb-cjk);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0.5rem 0 0.4rem;
   color: var(--dark);
 }
 
-/* Explorer: tighter list, hover affordance */
-.explorer {
+.content-meta {
+  color: var(--gray);
+  font-size: 0.85rem;
+  font-weight: 400;
+  margin: 0 0 1.75rem;
+  letter-spacing: -0.005em;
+}
+
+/* -----------------------------------------------------------------------------
+   5. IMAGES — strictly capped, never full-bleed
+   ----------------------------------------------------------------------------- */
+article img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.75rem auto;
+  border-radius: 10px;
+  border: 1px solid var(--kb-border-soft);
+  box-shadow: var(--kb-shadow-sm);
+  background: var(--kb-surface-1);
+}
+
+/* Cap visual width even when article column is wider than 600px */
+article p > img,
+article > img,
+article figure > img {
+  max-width: min(100%, 640px);
+}
+
+/* Image inside a wikilink: drop link chrome */
+article a:has(> img) {
+  background: transparent !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+}
+
+/* Video / audio same treatment */
+article video,
+article audio {
+  max-width: 100%;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 10px;
+}
+
+/* Italic caption directly under image (Markdown convention: ![alt](src) *caption*) */
+article p > img + em,
+article p > a > img + em {
+  display: block;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 0.4rem auto 0;
+  transform: none;
+}
+
+/* -----------------------------------------------------------------------------
+   6. Sidebars
+   ----------------------------------------------------------------------------- */
+.sidebar {
   font-size: 0.9rem;
+  gap: 1rem !important;
 }
 
-.explorer ul,
-.explorer ol {
-  line-height: 1.55;
+.sidebar.left {
+  border-right: 1px solid var(--kb-border-soft);
 }
 
-.explorer li > a,
-.explorer button.folder-button,
-.explorer .folder-outer .folder-container > div > span {
-  border-radius: 6px;
-  transition: background-color 0.15s ease, color 0.15s ease;
+.sidebar.right {
+  border-left: 1px solid var(--kb-border-soft);
 }
 
-.explorer li > a:hover,
-.explorer button.folder-button:hover {
-  background-color: var(--highlight);
-  color: var(--dark);
+@media all and (max-width: 1200px) {
+  .sidebar.right {
+    border-left: none;
+  }
+}
+@media all and (max-width: 800px) {
+  .sidebar.left {
+    border-right: none;
+  }
 }
 
-/* Search bar: card-like input feel */
-#search-container .search-space input,
+/* Brand title in left rail */
+.sidebar .page-title {
+  font-family: var(--kb-display), var(--kb-cjk);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
+}
+.sidebar .page-title a { color: var(--dark); }
+
+/* -----------------------------------------------------------------------------
+   7. Search input
+   ----------------------------------------------------------------------------- */
+#search-container input,
 .search input,
 input[type="search"] {
-  border-radius: 8px;
-  border: 1px solid var(--lightgray);
-  background: var(--light);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  border-radius: 10px;
+  border: 1px solid var(--kb-border);
+  background: var(--kb-surface-1);
+  font-family: var(--kb-sans), var(--kb-cjk);
+  font-size: 0.88rem;
+  padding: 0.45rem 0.7rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
 }
+
+input[type="search"]::placeholder { color: var(--gray); }
+input[type="search"]:hover { background: var(--kb-surface-2); }
 
 input[type="search"]:focus,
 .search input:focus {
   outline: none;
   border-color: var(--secondary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary) 18%, transparent);
+  background: var(--light);
+  box-shadow: 0 0 0 4px var(--kb-accent-ring);
 }
 
-/* Right rail: ToC, backlinks, graph */
-.toc, .backlinks, .graph {
-  font-size: 0.88rem;
-}
-
-.toc h3, .backlinks h3, .graph h3 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--gray);
-  margin: 0 0 0.6rem;
-  font-weight: 600;
-}
-
-.toc ul {
-  border-left: 1px solid var(--lightgray);
-  padding-left: 0.85rem;
-}
-
-.toc a {
-  color: var(--darkgray);
-  font-weight: 400;
-  transition: color 0.15s ease;
-}
-
-.toc a:hover,
-.toc .in-view > a {
-  color: var(--secondary);
-}
-
-/* Backlinks: list of small cards-ish chips */
-.backlinks .backlink {
-  padding: 0.45rem 0.6rem;
-  border-radius: 8px;
-  border: 1px solid var(--lightgray);
-  margin-bottom: 0.35rem;
-  background: transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
-}
-
-.backlinks .backlink:hover {
-  background-color: var(--highlight);
-  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
-}
-
-/* Graph view: reduce visual weight, make it secondary */
-.graph {
-  margin-top: 0.5rem;
-}
-
-.graph .graph-outer {
-  border-radius: 10px;
-  border: 1px solid var(--lightgray);
-  height: 180px;        /* minimized */
+#search-container .search-space {
+  background: var(--light);
+  border: 1px solid var(--kb-border);
+  border-radius: 14px;
+  box-shadow: var(--kb-shadow-lg);
   overflow: hidden;
 }
 
-.graph .graph-outer:hover {
-  border-color: color-mix(in srgb, var(--secondary) 35%, var(--lightgray));
+.darkmode, .readermode {
+  border-radius: 10px;
+  transition: background-color 0.15s ease;
+  &:hover { background: var(--kb-surface-2); }
 }
 
+/* -----------------------------------------------------------------------------
+   8. Explorer
+   ----------------------------------------------------------------------------- */
+.explorer {
+  font-size: 0.88rem;
+}
+
+.explorer h1, .explorer h2 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  padding-bottom: 0;
+  border: none;
+}
+
+.explorer ul, .explorer ol { line-height: 1.5; }
+.explorer li { padding: 0; }
+
+.explorer li > a,
+.explorer button.folder-button,
+.explorer .folder-container > div > span {
+  border-radius: 6px;
+  padding: 0.2rem 0.45rem;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  color: var(--darkgray);
+  font-weight: 400;
+  border-bottom: none;
+  background: transparent;
+}
+
+.explorer li > a:hover,
+.explorer button.folder-button:hover {
+  background-color: var(--kb-surface-2);
+  color: var(--dark);
+}
+
+/* -----------------------------------------------------------------------------
+   9. Right rail labels
+   ----------------------------------------------------------------------------- */
+.toc, .backlinks, .graph {
+  font-size: 0.86rem;
+}
+
+.toc h3, .backlinks h3, .graph h3 {
+  font-family: var(--kb-display);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  font-weight: 600;
+  margin: 0 0 0.7rem;
+  padding-bottom: 0;
+  border: none;
+}
+
+/* -----------------------------------------------------------------------------
+   10. Table of contents — guide line + active marker
+   ----------------------------------------------------------------------------- */
+.toc-content {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  position: relative;
+  border-left: 1px solid var(--kb-border-soft);
+}
+.toc-content li { margin: 0; position: relative; }
+
+.toc-content li > a {
+  display: block;
+  padding: 0.28rem 0 0.28rem 0.85rem;
+  color: var(--gray);
+  font-weight: 400;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  border-left: 2px solid transparent;
+  margin-left: -1px;
+  transition: color 0.12s ease, border-color 0.12s ease;
+  border-bottom: none;
+}
+.toc-content li > a:hover { color: var(--dark); }
+
+.toc-content .in-view > a {
+  color: var(--secondary);
+  border-left-color: var(--secondary);
+  font-weight: 500;
+}
+
+.toc-content .depth-1 > a { padding-left: 0.85rem; }
+.toc-content .depth-2 > a { padding-left: 1.6rem; }
+.toc-content .depth-3 > a { padding-left: 2.35rem; }
+.toc-content .depth-4 > a { padding-left: 3.1rem; }
+
+/* -----------------------------------------------------------------------------
+   11. Backlinks — quiet card list
+   ----------------------------------------------------------------------------- */
+.backlinks ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.backlinks li { margin: 0; }
+
+.backlinks li > a {
+  display: block;
+  padding: 0.55rem 0.7rem;
+  border-radius: 9px;
+  border: 1px solid var(--kb-border-soft);
+  background: transparent;
+  color: var(--darkgray);
+  font-weight: 500;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease,
+    color 0.15s ease;
+}
+
+.backlinks li > a:hover {
+  background: var(--kb-surface-1);
+  border-color: var(--secondary);
+  color: var(--dark);
+  transform: translateY(-1px);
+}
+
+/* -----------------------------------------------------------------------------
+   12. Graph — supporting role
+   ----------------------------------------------------------------------------- */
+.graph .graph-outer {
+  height: 180px;
+  border-radius: 12px;
+  border: 1px solid var(--kb-border-soft);
+  background: var(--kb-surface-1);
+  overflow: hidden;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.graph .graph-outer:hover {
+  border-color: var(--secondary);
+  box-shadow: var(--kb-shadow-md);
+}
 .graph button#global-graph-icon {
-  opacity: 0.6;
+  opacity: 0.55;
   transition: opacity 0.15s ease;
 }
 .graph button#global-graph-icon:hover { opacity: 1; }
 
-/* -------------------------------------------------------------------------
-   4. Links — clear, but not noisy
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   13. Links
+   ----------------------------------------------------------------------------- */
 article a {
   font-weight: 500;
   color: var(--secondary);
@@ -235,299 +510,347 @@ article a {
   border-bottom: 1px solid color-mix(in srgb, var(--secondary) 35%, transparent);
   transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
-
 article a:hover {
   color: var(--dark);
   border-bottom-color: var(--secondary);
 }
 
-/* Internal wiki links: subtle pill, like Notion mentions */
 article a.internal {
-  background-color: transparent;
-  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 30%, transparent);
+  background: transparent;
+  border-bottom: 1px solid color-mix(in srgb, var(--secondary) 28%, transparent);
   padding: 0 0.05rem;
   border-radius: 0;
 }
-
 article a.internal:hover {
-  background-color: var(--highlight);
+  background: var(--kb-accent-soft);
   border-bottom-color: var(--secondary);
 }
-
 article a.internal.broken {
   color: var(--gray);
   border-bottom-style: dashed;
+  opacity: 0.7;
 }
 
-/* External link icon stays muted */
-article a.external .external-icon > path {
-  fill: var(--gray);
-}
+article a.external .external-icon > path { fill: var(--gray); }
 
-/* -------------------------------------------------------------------------
-   5. Lists — Notion-style breathing room
-   ------------------------------------------------------------------------- */
-
-article ul,
-article ol {
+/* -----------------------------------------------------------------------------
+   14. Lists
+   ----------------------------------------------------------------------------- */
+article ul, article ol {
   padding-left: 1.4rem;
   margin: 0.5rem 0 1rem;
 }
-
-article li {
-  margin-bottom: 0.25rem;
-}
-
-article ul > li::marker {
-  color: var(--gray);
-}
-
-/* Nested lists tighter */
+article li { margin-bottom: 0.3rem; }
+article ul > li::marker { color: var(--gray); }
 article li > ul,
-article li > ol {
-  margin: 0.25rem 0 0.25rem;
-}
+article li > ol { margin: 0.3rem 0; }
 
-/* -------------------------------------------------------------------------
-   6. Code — soft, modern
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   15. Code
+   ----------------------------------------------------------------------------- */
 code {
-  background: color-mix(in srgb, var(--lightgray) 60%, transparent);
+  font-family: var(--kb-mono);
+  background: var(--kb-surface-2);
   color: var(--dark);
   padding: 0.1rem 0.35rem;
   border-radius: 5px;
-  font-size: 0.88em;
-  font-family: var(--kb-mono);
+  font-size: 0.86em;
+  font-feature-settings: "calt" 0;
 }
 
 pre {
-  border-radius: 10px;
-  border: 1px solid var(--lightgray);
-  background: color-mix(in srgb, var(--lightgray) 35%, var(--light));
-  padding: 0.9rem 1rem;
   font-family: var(--kb-mono);
-  line-height: 1.55;
-  font-size: 0.92rem;
+  border-radius: 12px;
+  border: 1px solid var(--kb-border-soft);
+  background: var(--kb-surface-1) !important;
+  padding: 1rem 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  box-shadow: var(--kb-shadow-sm);
 }
-
 pre > code {
   background: none;
   padding: 0;
   font-size: inherit;
 }
 
-/* -------------------------------------------------------------------------
-   7. Blockquotes & callouts
-   ------------------------------------------------------------------------- */
+figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title] {
+  background: var(--kb-surface-2);
+  border: 1px solid var(--kb-border-soft);
+  border-radius: 6px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-bottom: -0.4rem;
+}
 
+/* -----------------------------------------------------------------------------
+   16. Blockquote
+   ----------------------------------------------------------------------------- */
 article blockquote {
   margin: 1.25rem 0;
-  padding: 0.4rem 0 0.4rem 1rem;
+  padding: 0.6rem 1.1rem;
   border-left: 3px solid var(--secondary);
+  background: var(--kb-accent-soft);
+  border-radius: 0 10px 10px 0;
   color: var(--darkgray);
-  background: color-mix(in srgb, var(--secondary) 6%, transparent);
-  border-radius: 0 8px 8px 0;
 }
-
 article blockquote p { margin: 0.25rem 0; }
 
-/* -------------------------------------------------------------------------
-   8. Tables — clean, dense
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   17. Tables
+   ----------------------------------------------------------------------------- */
+.table-container {
+  overflow-x: auto;
+  margin: 1.25rem 0;
+}
 .table-container > table {
-  margin: 1rem 0;
+  margin: 0;
   padding: 0;
-  border: 1px solid var(--lightgray);
-  border-radius: 10px;
+  border: 1px solid var(--kb-border-soft);
+  border-radius: 12px;
+  border-collapse: separate;
+  border-spacing: 0;
   overflow: hidden;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
+  box-shadow: var(--kb-shadow-sm);
+  width: 100%;
 }
-
 .table-container th {
-  background: color-mix(in srgb, var(--lightgray) 50%, transparent);
-  border-bottom: 1px solid var(--lightgray);
+  background: var(--kb-surface-1);
+  border-bottom: 1px solid var(--kb-border-soft);
+  font-weight: 600;
+  color: var(--dark);
+  font-size: 0.85rem;
+  letter-spacing: -0.005em;
+  padding: 0.55rem 0.85rem;
 }
+.table-container td {
+  padding: 0.45rem 0.85rem;
+  border-bottom: 1px solid var(--kb-border-soft);
+}
+.table-container tr:last-child td { border-bottom: none; }
 
-/* -------------------------------------------------------------------------
-   9. Horizontal rule — softer
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   18. HR
+   ----------------------------------------------------------------------------- */
 hr {
   margin: 2.5rem auto;
   height: 1px;
-  background: var(--lightgray);
-  opacity: 0.7;
+  background: var(--kb-border-soft);
+  border: none;
+  opacity: 0.9;
 }
 
-/* -------------------------------------------------------------------------
-   10. Tag list (under article title) — chip-style
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   19. Tag pills
+   ----------------------------------------------------------------------------- */
 .tags {
   gap: 0.3rem !important;
   flex-wrap: wrap;
+  margin-top: 0.75rem !important;
+  padding-left: 0;
+  list-style: none;
 }
-
 .tags > li > a.tag-link {
-  background: color-mix(in srgb, var(--secondary) 10%, transparent) !important;
-  color: var(--secondary);
-  border-radius: 999px;
-  padding: 0.1rem 0.6rem !important;
-  font-size: 0.8rem;
+  background: var(--kb-accent-soft) !important;
+  color: var(--secondary) !important;
   border: 1px solid transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  border-radius: 999px;
+  padding: 0.15rem 0.65rem !important;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
 }
-
 .tags > li > a.tag-link:hover {
   background: color-mix(in srgb, var(--secondary) 18%, transparent) !important;
   border-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+  transform: translateY(-1px);
 }
 
-/* -------------------------------------------------------------------------
-   11. Breadcrumbs — quieter
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   20. Breadcrumbs
+   ----------------------------------------------------------------------------- */
 .breadcrumb-container {
   font-size: 0.82rem;
   color: var(--gray);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  letter-spacing: -0.005em;
 }
-
 .breadcrumb-container a {
   color: var(--gray);
-}
-
-.breadcrumb-container a:hover {
-  color: var(--secondary);
-}
-
-/* -------------------------------------------------------------------------
-   12. Article title & meta
-   ------------------------------------------------------------------------- */
-
-article > h1:first-child,
-.page-header h1.article-title {
-  font-size: 2.1rem;
-  letter-spacing: -0.015em;
-  margin-top: 0.5rem;
-  margin-bottom: 0.4rem;
-}
-
-.content-meta {
-  color: var(--gray);
-  font-size: 0.85rem;
-  margin-bottom: 1.5rem;
-}
-
-/* -------------------------------------------------------------------------
-   13. Homepage — entry point, not marketing
-   Activated by `cssclasses: [home]` in content/index.md frontmatter
-   (Quartz applies cssclasses to <article>)
-   ------------------------------------------------------------------------- */
-
-article.home h1:first-child,
-article.home + .page-header h1.article-title {
-  font-size: 2.4rem;
-  margin-bottom: 0.25rem;
-}
-
-article.home > p:first-of-type,
-article.home > h1:first-child + p {
-  color: var(--gray);
-  font-size: 1.05rem;
-  margin-bottom: 2rem;
-}
-
-/* On homepage, h2 acts as section label, not heading */
-article.home h2 {
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gray);
-  font-weight: 600;
   border-bottom: none;
-  padding-bottom: 0;
-  margin-top: 2.25rem;
-  margin-bottom: 0.4rem;
+  font-weight: 400;
+}
+.breadcrumb-container a:hover { color: var(--secondary); }
+
+/* -----------------------------------------------------------------------------
+   21. Homepage hero (cssclasses: [home])
+   ----------------------------------------------------------------------------- */
+article.home {
+  & > h1:first-child {
+    font-family: var(--kb-display), var(--kb-cjk);
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin: 0.25rem 0 0.6rem;
+    background: linear-gradient(
+      135deg,
+      var(--dark) 0%,
+      color-mix(in srgb, var(--secondary) 60%, var(--dark)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  & > p:first-of-type {
+    color: var(--gray);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    margin: 0 0 2.5rem;
+    letter-spacing: -0.005em;
+  }
+
+  & h2 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    font-weight: 600;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-top: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  & ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0.5rem;
+    border-top: 1px solid var(--kb-border-soft);
+  }
+
+  & ul > li {
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--kb-border-soft);
+    transition: background-color 0.12s ease;
+    position: relative;
+  }
+  & ul > li:hover { background: var(--kb-surface-1); }
+
+  & ul > li > a {
+    display: block;
+    padding: 0.7rem 0.8rem 0.7rem 0.5rem;
+    color: var(--dark);
+    font-weight: 500;
+    font-size: 0.98rem;
+    border-bottom: none;
+    background: transparent;
+    transition: color 0.12s ease, padding-left 0.15s ease;
+  }
+  & ul > li > a.internal { background: transparent; }
+  & ul > li:hover > a {
+    color: var(--secondary);
+    padding-left: 0.85rem;
+  }
+
+  & ul > li::after {
+    content: "→";
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(-4px);
+    color: var(--gray);
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+  }
+  & ul > li:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+    color: var(--secondary);
+  }
+
+  & hr { display: none; }
 }
 
-article.home ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0.25rem 0 1rem;
-}
-
-article.home ul > li {
-  padding: 0.55rem 0.75rem;
-  border-radius: 8px;
-  margin-bottom: 0.1rem;
-  transition: background-color 0.15s ease;
-}
-
-article.home ul > li:hover {
-  background-color: var(--highlight);
-}
-
-article.home ul > li > a,
-article.home ul > li > a.internal {
-  background: transparent;
-  border-bottom: none;
-  color: var(--dark);
-  font-weight: 500;
-}
-
-article.home ul > li:hover > a,
-article.home ul > li:hover > a.internal {
-  color: var(--secondary);
-}
-
-/* Subtle hr between homepage sections */
-article.home hr {
-  display: none;
-}
-
-/* -------------------------------------------------------------------------
-   14. Footer — quiet
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   22. Footer
+   ----------------------------------------------------------------------------- */
 footer {
   color: var(--gray);
-  font-size: 0.85rem;
-  border-top: 1px solid var(--lightgray);
-  margin-top: 3rem;
+  font-size: 0.82rem;
+  border-top: 1px solid var(--kb-border-soft);
+  margin-top: 4rem;
   padding-top: 1.25rem;
+  padding-bottom: 1.5rem;
 }
-
-footer a { color: var(--gray); }
+footer a {
+  color: var(--gray);
+  border-bottom: none;
+  font-weight: 400;
+}
 footer a:hover { color: var(--secondary); }
 
-/* -------------------------------------------------------------------------
-   15. Selection & focus
-   ------------------------------------------------------------------------- */
-
+/* -----------------------------------------------------------------------------
+   23. Selection, focus, scrollbars
+   ----------------------------------------------------------------------------- */
 ::selection {
-  background: color-mix(in srgb, var(--secondary) 30%, transparent);
+  background: color-mix(in srgb, var(--secondary) 28%, transparent);
+  color: var(--dark);
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+input:focus-visible {
   outline: 2px solid var(--secondary);
   outline-offset: 2px;
   border-radius: 4px;
 }
 
-/* -------------------------------------------------------------------------
-   16. Dark mode tweaks (Quartz toggles via [saved-theme=dark])
-   ------------------------------------------------------------------------- */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--kb-border);
+  border-radius: 999px;
+  border: 2px solid var(--light);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--gray); }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--kb-border) transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   24. Navigation progress bar
+   ----------------------------------------------------------------------------- */
+.navigation-progress {
+  height: 2px;
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--tertiary) 100%);
+  box-shadow: 0 0 8px color-mix(in srgb, var(--secondary) 50%, transparent);
+}
+
+/* -----------------------------------------------------------------------------
+   25. Dark mode adjustments
+   ----------------------------------------------------------------------------- */
 :root[saved-theme="dark"] {
-  pre {
-    background: color-mix(in srgb, var(--lightgray) 25%, var(--light));
+  article.home > h1:first-child {
+    background: linear-gradient(
+      135deg,
+      var(--dark) 0%,
+      color-mix(in srgb, var(--secondary) 70%, var(--dark)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  article blockquote {
-    background: color-mix(in srgb, var(--secondary) 12%, transparent);
+  *::-webkit-scrollbar-thumb {
+    border-color: var(--light);
   }
 }

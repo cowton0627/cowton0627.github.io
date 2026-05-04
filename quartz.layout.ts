@@ -1,7 +1,7 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg"
 import * as Component from "./quartz/components"
 
-// components shared across all pages
+// Components shared across all pages
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
@@ -14,7 +14,7 @@ export const sharedPageComponents: SharedLayout = {
   }),
 }
 
-// left sidebar: identity + search + tools + explorer
+// Left rail: identity + search bar + tools + explorer
 const leftSidebar = [
   Component.PageTitle(),
   Component.MobileOnly(Component.Spacer()),
@@ -28,26 +28,43 @@ const leftSidebar = [
   Component.Explorer(),
 ]
 
-// components for pages that display a single page (e.g. a single note)
+const isHome = (page: { fileData: { slug?: string } }) => page.fileData.slug === "index"
+
+// Single-note pages
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
+      condition: (page) => !isHome(page),
     }),
-    Component.ArticleTitle(),
-    Component.ContentMeta(),
+    Component.ConditionalRender({
+      component: Component.ArticleTitle(),
+      condition: (page) => !isHome(page),
+    }),
+    Component.ConditionalRender({
+      component: Component.ContentMeta(),
+      condition: (page) => !isHome(page),
+    }),
     Component.TagList(),
   ],
   left: leftSidebar,
   right: [
-    Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
-    Component.DesktopOnly(Component.Graph()),
+    Component.ConditionalRender({
+      component: Component.DesktopOnly(Component.TableOfContents()),
+      condition: (page) => !isHome(page),
+    }),
+    Component.ConditionalRender({
+      component: Component.Backlinks(),
+      condition: (page) => !isHome(page),
+    }),
+    Component.ConditionalRender({
+      component: Component.DesktopOnly(Component.Graph()),
+      condition: (page) => !isHome(page),
+    }),
   ],
 }
 
-// components for pages that display lists of pages  (e.g. tags or folders)
+// List pages (tags, folders)
 export const defaultListPageLayout: PageLayout = {
   beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
   left: leftSidebar,
