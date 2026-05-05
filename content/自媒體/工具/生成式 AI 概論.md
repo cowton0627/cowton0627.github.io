@@ -1,6 +1,7 @@
 ---
 title: 生成式 AI 概論
 tags: [自媒體, AI, 工具]
+created: 2026-05-04
 ---
 
 # 生成式 AI
