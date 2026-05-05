@@ -3,7 +3,7 @@ title: Space Bound
 tags: [讀書會, 音樂, Eminem]
 ---
 
-# 讀書會005 - Space Bound by Eminem
+# Space Bound by Eminem
 We touch, I feel a rush, 
 we clutch, it isn't much
 But it's enough to make me wonder what's in store for us
