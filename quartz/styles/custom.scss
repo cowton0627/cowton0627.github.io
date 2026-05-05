@@ -100,10 +100,11 @@ body {
    2. Reading column — capped at every breakpoint
    ----------------------------------------------------------------------------- */
 
-/* Override Quartz's default 1rem horizontal padding on #quartz-body so we
-   control all gutters from --kb-content-pad. Avoids double-padding. */
+/* Override Quartz's default 1rem horizontal padding on #quartz-body
+   (declared on the same selector at @media not desktop) so we control
+   gutters from --kb-content-pad. Same specificity, source order wins. */
 .page > #quartz-body {
-  padding: 0 !important;
+  padding: 0;
 }
 
 .page > #quartz-body .center {
@@ -247,10 +248,15 @@ article figure > img {
   max-width: min(100%, 640px);
 }
 
+/* When a wikilink wraps an image, drop the chip styling. Selector
+   includes `.internal` to outweigh Quartz's `article a.internal { … }`
+   on specificity (0,1,3 > 0,1,2). Plain `article a:has(>img)` would
+   need !important to win. */
+article a.internal:has(> img),
 article a:has(> img) {
-  background: transparent !important;
-  border-bottom: none !important;
-  padding: 0 !important;
+  background: transparent;
+  border-bottom: none;
+  padding: 0;
 }
 
 article video,
@@ -273,10 +279,13 @@ article p > a > img + em {
 
 /* -----------------------------------------------------------------------------
    6. Sidebars — base
+   Selectors in this section mirror Quartz's nested form
+   `.page > #quartz-body .sidebar.…` (specificity 1,3,0) so we override
+   without `!important`.
    ----------------------------------------------------------------------------- */
-.sidebar {
+.page > #quartz-body .sidebar {
   font-size: 0.9rem;
-  gap: 1rem !important;
+  gap: 1rem;
 }
 
 .sidebar .page-title {
@@ -644,7 +653,7 @@ pre {
   font-family: var(--kb-mono);
   border-radius: 12px;
   border: 1px solid var(--kb-border-soft);
-  background: var(--kb-surface-1) !important;
+  background: var(--kb-surface-1);
   padding: 1rem 1.1rem;
   font-size: 0.88rem;
   line-height: 1.6;
@@ -730,20 +739,23 @@ hr {
 
 /* -----------------------------------------------------------------------------
    19. Tag pills
+   Quartz only contributes `.tag-link::before { content: "#" }` from
+   base.scss — no competing background / color / padding rules — so
+   source order alone wins. No `!important` needed.
    ----------------------------------------------------------------------------- */
 .tags {
-  gap: 0.3rem !important;
+  gap: 0.3rem;
   flex-wrap: wrap;
-  margin-top: 0.75rem !important;
+  margin-top: 0.75rem;
   padding-left: 0;
   list-style: none;
 }
 .tags > li > a.tag-link {
-  background: var(--kb-accent-soft) !important;
-  color: var(--secondary) !important;
+  background: var(--kb-accent-soft);
+  color: var(--secondary);
   border: 1px solid transparent;
   border-radius: 999px;
-  padding: 0.15rem 0.65rem !important;
+  padding: 0.15rem 0.65rem;
   font-size: 0.78rem;
   font-weight: 500;
   transition:
@@ -752,7 +764,7 @@ hr {
     transform 0.15s ease;
 }
 .tags > li > a.tag-link:hover {
-  background: color-mix(in srgb, var(--secondary) 18%, transparent) !important;
+  background: color-mix(in srgb, var(--secondary) 18%, transparent);
   border-color: color-mix(in srgb, var(--secondary) 35%, transparent);
   transform: translateY(-1px);
 }
@@ -1066,11 +1078,13 @@ input:focus-visible {
     --kb-content-max: 100%;
   }
 
-  /* Top sidebar: tidy spacing */
-  .sidebar.left {
+  /* Top sidebar: tidy spacing.
+     `.page > #quartz-body` prefix matches Quartz's specificity
+     (it nests `.sidebar.left` inside `.page > #quartz-body`). */
+  .page > #quartz-body .sidebar.left {
     border-right: none;
-    padding: 1.25rem 1.1rem 1rem !important;
-    gap: 0.6rem !important;
+    padding: 1.25rem 1.1rem 1rem;
+    gap: 0.6rem;
     align-items: center;
   }
   .sidebar .page-title {
@@ -1079,11 +1093,15 @@ input:focus-visible {
 
   /* Right rail (under article): only backlinks. Hide TOC + graph.
      Top-card TOC at the top of the article handles navigation. */
-  .sidebar.right {
+  .page > #quartz-body .sidebar.right {
     border-left: none;
-    padding: 0 1.1rem 1.5rem !important;
-    gap: 1.25rem !important;
+    padding: 0 1.1rem 1.5rem;
+    gap: 1.25rem;
   }
+  /* `!important` here is defensive: Quartz's base.scss has the same
+     "hide TOC on non-desktop" rule, but Lightning CSS drops it during
+     minify of nested @media queries. We keep our own copy with
+     !important so the rule survives no matter what. */
   .sidebar.right > .toc,
   .sidebar.right > .graph {
     display: none !important;
@@ -1141,8 +1159,8 @@ input:focus-visible {
   :root {
     --kb-content-pad: 0.85rem;
   }
-  .sidebar.left {
-    padding: 1rem 0.85rem 0.75rem !important;
+  .page > #quartz-body .sidebar.left {
+    padding: 1rem 0.85rem 0.75rem;
   }
   .sidebar .page-title {
     font-size: 1rem;
@@ -1167,10 +1185,10 @@ input:focus-visible {
        800px viewport → 200px sidebar, content cell ~576px
        1024px         → 225px,         content cell ~775px
        1199px         → 260px (clamp), content cell ~915px
-  */
+     Same selector as Quartz's `$tabletGrid` rule, source order wins. */
   .page > #quartz-body {
-    grid-template-columns: clamp(200px, 22vw, 260px) minmax(0, 1fr) !important;
-    column-gap: 1.5rem !important;
+    grid-template-columns: clamp(200px, 22vw, 260px) minmax(0, 1fr);
+    column-gap: 1.5rem;
   }
 
   /* Hairline divider between left rail and content */
@@ -1180,11 +1198,13 @@ input:focus-visible {
 
   /* Right rail flows below content as a horizontal row of backlinks + graph.
      Hide the right-rail TOC (the top-card TOC inside .page-header takes over). */
-  .sidebar.right {
+  .page > #quartz-body .sidebar.right {
     border-left: none;
-    padding: 1rem 0 0 0 !important;
-    gap: 1.5rem !important;
+    padding: 1rem 0 0 0;
+    gap: 1.5rem;
   }
+  /* See note in mobile block — Lightning CSS drops Quartz's own
+     "hide TOC" rule, so we keep our own !important copy. */
   .sidebar.right > .toc {
     display: none !important;
   }
@@ -1214,12 +1234,13 @@ input:focus-visible {
     --kb-content-max: 760px;
   }
 
+  /* Same selector as Quartz's `$desktopGrid` rule, source order wins. */
   .page > #quartz-body {
     grid-template-columns:
       clamp(200px, 16vw, 260px)
       minmax(0, 1fr)
-      clamp(200px, 16vw, 260px) !important;
-    column-gap: 1.75rem !important;
+      clamp(200px, 16vw, 260px);
+    column-gap: 1.75rem;
   }
 
   /* Hairline rails on both sides */
