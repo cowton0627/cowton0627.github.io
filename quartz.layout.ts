@@ -13,6 +13,25 @@ export const sharedPageComponents: SharedLayout = {
   }),
 };
 
+// Home page only: auto-listed recent notes after article body.
+// Replaces the manually-curated "開始閱讀" list — scales without maintenance.
+const homeAfterBody = [
+  Component.ConditionalRender({
+    component: Component.RecentNotes({
+      title: "最近更新",
+      limit: 8,
+      showTags: false,
+      // Skip the home page itself and any folder index file
+      // (slug pattern: "index" or ".../index")
+      filter: (f) => {
+        const slug = f.slug ?? "";
+        return slug !== "index" && !slug.endsWith("/index");
+      },
+    }),
+    condition: (page) => (page.fileData.slug ?? "") === "index",
+  }),
+];
+
 // Left rail: identity + search bar + tools + explorer
 const leftSidebar = [
   Component.PageTitle(),
@@ -58,6 +77,7 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => !isHome(page),
     }),
   ],
+  afterBody: homeAfterBody,
   left: leftSidebar,
   right: [
     Component.ConditionalRender({

@@ -880,6 +880,101 @@ article.home {
 }
 
 /* -----------------------------------------------------------------------------
+   21.b  Homepage RecentNotes (in afterBody → .page-footer)
+   Auto-listed recent notes; styled to match the home directory rows above.
+   ----------------------------------------------------------------------------- */
+.page-footer .recent-notes {
+  margin-top: 1.5rem;
+
+  /* Section header — same eyebrow as homepage h2 */
+  & > h3 {
+    font-family: var(--kb-display);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+
+  & > ul.recent-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    border-top: 1px solid var(--kb-border-soft);
+
+    & > li.recent-li {
+      margin: 0;
+      padding: 0;
+      border-bottom: 1px solid var(--kb-border-soft);
+      transition: background-color 0.12s ease;
+      position: relative;
+
+      &:hover {
+        background: var(--kb-surface-1);
+      }
+
+      & > .section {
+        display: block;
+        padding: 0.7rem 2rem 0.7rem 0.5rem;
+        transition: padding-left 0.15s ease;
+      }
+
+      &:hover > .section {
+        padding-left: 0.85rem;
+      }
+
+      & .desc > h3 {
+        margin: 0;
+        font-size: 0.98rem;
+        font-weight: 500;
+        line-height: 1.4;
+        letter-spacing: -0.01em;
+      }
+
+      & .desc > h3 > a {
+        color: var(--dark);
+        background: transparent;
+        border-bottom: none;
+        transition: color 0.12s ease;
+      }
+
+      &:hover .desc > h3 > a {
+        color: var(--secondary);
+      }
+
+      & .meta {
+        margin: 0.2rem 0 0;
+        font-size: 0.78rem;
+        color: var(--gray);
+        opacity: 1;
+      }
+
+      /* Trailing chevron — same as home rows */
+      &::after {
+        content: "→";
+        position: absolute;
+        right: 0.85rem;
+        top: 50%;
+        transform: translateY(-50%) translateX(-4px);
+        color: var(--gray);
+        font-size: 0.85rem;
+        opacity: 0;
+        transition:
+          opacity 0.15s ease,
+          transform 0.15s ease;
+        pointer-events: none;
+      }
+      &:hover::after {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+        color: var(--secondary);
+      }
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
    22. Footer
    ----------------------------------------------------------------------------- */
 footer {
