@@ -1,7 +1,8 @@
 node_modules/
 public/
 quartz/.quartz-cache/
-.obsidian/workspace.json
+.obsidian/
+**/.obsidian/
 .DS_Store
 
 # === Local-only working folders ===
