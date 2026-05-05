@@ -63,6 +63,39 @@ KnowledgeBase/
 
 ---
 
+## 標籤 / 分類規則（Tagging convention）
+
+**核心原則：tags 為主，folders 為次。** 資料夾用來組織檔案層級（檔案系統的需求），tags 用來做主題交叉檢索（讀者的需求）。
+
+### 兩層 tag
+
+| 層級 | 用途 | 例子 |
+|---|---|---|
+| **領域 (Domain)** | 對應頂層資料夾的概念，每篇至少 1 個 | `自媒體`、`影視`、`部落格`、`開箱`、`程式`、`生活` |
+| **主題 (Topic)** | 細粒度題材 | `AI`、`Podcast`、`RSS`、`音樂`、`器材`、`社群`、`工具`、`自動化` |
+
+### 規則
+
+- 領域 tag = 一級分類（與資料夾根對應）。即使檔案放在 `自媒體/工具/`，仍要標 `自媒體` —— 這樣 `/tags/自媒體` 頁能列出整個 domain 的全部文章
+- **跨領域文章標多個領域**。例如「用 ffmpeg 處理 podcast」放 `自媒體/工具/` 或 `程式/` 都行，frontmatter 寫 `tags: [自媒體, 程式, Podcast, ffmpeg]`，會同時出現在兩個 domain 的 tag page
+- 主題 tag 與領域 tag 不重複用同名概念。「工具 / 器材 / 平台」是 `自媒體/` 內部的子資料夾，當主題 tag 用就好，不當領域
+- 命名：中文用原字、英文/技術名保留原大小寫（`AI`、`RSS`、`ffmpeg`），不放空格
+
+### Frontmatter 範例
+
+```yaml
+---
+title: 上架 Podcast
+tags: [自媒體, Podcast, 平台]
+---
+```
+
+### Tag 頁面
+
+`Plugin.TagPage()` 在 build 時自動為每個 tag 生成 `/tags/<name>` 頁面，列出該 tag 下的所有文章。Tag index 在 `/tags/`。文章標題下方的 chip pills 點下去就跳到對應 tag page。
+
+---
+
 ## 🔧 Fork base — 重要！
 
 **本 repo 是 [jackyzha0/quartz](https://github.com/jackyzha0/quartz) 的 vendored fork，基於 `v4.5.2`。**

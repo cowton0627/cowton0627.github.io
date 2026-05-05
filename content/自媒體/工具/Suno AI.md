@@ -1,5 +1,6 @@
 ---
 title: 生成式 AI - Suno AI
+tags: [自媒體, AI, 音樂, 工具]
 ---
 
 # Suno AI
