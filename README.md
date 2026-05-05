@@ -120,6 +120,11 @@ tags: [自媒體, Podcast, 平台]
 
 `.prettierignore` 把 `quartz/` 排除在 `npm run format` 之外，避免格式化雜訊污染 fork diff。
 
+> ⚠️ **不要把 `quartz/` 從 `.prettierignore` 拿掉。**
+> 踩過：早期一次 `npm run format` 把整個 `quartz/` 加了分號，
+> 造成 156 個檔對 upstream diff（純格式雜訊），未來 merge 一定崩。
+> 已花一輪 reset 清掉，請保持現狀。
+
 ### 從 upstream 升級 Quartz
 
 `upstream` remote 已加好（fetch-only）：
