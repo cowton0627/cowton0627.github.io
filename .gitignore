@@ -3,3 +3,14 @@ public/
 quartz/.quartz-cache/
 .obsidian/workspace.json
 .DS_Store
+
+# === Local-only working folders ===
+# Keep folder structure (.gitkeep + README.md) but ignore actual content.
+
+sources/*
+!sources/.gitkeep
+!sources/README.md
+
+drafts/*
+!drafts/.gitkeep
+!drafts/README.md
