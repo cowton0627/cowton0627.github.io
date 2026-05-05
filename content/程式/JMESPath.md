@@ -66,7 +66,8 @@ $ aws iot list-certificates
 - `ACTIVE`
 - `PENDING_ACTIVATION`
 
-> `PENDING_ACTIVATION` 表示憑證被簽署時起初是 INACTIVE，當它**第一次連上 AWS** 時，會自動轉為「準備啟用」的狀態。
+> [!info] PENDING_ACTIVATION
+> 憑證被簽署時起初是 INACTIVE，當它**第一次連上 AWS** 時，會自動轉為「準備啟用」的狀態。
 
 我們想找出狀態為 `PENDING_ACTIVATION` 的憑證。透過 `--query` 參數套用 JMESPath：
 
@@ -111,7 +112,8 @@ $ aws iot list-certificates --query 'certificates[?status==`PENDING_ACTIVATION`]
 | `sort_by(@, &k)` | 依某欄位排序 | `sort_by(users, &age)` |
 | `keys(@)` / `values(@)` | 取所有 key / value | `keys(metadata)` |
 
-> 反引號 `` ` `` 用來包裹**字面量**（字串、數字）。在 shell 裡記得用單引號 `'…'` 把整個 JMESPath 表達式包起來，避免反引號被 shell 當成命令替換。
+> [!warning] Shell 的反引號陷阱
+> 反引號 `` ` `` 在 JMESPath 裡用來包裹**字面量**（字串、數字）。在 shell 裡記得用**單引號** `'…'` 把整個 JMESPath 表達式包起來，避免反引號被 shell 當成 command substitution。
 
 ### 多個常見模式
 

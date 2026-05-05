@@ -30,6 +30,7 @@ created: 2026-05-05
 - Xcode 左上方工具列：第一個 tab 是 **Project navigator**（檔案樹），第二個是 **Source Control navigator**（Git 介面）。
 - 在 Source Control navigator 中選**專案** → 右鍵 → **New Remote** → 選 GitHub 帳號 → 完成。
 
+> [!note]
 > IDE 介面可以掩蓋很多 Git 機制細節 —— 適合做事，不適合學原理。學原理還是要落地到 CLI。
 
 ## 常用 Git 指令
@@ -110,7 +111,9 @@ $ git add -p              # 互動式，逐 hunk 選擇要加什麼
 $ git commit -m "Initial commit"
 ```
 
-寫 commit message 的訣竅：**寫 why，不要只寫 what**。
+> [!tip] 寫 commit message 的訣竅
+> **寫 why，不要只寫 what**。
+> 「修了 button alignment」是 what；「修因為 RTL 語系下右上角 button overflow」才是 why。
 
 ### `git branch`
 

@@ -33,6 +33,19 @@ created: 2026-05-04
 
 ![image](https://hackmd.io/_uploads/H1kAw1vZyl.png)
 
+```mermaid
+flowchart LR
+    A[創作者] -->|上傳單集| B[SoundOn 託管]
+    B -->|產生| C[(RSS Feed)]
+    C -->|自動訂閱| D[Spotify]
+    C -->|自動訂閱| E[KKBOX Podcast]
+    C -->|手動串接| F[Apple Podcasts]
+    C -.->|手動串接| G[其他平台]
+```
+
+> [!info] 為什麼要走 RSS Feed？
+> 一次更新（在 SoundOn 新增單集），全部訂閱該 Feed 的平台都會自動同步 —— 不必到 Spotify、Apple、KKBOX 各自上架一次。
+
 ---
 
 ### 使用
@@ -70,9 +83,10 @@ created: 2026-05-04
 
 5. 版權宣告可以參照如下。
 
+> [!example] 版權宣告範本
 > 本頻道的所有內容，包括但不限於音頻、圖像、文本、設計、標誌及其他相關素材，均由頻道創建者 「」 共同擁有並保護。
-
->將「」內換成該節目主創者的人名、暱稱、稱號等即可。
+>
+> 將「」內換成該節目主創者的人名、暱稱、稱號等即可。
 
 ---
 
