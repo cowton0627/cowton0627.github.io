@@ -1,5 +1,5 @@
 ---
-title: 自媒體工具 - 快速發文平台
+title: 快速發文工具 - dlvr.it
 ---
 
 ## 🧾 重新申請一個 Google 帳號（建議）
@@ -17,7 +17,7 @@ title: 自媒體工具 - 快速發文平台
 
 ---
 
-## 🚀 快速發文平台：dlvrit
+## 🚀 快速發文工具：dlvrit
 
 ### 📌 為什麼需要它？
 
@@ -58,16 +58,15 @@ https://app.dlvrit.com/
 >[!info]
 >請選擇「你要經營的粉絲專頁」，再點擊 Connect
 
-
 ---
 
 ### Step 3️⃣：測試建議（很重要）
 
-👉 至少連接 **2 個以上平台**
+👉 請至少連接 **2 個以上平台**
 
 否則：
 
-> 你直接在該平台發文就好了，不需要 dlvrit
+> 直接在該平台發文就好了，不需要 dlvrit
 
 ---
 
@@ -92,7 +91,7 @@ https://app.dlvrit.com/
 - Tumblr / Blogger
 - Bluesky / Nextdoor 等
 
-👉 **不用全部接，選你會用的就好**
+👉 **不用全部接，選你會用的即可**
 
 ---
 
@@ -128,7 +127,6 @@ https://app.dlvrit.com/
 >  
 >👉 請依提示調整內容
 
-
 ---
 
 ### ⚠️ 特別注意：X（Twitter）預覽問題
@@ -150,7 +148,6 @@ https://app.dlvrit.com/
 >
 >👉 參考說明：
 >[網頁的結構化資料，JSON-LD、RDFa、Microdata](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E6%95%99%E5%AE%A4/%E7%B6%B2%E9%A0%81%E7%9A%84%E7%B5%90%E6%A7%8B%E5%8C%96%E8%B3%87%E6%96%99-json-ld-rdfa-microdata-2882b4109ad0#800f)
-
 
 ---
 

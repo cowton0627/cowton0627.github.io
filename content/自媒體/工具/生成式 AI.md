@@ -1,5 +1,5 @@
 ---
-title: A002 自媒體工具 - 生成式 AI
+title: 生成式 AI 概論
 ---
 
 # 生成式 AI
@@ -55,10 +55,13 @@ title: A002 自媒體工具 - 生成式 AI
 
 ![Screenshot 2024-10-30 at 5.01.55 PM (2)](https://hackmd.io/_uploads/Byr0LukZJl.png)
 
-:::warning
-因為 ChatGPT 是經過多工串接到 DALLE (繪圖機器人)，所以其實是將使用者與之的對話轉換成適合餵給繪圖機器人的 prompt 後，再由繪圖機器人生出圖片，但**前一個過程**我們看不到。
-::: 2.所以一般在餵給繪圖機器人前，可使用對話機器人將你的白話文轉化為適合餵給繪圖機器人的 prompt 再餵。
+>[!warning]
+>因為 ChatGPT 是經過多工串接到 DALLE (繪圖機器人)，所以其實是將使用者與之的對話轉換成適合餵給繪圖機器人的 prompt 後，再由繪圖機器人生出圖片，但**前一個過程**我們看不到。
+
+
+2. 所以一般在餵給繪圖機器人前，可使用對話機器人將你的白話文轉化為適合餵給繪圖機器人的 prompt 再餵。
 ![image](https://hackmd.io/_uploads/SJAn_uJ-Jx.png)
+
 
 從 ChatGPT 得到的 prompt，餵給其他以 stable diffusion 為基底的繪圖機器人，得到如下：
 ![Screenshot 2024-10-30 at 5.17.04 PM](https://hackmd.io/_uploads/rkjGqdkW1x.png)

@@ -18,13 +18,15 @@ title: 上架 Podcast
 4. 作法是透過 RSS Feed，這即是說使用 RSS Feed 上架 Podcast，只需要更新一次，不需要多平台複製貼上，而多平台發文的話，可以使用 [dlvr.it](https://dlvrit.com/) 這個工具網站，後面會有專文。
 
 >[!info]
->下面先來看看 RSS 長得如何
+>下面先來看看 RSS Feed 長得如何
 
 
 ![image](https://hackmd.io/_uploads/Hkegv1PZ1g.png)
 
 >[!success]
 >RSS 就跟 HTML、XML 非常相似，裡面使用的是**標籤式語言**，標籤式語言目的在於排列結構，方面檢視、安排以 **<>** 作為開頭，**</>** 作為結尾的標籤的內容。
+>
+>HTML 也是一種標籤式語言。
 
 
 >[!info]
@@ -66,7 +68,6 @@ title: 上架 Podcast
 >
 >如果每一集都是一個單元，這個單集也叫做單元，好比 X 檔案裡，殺人蜂既是一個單集，也是一個單元，這個單元結束後就不再有跟殺人蜂相關的其他集。
 
-
 4. 類別的部份，點下去就會有分類標籤選項，建立節目只要將左上有**紅色星號**的欄位都填完即可。而描述的部份就是你這個節目會有什麼樣的內容，簡單描述即可。
 
 ![image](https://hackmd.io/_uploads/Hkn4X4gz1l.png)
@@ -77,7 +78,6 @@ title: 上架 Podcast
 
 >[!success]
 >將「」內換成該節目主創者的人名、暱稱、稱號等即可。
-
 
 ---
 
@@ -103,7 +103,6 @@ title: 上架 Podcast
 
 >[!success]
 >最後，按下右上角的儲存，這個單集的內容就會出現在你的 RSS Feed 中，並且等待一會兒，也會在 SoundOn 這個平台上架囉！
-
 
 ---
 
@@ -181,3 +180,6 @@ title: 上架 Podcast
 7. 當你將網頁拉到下方，我們可以看到 Apple Podcasts URL，按下 Copy 就可以將你的網址分享出去，或者在網站上找到你的節目了，OK！完成了！
 
 ![image](https://hackmd.io/_uploads/By9YKiMmkg.png)
+
+---
+
