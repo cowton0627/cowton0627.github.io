@@ -59,7 +59,13 @@ const config: QuartzConfig = {
     transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
-        priority: ["frontmatter", "git", "filesystem"],
+        // git BEFORE frontmatter so `modified` always tracks the latest
+        // commit. Quartz's frontmatter transformer auto-sets
+        // data.modified := created when `modified:` is omitted; if
+        // frontmatter ran first, that auto-set value would short-circuit
+        // git's lookup, freezing `modified` to the publish date.
+        // `created` still comes from frontmatter (git doesn't supply it).
+        priority: ["git", "frontmatter", "filesystem"],
       }),
       Plugin.SyntaxHighlighting({
         theme: {

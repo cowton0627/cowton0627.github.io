@@ -96,6 +96,53 @@ tags: [自媒體, Podcast, 平台]
 
 ---
 
+## 文章日期（原始發佈 / 最後更新）
+
+文章的 meta 行會顯示兩個日期：
+
+```
+2024年8月15日 · 更新於 2026年5月05日 · 閱讀時間約 14 分鐘
+```
+
+| 欄位 | 來源 | 行為 |
+|---|---|---|
+| **原始發佈日**（前面那個） | frontmatter `created:` | 沒設就 fallback 到 git 第一次 commit 的時間 |
+| **最後更新日**（更新於） | git 最後一次 commit 此檔的時間 | 自動，不需要手動維護 |
+
+兩個日期落在同一天時，**「更新於」段會自動隱藏**（剛發佈的文章只顯示一個日期）。
+
+### 替舊文章補回原始發佈日（HackMD / Medium 來源）
+
+```yaml
+---
+title: 上架 Podcast
+tags: [自媒體, Podcast, 平台]
+created: 2024-08-15        # ← YYYY-MM-DD，文章在原平台首次發佈那天
+---
+```
+
+其他可選欄位：
+
+```yaml
+modified: 2025-03-20       # 強制鎖死「最後更新日」（覆蓋 git 計算結果）
+```
+
+通常**不需要**手動設 `modified`。git commit 已經自動追蹤了。只在「修一個錯字不想讓更新日跳到今天」這種情境才會用到。
+
+### Quartz 內部運作
+
+`quartz.config.ts` 的 `Plugin.CreatedModifiedDate` 用了非預設的 priority：
+
+```ts
+priority: ["git", "frontmatter", "filesystem"]
+```
+
+**為什麼不用 Quartz 預設的 `["frontmatter", "git", "filesystem"]`？** 因為 Quartz 的 frontmatter transformer 有一行 `data.modified ||= created`：當你只設 `created:` 沒設 `modified:` 時，它會把 `modified` 也填成 `created`。如果 frontmatter 在 priority 中先跑，這個自動填值會 short-circuit 後續 git pass，「最後更新日」永遠卡在發佈日不會動。
+
+把 git 排在 frontmatter 前面，git 先把 `modified` 填好，frontmatter pass 才不會覆蓋。`created` 仍然從 frontmatter 取（git 不負責填 `created`）。
+
+---
+
 ## 🔧 Fork base — 重要！
 
 **本 repo 是 [jackyzha0/quartz](https://github.com/jackyzha0/quartz) 的 vendored fork，基於 `v4.5.2`。**
@@ -104,12 +151,13 @@ tags: [自媒體, Podcast, 平台]
 
 ### 我們做了哪些客製
 
-對 upstream `v4.5.2` 的實質改動 **只有兩個檔案**：
+對 upstream `v4.5.2` 的實質改動：
 
 | 檔案 | 改了什麼 |
 |---|---|
 | `quartz/styles/custom.scss` | ~1,200 行的整體視覺主題：字型（Inter + zh-Hant CJK fallback）、Linear 風格 indigo 配色、響應式版型（mobile/tablet/desktop/wide）、TOC 雙模式（桌機右側、手機/平板上方卡片）、首頁 hero、scrollbars、selection、focus rings 等。 |
 | `quartz/styles/variables.scss` | sidebar 寬度 `320px → 260px`，`topSpacing 6rem → 4rem`。 |
+| `quartz/components/ContentMeta.tsx` | meta 行同時顯示**原始發佈日**（`created`）與**最後更新日**（`modified`）。原版只顯示 `defaultDateType` 對應的單一日期。 |
 
 **站台層級設定**（不算 quartz core，但會影響行為）：
 
@@ -148,10 +196,11 @@ git checkout -b upgrade/v4.X.Y
 git merge upstream/v4.X.Y          # 或 git rebase upstream/v4.X.Y
 
 # 4. 預期 conflict 高發區（按可能性排序）
-#    - quartz/styles/custom.scss        ← 我們改最多的檔
-#    - quartz/styles/variables.scss     ← 兩個變數值
-#    - quartz.config.ts                 ← 看 upstream 有沒有改 plugin signature
-#    - quartz.layout.ts                 ← 看 upstream 有沒有改 component API
+#    - quartz/styles/custom.scss            ← 我們改最多的檔
+#    - quartz/styles/variables.scss         ← 兩個變數值
+#    - quartz/components/ContentMeta.tsx    ← 雙日期 meta
+#    - quartz.config.ts                     ← 看 upstream 有沒有改 plugin signature
+#    - quartz.layout.ts                     ← 看 upstream 有沒有改 component API
 #
 #    quartz/ 其他檔通常 conflict-free（我們沒改），
 #    直接 accept upstream 版本即可。

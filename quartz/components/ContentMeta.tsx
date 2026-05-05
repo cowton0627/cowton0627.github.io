@@ -1,4 +1,4 @@
-import { Date, getDate } from "./Date"
+import { Date } from "./Date"
 import { QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import readingTime from "reading-time"
 import { classNames } from "../util/lang"
@@ -30,7 +30,20 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
       const segments: (string | JSX.Element)[] = []
 
       if (fileData.dates) {
-        segments.push(<Date date={getDate(cfg, fileData)!} locale={cfg.locale} />)
+        // Customised for this site (zh-TW only): show both the original
+        // publish date (`created`, settable via frontmatter `created:`) and
+        // the last modified date (`modified`, from git or frontmatter).
+        // Suppress the second one when both fall on the same calendar day.
+        const { created, modified } = fileData.dates
+        segments.push(<Date date={created} locale={cfg.locale} />)
+        const dayKey = (d: Date) => d.toISOString().slice(0, 10)
+        if (dayKey(modified) !== dayKey(created)) {
+          segments.push(
+            <span>
+              更新於 <Date date={modified} locale={cfg.locale} />
+            </span>,
+          )
+        }
       }
 
       // Display reading time if enabled
