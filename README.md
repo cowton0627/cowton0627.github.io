@@ -34,6 +34,7 @@ npx quartz build --serve   # http://localhost:8080，watch + hot reload
 npx quartz build           # 一次性 build → public/
 npm run check              # tsc + prettier check
 npm run format             # prettier --write（已透過 .prettierignore 排除 quartz/）
+npm run docs               # 在本機跑 Quartz 官方文件（_upstream-docs/）
 ```
 
 ---
@@ -52,6 +53,7 @@ KnowledgeBase/
 ├── sources/              ← 原始資料（HackMD / Medium 匯出，本機用、不進 git）
 ├── drafts/               ← 未整理草稿（本機用、不進 git）
 ├── quartz/               ← Quartz 框架原始碼（vendored）
+├── _upstream-docs/       ← Quartz 官方文件（純參考，不會被 build 進站）
 ├── quartz.config.ts      ← 站台設定（locale、配色、字型、plugins）
 ├── quartz.layout.ts      ← 頁面骨架（左右 sidebar、beforeBody）
 └── .github/workflows/    ← GitHub Actions

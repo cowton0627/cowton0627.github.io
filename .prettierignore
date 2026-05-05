@@ -12,7 +12,7 @@ node_modules/
 quartz/.quartz-cache/
 
 # Upstream Quartz docs (we don't author these)
-docs/
+_upstream-docs/
 
 # OS / editor noise
 .DS_Store
