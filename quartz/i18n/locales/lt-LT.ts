@@ -1,4 +1,4 @@
-import { Translation } from "./definition";
+import { Translation } from "./definition"
 
 export default {
   propertyDefaults: {
@@ -95,9 +95,7 @@ export default {
             ? `${count} elementai su šia žyma.`
             : `${count} elementų su šia žyma.`,
       showingFirst: ({ count }) =>
-        count < 10
-          ? `Rodomos pirmosios ${count} žymos.`
-          : `Rodomos pirmosios ${count} žymų.`,
+        count < 10 ? `Rodomos pirmosios ${count} žymos.` : `Rodomos pirmosios ${count} žymų.`,
       totalTags: ({ count }) =>
         count === 1
           ? "Rasta iš viso 1 žyma."
@@ -106,4 +104,4 @@ export default {
             : `Rasta iš viso ${count} žymų.`,
     },
   },
-} as const satisfies Translation;
+} as const satisfies Translation

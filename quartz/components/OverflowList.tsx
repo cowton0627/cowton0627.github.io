@@ -1,24 +1,20 @@
-import { JSX } from "preact";
+import { JSX } from "preact"
 
 const OverflowList = ({
   children,
   ...props
 }: JSX.HTMLAttributes<HTMLUListElement> & { id: string }) => {
   return (
-    <ul
-      {...props}
-      class={[props.class, "overflow"].filter(Boolean).join(" ")}
-      id={props.id}
-    >
+    <ul {...props} class={[props.class, "overflow"].filter(Boolean).join(" ")} id={props.id}>
       {children}
       <li class="overflow-end" />
     </ul>
-  );
-};
+  )
+}
 
-let numLists = 0;
+let numLists = 0
 export default () => {
-  const id = `list-${numLists++}`;
+  const id = `list-${numLists++}`
 
   return {
     OverflowList: (props: JSX.HTMLAttributes<HTMLUListElement>) => (
@@ -48,5 +44,5 @@ document.addEventListener("nav", (e) => {
   window.addCleanup(() => observer.disconnect())
 })
 `,
-  };
-};
+  }
+}

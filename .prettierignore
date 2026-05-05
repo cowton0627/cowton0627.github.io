@@ -1,0 +1,19 @@
+# Quartz framework source — vendored upstream code.
+# DO NOT auto-format; formatting noise makes upstream merges painful.
+# Our actual customizations live in:
+#   - quartz/styles/custom.scss
+#   - quartz/styles/variables.scss
+# Format those manually if needed.
+quartz/
+
+# Generated / vendored
+public/
+node_modules/
+quartz/.quartz-cache/
+
+# Upstream Quartz docs (we don't author these)
+docs/
+
+# OS / editor noise
+.DS_Store
+.obsidian/
