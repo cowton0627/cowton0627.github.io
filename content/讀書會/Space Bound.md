@@ -4,6 +4,7 @@ tags: [讀書會, 音樂, Eminem]
 ---
 
 # Space Bound by Eminem
+
 We touch, I feel a rush, 
 we clutch, it isn't much
 But it's enough to make me wonder what's in store for us
@@ -41,7 +42,12 @@ And I'm aimin' right at you, right at you
 250, 000 miles on a clear night in June
 And I'm aimin' right at you, right at you, right at you
 
+## 背景         
+
+  Eminem 第七張錄音室專輯《Recovery》（2010 年 6 月 18 日發行）收錄。原本標題《Relapse 2》，後改名《Recovery》以區隔藝術方向。
+
 - [Space bound](https://reurl.cc/107vYW)
+
 - Marshall Mathers（MM，M & M，Eminem）
     - 8 miles 
 
@@ -49,9 +55,12 @@ And I'm aimin' right at you, right at you, right at you
     - [love the way you lie]()
     - space bound
 
-- Sample
-    - [Stan](https://reurl.cc/mZ4M31) 
-        - Dido: [Thank You](https://reurl.cc/mZ4MrM)
-    - R.E.M.〈Drive〉 
-    - Nick Cave and Warren Ellis〈[Song for bob](https://reurl.cc/NGLQoe)〉 
-        - The Assassination of Jesse James by the Coward Robert Ford
+## Sample 與相關曲目                                                                   
+
+  - ****Stan****（feat. Dido）—— Dido〈Thank You〉的 sample                                  
+
+  - ****R.E.M.〈Drive〉****
+
+  - ****Nick Cave & Warren Ellis〈Song for Bob〉**** ——                                      
+
+    電影《刺殺傑西》(The Assassination of Jesse James by the Coward Robert Ford) 配樂
