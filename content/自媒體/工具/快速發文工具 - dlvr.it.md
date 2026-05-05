@@ -56,7 +56,6 @@ https://app.dlvrit.com/
 
 ![FB設定](https://hackmd.io/_uploads/ByAeK6bWJx.png)
 
->[!info]
 >請選擇「你要經營的粉絲專頁」，再點擊 Connect
 
 ---
@@ -110,7 +109,6 @@ https://app.dlvrit.com/
 
 ![選平台](https://hackmd.io/_uploads/HyX-4xMW1e.png)
 
->[!info]
 >選擇你剛剛已連結的社群帳號
 
 
@@ -120,7 +118,6 @@ https://app.dlvrit.com/
 
 ![字數限制](https://hackmd.io/_uploads/rk0mNxzbyx.png)
 
->[!info]
 >每個平台都有不同限制，例如：
 >- X（Twitter）：280 字元（含標點）
 >- IG：圖片為主
@@ -132,7 +129,6 @@ https://app.dlvrit.com/
 
 ### ⚠️ 特別注意：X（Twitter）預覽問題
 
->[!warning]
 >如果你發「網站連結」到 X：
 >
 >👉 該網站必須支援 **Twitter Card**
@@ -166,7 +162,6 @@ https://app.dlvrit.com/
 
 ![結果](https://hackmd.io/_uploads/Syr5yGM-1x.png)
 
->[!warning]
 >請逐一檢查每個平台是否成功發佈
 >
 >⚠️ 注意：

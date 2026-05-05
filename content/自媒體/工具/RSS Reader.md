@@ -27,7 +27,6 @@ RSS Reader 可以理解為一個「訂閱 XML 的閱讀器」。每當創作者�
 
 ![Feedly 所有更新的訂閱內容](https://hackmd.io/_uploads/S1hNDZoZ1x.png)
 
-> [!info]
 > 上圖是所有更新的訂閱內容，下圖則是分類中所有訂閱的頻道。
 
 ![Feedly 分類中的訂閱頻道](https://hackmd.io/_uploads/BJBBv-ibke.png)
@@ -55,7 +54,6 @@ Feedly 也可以新增分類，並把不同 RSS Feed 放進不同分類中，方
 
 ### 議題：搜尋不到的內容怎麼辦？
 
-> [!warning]
 > 有一些內容無論怎麼搜尋都搜尋不到。
 >
 > 例如：
@@ -78,7 +76,6 @@ RSS 產生器的原理，是定時去爬取指定帳號或網站是否有更新�
 
 ![RSS.app 後台](https://hackmd.io/_uploads/HyWGy7s-ke.png)
 
-> [!success]
 > 在 RSS.app 中，可以建立多種來源的 RSS Feed。
 >
 > 例如：
@@ -96,7 +93,6 @@ RSS 產生器的原理，是定時去爬取指定帳號或網站是否有更新�
 
 ![RSS.app 新增 Feed](https://hackmd.io/_uploads/HyFeJQjWJl.png)
 
-> [!info]
 > 接著可以看到 RSS.app 支援許多不同平台的內容來源，往下拉還有更多選項。
 
 ![RSS.app 支援的平台](https://hackmd.io/_uploads/Skzg-Xs-Jg.png)
@@ -111,7 +107,6 @@ RSS 產生器的原理，是定時去爬取指定帳號或網站是否有更新�
 
 ![RSS.app 產生 Feed](https://hackmd.io/_uploads/ryGSGXob1x.png)
 
-> [!info]
 > 製作好 RSS Feed 之後，按下 **Save To My Feeds**。
 
 ![RSS.app 儲存 Feed](https://hackmd.io/_uploads/rkJozXj-1x.png)
@@ -124,7 +119,6 @@ RSS 產生器的原理，是定時去爬取指定帳號或網站是否有更新�
 
 ![RSS.app 取得 RSS Feed URL](https://hackmd.io/_uploads/BkW2GQs-Jx.png)
 
-> [!success]
 > 複製這個網址後，就可以拿去餵給你的 RSS Reader，例如 Feedly。
 >
 > 接下來的操作就跟前面 Feedly 的訂閱流程一樣。
@@ -153,3 +147,5 @@ RSS Reader 的核心價值，是讓你重新掌握資訊來源。
 簡單來說：
 
 > RSS 不是過時技術，而是一種「資訊主權」工具。
+
+---

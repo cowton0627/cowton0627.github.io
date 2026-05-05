@@ -59,7 +59,6 @@ Suno AI 可以直接透過「歌曲描述」產生音樂或歌曲，不過如果
 
 ![image](https://hackmd.io/_uploads/H1o_lJ7Myg.png)
 
-> [!success]
 > 在 music style 裡面，可以看到三種常見項目：
 >
 > - **Style**：風格
@@ -86,7 +85,6 @@ Suno AI 可以直接透過「歌曲描述」產生音樂或歌曲，不過如果
 
 ![image](https://hackmd.io/_uploads/S1LhPJ7zyl.png)
 
-> [!warning]
 > Sonoteller 容易達到 daily limit，所以也可以使用替代方案，例如 [SubmitHub](https://www.submithub.com/)。
 
 ---
@@ -337,7 +335,6 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 !! ... ! ! !
 ```
 
-> [!success]
 > 這裡的點 `.` 和驚嘆號 `!`，可以理解為擊打節奏的提示。
 
 還可以參照下面這些常用 Instrumental Tags：
@@ -371,7 +368,6 @@ Voice Tags 可以直接提示模型換掉預設的人聲，例如：
 [Diva Solo]
 ```
 
-> [!warning]
 > 為什麼需要換掉預設人聲？
 >
 > 因為 Suno AI 可能會根據音樂類型套用常見預設：
@@ -457,3 +453,5 @@ Yo yo yo，大學狗不簡單
 大家可以參照這樣的方式安排自己的 Meta Tags。
 
 最後附上：[音樂參照](https://suno.com/song/32023c94-abde-46b2-9cb6-5760ddfa52c5)
+
+---

@@ -56,7 +56,6 @@ tags: [自媒體, AI, 工具]
 
 ![Screenshot 2024-10-30 at 5.01.55 PM (2)](https://hackmd.io/_uploads/Byr0LukZJl.png)
 
->[!warning]
 >因為 ChatGPT 是經過多工串接到 DALLE (繪圖機器人)，所以其實是將使用者與之的對話轉換成適合餵給繪圖機器人的 prompt 後，再由繪圖機器人生出圖片，但**前一個過程**我們看不到。
 
 
@@ -99,3 +98,6 @@ tags: [自媒體, AI, 工具]
 ![image](https://hackmd.io/_uploads/Sk_-Qa--1g.png)
 
 5. 簡單操作流程可參考[影片](https://www.youtube.com/shorts/8omzDx2rGOY)
+
+---
+
