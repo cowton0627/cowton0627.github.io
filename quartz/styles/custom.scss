@@ -1139,6 +1139,34 @@ li.section-li > .section > .meta > time {
 }
 
 /* -----------------------------------------------------------------------------
+   22.c  Smooth desktop collapse animation for the explorer toggle
+   Quartz's default `.explorer.collapsed { flex: 0 1 1.2rem }` snaps
+   the section without a transition — feels jerky compared to the
+   folder rows below (which use `grid-template-rows: 0fr → 1fr` and
+   interpolate smoothly).
+   Match that technique on `.explorer` itself so the top-level toggle
+   animates with the same easing.
+   Scoped to ≥800px so the mobile drawer's existing transform-based
+   slide-in animation isn't affected.
+   ----------------------------------------------------------------------------- */
+@media (min-width: 800px) {
+  .explorer {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    transition: grid-template-rows 0.3s ease-in-out;
+  }
+  .explorer.collapsed {
+    grid-template-rows: auto 0fr;
+  }
+  .explorer > .explorer-content {
+    /* Required so the grid track can actually shrink to 0 — without
+       this, browsers default `min-height` to min-content and the row
+       refuses to collapse fully. */
+    min-height: 0;
+  }
+}
+
+/* -----------------------------------------------------------------------------
    23. Selection / focus / scrollbars
    ----------------------------------------------------------------------------- */
 ::selection {
