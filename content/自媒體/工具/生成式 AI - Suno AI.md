@@ -259,7 +259,7 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 
 這類標籤可以搭配 `[Bridge]` 使用，讓歌曲在中段產生轉折或情緒變化。
 
-> 參照：[Suno AI Docs - Pre-chorus and Bridge](https://www.suno.wiki/faq/metatags/pre-chorus-and-bridge/)
+> 參照：[Suno AI Docs - Pre-chorus and Bridge](https://help.suno.com/en/articles/9010177))
 
 ---
 
