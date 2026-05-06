@@ -58,3 +58,6 @@ And I'm aimin' right at you, right at you, right at you
 - **Stan**（feat. Dido）—— Dido 的〈Thank You〉作為 sample
 - **R.E.M. 〈Drive〉**
 - **Nick Cave & Warren Ellis 〈Song for Bob〉** —— 電影《刺殺傑西》（_The Assassination of Jesse James by the Coward Robert Ford_, 2007）配樂
+
+---
+
