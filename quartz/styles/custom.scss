@@ -1123,6 +1123,22 @@ footer a:hover {
 }
 
 /* -----------------------------------------------------------------------------
+   22.b  Folder / tag listing rows
+   Quartz's listPage.scss puts `.section { grid-template-columns:
+   fit-content(8em) 3fr 1fr }`. The 8em (~124px) date column is just
+   short enough that "2026年5月05日" wraps to two lines in Chinese.
+   Bump to 10em (~155px) and add `white-space: nowrap` for belt-and-
+   braces. Same selector path as Quartz, source order wins.
+   ----------------------------------------------------------------------------- */
+li.section-li > .section {
+  grid-template-columns: fit-content(10em) 3fr 1fr;
+}
+li.section-li > .section > .meta,
+li.section-li > .section > .meta > time {
+  white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------------------
    23. Selection / focus / scrollbars
    ----------------------------------------------------------------------------- */
 ::selection {
@@ -1187,18 +1203,6 @@ input:focus-visible {
       pointer-events: auto;
     }
   }
-}
-
-/* -----------------------------------------------------------------------------
-   23.c  Explorer collapse — actually hide content when collapsed
-   Quartz's `.explorer.collapsed` rule uses `flex: 0 1 1.2rem` to clamp
-   the section height. In some flex-container layouts that flex hint is
-   ignored and child content remains visible at full height. Add a hard
-   `display: none` on the content tree so collapsing the explorer
-   genuinely hides 程式 / 自媒體 / 讀書會 etc., not only the chevron.
-   ----------------------------------------------------------------------------- */
-.explorer.collapsed > .explorer-content {
-  display: none;
 }
 
 /* -----------------------------------------------------------------------------
