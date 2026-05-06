@@ -32,10 +32,29 @@ npx quartz build --serve   # http://localhost:8080，watch + hot reload
 
 ```bash
 npx quartz build           # 一次性 build → public/
-npm run check              # tsc + prettier check
+npm run check              # tsc + prettier check + wikilink 完整性檢查
+npm run check:links        # 只檢查 wikilink 是否都對應到存在的檔案
 npm run format             # prettier --write（已透過 .prettierignore 排除 quartz/）
 npm run docs               # 在本機跑 Quartz 官方文件（_upstream-docs/）
 ```
+
+### 想要 push 前自動檢查 wikilink？
+
+加一個 pre-commit hook（**不會進 git**，每台電腦各自設定一次）：
+
+```bash
+cat > .git/hooks/pre-commit <<'EOF'
+#!/bin/sh
+node scripts/check-wikilinks.mjs || {
+  echo ""
+  echo "（要強制提交可加 --no-verify，但通常不建議）"
+  exit 1
+}
+EOF
+chmod +x .git/hooks/pre-commit
+```
+
+之後 `git commit` 前會自動跑 link check，發現壞 wikilink 就阻止 commit。
 
 ---
 
