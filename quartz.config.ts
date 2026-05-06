@@ -24,33 +24,35 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Inter",
+        // Editorial serif headers (Forest Canopy theme), humanist sans body
+        header: "Source Serif 4",
         body: "Inter",
         code: "JetBrains Mono",
       },
       colors: {
-        // Apple-clean neutrals + Linear-style indigo accent
+        // Forest Canopy theme (theme-factory) — ivory canvas, forest green
+        // ink, sage / olive accents. Long-read friendly editorial palette.
         lightMode: {
-          light: "#ffffff",
-          lightgray: "#e8e8ec",
-          gray: "#86868b",
-          darkgray: "#3a3a3c",
-          dark: "#1d1d1f",
-          secondary: "#5e6ad2",
-          tertiary: "#8b95e8",
-          highlight: "rgba(94, 106, 210, 0.08)",
-          textHighlight: "rgba(255, 220, 100, 0.40)",
+          light: "#faf9f6", // ivory canvas
+          lightgray: "#dcded0", // soft olive border
+          gray: "#7d8471", // sage muted text
+          darkgray: "#3a3f33", // deep olive-black body text
+          dark: "#2d4a2b", // forest green titles
+          secondary: "#2d4a2b", // forest green links (editorial style: underline, not hue, distinguishes)
+          tertiary: "#a4ac86", // olive accent
+          highlight: "rgba(125, 132, 113, 0.10)",
+          textHighlight: "rgba(164, 172, 134, 0.35)",
         },
         darkMode: {
-          light: "#0a0a0b",
-          lightgray: "#26262a",
-          gray: "#6e6e76",
-          darkgray: "#c8c8cc",
-          dark: "#f5f5f7",
-          secondary: "#a5b4fc",
-          tertiary: "#818cf8",
-          highlight: "rgba(165, 180, 252, 0.10)",
-          textHighlight: "rgba(165, 180, 252, 0.20)",
+          light: "#1a261a", // deep forest
+          lightgray: "#2d4a2b", // forest green elevated
+          gray: "#7d8471", // sage
+          darkgray: "#c4c8b8", // light olive body
+          dark: "#faf9f6", // ivory titles
+          secondary: "#a4ac86", // olive — brighter for dark-mode legibility
+          tertiary: "#7d8471", // sage
+          highlight: "rgba(164, 172, 134, 0.10)",
+          textHighlight: "rgba(164, 172, 134, 0.18)",
         },
       },
     },

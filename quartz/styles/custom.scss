@@ -23,9 +23,13 @@
   --kb-sans:
     "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI",
     system-ui, sans-serif;
+  /* Editorial serif for display headings (Forest Canopy theme).
+     "Source Serif 4" is loaded by Quartz from Google Fonts via
+     quartz.config.ts → typography.header. Falls back through
+     other editorial serifs and Georgia (universal). */
   --kb-display:
-    "Inter", "Inter Display", -apple-system, BlinkMacSystemFont,
-    "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+    "Source Serif 4", "Newsreader", "Tiempos Headline", "Iowan Old Style",
+    Georgia, "Noto Serif TC", "Source Han Serif TC", "Songti TC", serif;
   --kb-mono:
     "JetBrains Mono", "SF Mono", ui-monospace, "IBM Plex Mono", Menlo, Consolas,
     monospace;
