@@ -30,29 +30,30 @@ const config: QuartzConfig = {
         code: "JetBrains Mono",
       },
       colors: {
-        // Forest Canopy theme (theme-factory) — ivory canvas, forest green
-        // ink, sage / olive accents. Long-read friendly editorial palette.
+        // Sunset Boulevard theme (theme-factory) — warm cream canvas,
+        // deep purple ink, burnt orange + coral accents. Editorial,
+        // golden-hour energy. Pairs with Source Serif 4 headers.
         lightMode: {
-          light: "#faf9f6", // ivory canvas
-          lightgray: "#dcded0", // soft olive border
-          gray: "#7d8471", // sage muted text
-          darkgray: "#3a3f33", // deep olive-black body text
-          dark: "#2d4a2b", // forest green titles
-          secondary: "#2d4a2b", // forest green links (editorial style: underline, not hue, distinguishes)
-          tertiary: "#a4ac86", // olive accent
-          highlight: "rgba(125, 132, 113, 0.10)",
-          textHighlight: "rgba(164, 172, 134, 0.35)",
+          light: "#fdf6e9", // warm cream canvas
+          lightgray: "#f0e3c2", // sand-tinted border
+          gray: "#6a7a82", // muted purple-gray secondary text
+          darkgray: "#264653", // deep purple body text
+          dark: "#264653", // deep purple titles
+          secondary: "#e76f51", // burnt orange — primary accent (links, focus rings, hover)
+          tertiary: "#f4a261", // coral — secondary accent
+          highlight: "rgba(231, 111, 81, 0.10)",
+          textHighlight: "rgba(244, 162, 97, 0.40)",
         },
         darkMode: {
-          light: "#1a261a", // deep forest
-          lightgray: "#2d4a2b", // forest green elevated
-          gray: "#7d8471", // sage
-          darkgray: "#c4c8b8", // light olive body
-          dark: "#faf9f6", // ivory titles
-          secondary: "#a4ac86", // olive — brighter for dark-mode legibility
-          tertiary: "#7d8471", // sage
-          highlight: "rgba(164, 172, 134, 0.10)",
-          textHighlight: "rgba(164, 172, 134, 0.18)",
+          light: "#1a2326", // dark purple-navy canvas
+          lightgray: "#264653", // deep purple elevated
+          gray: "#6a7a82", // muted secondary
+          darkgray: "#f4a261", // coral on dark for body legibility
+          dark: "#fef5e7", // cream titles
+          secondary: "#e76f51", // burnt orange
+          tertiary: "#f4a261", // coral
+          highlight: "rgba(244, 162, 97, 0.10)",
+          textHighlight: "rgba(244, 162, 97, 0.20)",
         },
       },
     },
