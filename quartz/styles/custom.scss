@@ -840,6 +840,59 @@ hr {
 }
 
 /* -----------------------------------------------------------------------------
+   20.b  Homepage Claude-theme experiment
+   Scopes Anthropic Claude's "warm canvas / coral accent / editorial serif"
+   palette to `body[data-slug="index"]` only — the rest of the site stays
+   on the Linear/indigo theme. Two clicks (home vs an article) lets you
+   compare the two languages side by side.
+
+   Tokens cribbed from
+   .claude/references/claude-design.md (VoltAgent/awesome-design-md, Claude entry)
+
+   To kill this experiment: delete this section — palette reverts to the
+   site-wide colours from quartz.config.ts.
+   ----------------------------------------------------------------------------- */
+body[data-slug="index"] {
+  /* Light-mode overrides (Claude warm canvas) */
+  --light: #faf9f5; /* canvas — tinted cream */
+  --lightgray: #e6dfd8; /* hairline */
+  --gray: #6c6a64; /* muted text */
+  --darkgray: #3d3d3a; /* body text */
+  --dark: #141413; /* ink — title text */
+  --secondary: #cc785c; /* primary — warm coral / terracotta */
+  --tertiary: #e8a55a; /* accent amber */
+  --highlight: rgba(204, 120, 92, 0.08);
+  --textHighlight: rgba(232, 165, 90, 0.35);
+
+  /* Surfaces re-derive automatically from --lightgray / --light via
+     the existing color-mix() formulas in :root, so no need to redo
+     --kb-surface-1, --kb-border etc. */
+}
+
+:root[saved-theme="dark"] body[data-slug="index"] {
+  /* Dark-mode overrides (Claude dark surfaces, warm undertone) */
+  --light: #181715; /* surface-dark */
+  --lightgray: #252320; /* surface-dark-elevated */
+  --gray: #a09d96; /* on-dark-soft */
+  --darkgray: #d4d2cc; /* body strong on dark */
+  --dark: #faf9f5; /* on-dark — title text on dark */
+  --secondary: #e8a55a; /* shift to amber on dark for contrast */
+  --tertiary: #cc785c; /* coral as secondary */
+  --highlight: rgba(232, 165, 90, 0.12);
+}
+
+/* Claude hero typography: serif display for the H1, replacing Inter.
+   Use freely-available editorial serif fallbacks (Newsreader / Source
+   Serif 4 / Georgia) instead of paid Copernicus/Tiempos. */
+body[data-slug="index"] article.home > h1:first-child {
+  font-family:
+    "Newsreader", "Source Serif 4", "Tiempos Headline", "PingFang TC",
+    "Noto Serif TC", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+}
+
+/* -----------------------------------------------------------------------------
    21. Homepage hero (cssclasses: [home])
    ----------------------------------------------------------------------------- */
 article.home {
