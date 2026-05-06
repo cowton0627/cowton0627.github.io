@@ -482,7 +482,34 @@ input[type="search"]:focus,
   border-left: 1px solid var(--kb-border-soft);
 }
 
-/* Article-top TOC: rendered as a quiet card */
+/* === Smooth collapse for both TOCs (top card + right rail) ===
+   Quartz toggles `.collapsed` on `button.toc-header` and uses
+   `.toc:has(.toc-header.collapsed) { flex: 0 1 1.4rem }` to clamp
+   height — without a `transition`, so the change is instant.
+   Apply the `grid-template-rows: 0fr → 1fr` interpolation trick
+   (same as `.folder-outer` and our `.explorer` collapse) so the
+   chevron click animates a smooth height change. */
+.toc {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  transition: grid-template-rows 0.3s ease-in-out;
+}
+.toc:has(button.toc-header.collapsed) {
+  grid-template-rows: auto 0fr;
+}
+.toc > .toc-content {
+  /* Required so the grid track can collapse to 0 */
+  min-height: 0;
+  overflow: hidden;
+}
+.toc > button.toc-header {
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Article-top TOC: rendered as a quiet card.
+   Don't override flex / overflow / max-height here — those would
+   defeat the grid-template-rows collapse animation above. */
 .page-header .toc {
   margin: 1.5rem 0 0.5rem;
   padding: 0.85rem 1.1rem 0.95rem;
@@ -490,13 +517,8 @@ input[type="search"]:focus,
   border-radius: 10px;
   background: var(--kb-surface-1);
   box-shadow: var(--kb-shadow-sm);
-  /* Override Quartz's flex column constraint so the card sizes to content */
-  flex: initial;
-  overflow-y: visible;
-  min-height: 0;
 }
 .page-header .toc button.toc-header {
-  width: 100%;
   justify-content: space-between;
 }
 .page-header .toc button.toc-header h3 {
@@ -510,8 +532,6 @@ input[type="search"]:focus,
 }
 .page-header .toc .toc-content {
   margin-top: 0.55rem;
-  max-height: none;
-  overflow: visible;
 }
 .page-header .toc .toc-content li > a {
   padding-top: 0.18rem;
