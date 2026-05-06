@@ -40,11 +40,22 @@ npm run docs               # 在本機跑 Quartz 官方文件（_upstream-docs/�
 
 ### 想要 push 前自動檢查 wikilink？
 
-加一個 pre-commit hook（**不會進 git**，每台電腦各自設定一次）：
+加一個 pre-commit hook（**不會進 git**，每台電腦各自設定一次）。下面這個版本在 **CLI、Sourcetree、GitHub Desktop、GitKraken、VS Code 內建 git** 都會擋住壞 wikilink：
 
 ```bash
 cat > .git/hooks/pre-commit <<'EOF'
 #!/bin/sh
+# GUI git clients (Sourcetree, GitHub Desktop, …) don't inherit your
+# shell PATH, so `node` may not be found. Prepend common install
+# paths to make this hook work in both CLI and GUI.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.volta/bin:$PATH"
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "✗ pre-commit: node not found in PATH"
+  echo "  Edit .git/hooks/pre-commit and add your node bin path."
+  exit 1
+fi
+
 node scripts/check-wikilinks.mjs || {
   echo ""
   echo "（要強制提交可加 --no-verify，但通常不建議）"
@@ -54,7 +65,10 @@ EOF
 chmod +x .git/hooks/pre-commit
 ```
 
-之後 `git commit` 前會自動跑 link check，發現壞 wikilink 就阻止 commit。
+之後不論你用 CLI 還是 GUI 開 commit，git 都會在送出前跑 link check。發現壞 wikilink 直接擋下 commit，告訴你哪個檔哪行壞掉。
+
+> **若你用 nvm 而非 Homebrew/Volta**，PATH 行多加一個：  
+> `$HOME/.nvm/versions/node/$(ls -1 $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin`
 
 ---
 
