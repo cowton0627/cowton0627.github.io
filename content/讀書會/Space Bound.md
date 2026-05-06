@@ -1,6 +1,7 @@
 ---
 title: Space Bound
 tags: [讀書會, 音樂, Eminem]
+created: 2026-05-05
 ---
 
 # Space Bound by Eminem
@@ -42,25 +43,18 @@ And I'm aimin' right at you, right at you
 250, 000 miles on a clear night in June
 And I'm aimin' right at you, right at you, right at you
 
-## 背景         
+## 背景
 
-  Eminem 第七張錄音室專輯《Recovery》（2010 年 6 月 18 日發行）收錄。原本標題《Relapse 2》，後改名《Recovery》以區隔藝術方向。
+> [!info] 專輯資訊
+> Eminem 第七張錄音室專輯《Recovery》（2010 年 6 月 18 日發行）收錄。原本標題《Relapse 2》，後改名為《Recovery》以區隔藝術方向。
 
-- [Space bound](https://reurl.cc/107vYW)
+- 原曲連結：[Space Bound](https://reurl.cc/107vYW)
+- 同專輯名作：Love the Way You Lie（feat. Rihanna）
+- 創作者：Marshall Mathers（MM、M & M → **Eminem**）
+- 自傳電影：《8 Mile》（2002）
 
-- Marshall Mathers（MM，M & M，Eminem）
-    - 8 miles 
+## Sample 與相關曲目
 
-- Recovery (June 18, 2010) 7th studio album
-    - [love the way you lie]()
-    - space bound
-
-## Sample 與相關曲目                                                                   
-
-  - ****Stan****（feat. Dido）—— Dido〈Thank You〉的 sample                                  
-
-  - ****R.E.M.〈Drive〉****
-
-  - ****Nick Cave & Warren Ellis〈Song for Bob〉**** ——                                      
-
-    電影《刺殺傑西》(The Assassination of Jesse James by the Coward Robert Ford) 配樂
+- **Stan**（feat. Dido）—— Dido 的〈Thank You〉作為 sample
+- **R.E.M. 〈Drive〉**
+- **Nick Cave & Warren Ellis 〈Song for Bob〉** —— 電影《刺殺傑西》（_The Assassination of Jesse James by the Coward Robert Ford_, 2007）配樂

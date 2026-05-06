@@ -99,7 +99,7 @@ SEO 的基礎是以**搜尋引擎**為主，包含**關鍵字、內容、權重*
 
 ### 不好的例子
 
-1. **網站標題與描述模糊**。參考 [𝐂𝗵𝐚𝗿𝗹𝗲𝘀' 網誌](https://wordpress.com/view/clc914806616.wordpress.com)，內容主題是**編劇教學**，但 title 與 description 必須讓人**一眼讀出**這件事。能不能改得更好？可以。
+1. **網站標題與描述模糊**。參考 [𝐂𝗵𝐚𝗿𝗹𝗲𝘀' 網誌](https://clc914806616.wordpress.com/)，內容主題是**編劇教學**，但 title 與 description 必須讓人**一眼讀出**這件事。能不能改得更好？可以。
 2. **後台埋假關鍵字**。某電商在網站後台埋入流量詞，但實際**沒有賣那類商品**，違反公平交易法被罰鍰：
    - [新聞連結一（中央社）](https://www.cna.com.tw/news/afe/202204150061.aspx)
    - [新聞連結二（數位時代）](https://www.bnext.com.tw/article/47490/facebook-fights-engagement-baiting-spam-in-your-news-feed)
