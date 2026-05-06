@@ -678,7 +678,11 @@ figure[data-rehype-pretty-code-figure] > [data-rehype-pretty-code-title] {
 /* -----------------------------------------------------------------------------
    16. Blockquote
    ----------------------------------------------------------------------------- */
-article blockquote {
+/* `:not(.callout)` because Quartz's Obsidian-flavoured callouts
+   (`> [!tip]` syntax) render as `<blockquote class="callout">`.
+   We don't want our blockquote chrome stacking on top of the
+   callout chrome — see section 16.b for callout theming. */
+article blockquote:not(.callout) {
   margin: 1.25rem 0;
   padding: 0.6rem 1.1rem;
   border-left: 3px solid var(--secondary);
@@ -686,8 +690,56 @@ article blockquote {
   border-radius: 0 10px 10px 0;
   color: var(--darkgray);
 }
-article blockquote p {
+article blockquote:not(.callout) p {
   margin: 0.25rem 0;
+}
+
+/* -----------------------------------------------------------------------------
+   16.b  Callouts — theme Quartz's built-in Obsidian callouts
+   Quartz ships 14 callout types (note/info/tip/warning/danger/quote/
+   example/…) each with its own --color/--border/--bg defined in
+   quartz/styles/callouts.scss. Defaults are Material-design-ish blues,
+   greens, oranges, reds.
+
+   We retune to:
+   - Pull the "informational" family toward our indigo --secondary
+     so they read as part of the same design language as our
+     internal links / focus rings / hero gradient.
+   - Keep semantic colours (warning/danger/failure/bug) as Quartz
+     ships them — readers rely on those colours to tell the type
+     apart at a glance.
+   - Treat quote/example as neutral: muted gray on surface-1
+     background.
+   ----------------------------------------------------------------------------- */
+.callout {
+  border-radius: 10px;
+  font-size: 0.96rem;
+
+  /* Slightly tighter title spacing for our type stack */
+  & > .callout-title {
+    font-family: var(--kb-display), var(--kb-cjk);
+    letter-spacing: -0.005em;
+    padding: 0.55rem 0;
+  }
+
+  /* === Informational family → indigo === */
+  &[data-callout="note"],
+  &[data-callout="info"],
+  &[data-callout="abstract"],
+  &[data-callout="question"],
+  &[data-callout="todo"] {
+    --color: var(--secondary);
+    --border: color-mix(in srgb, var(--secondary) 28%, transparent);
+    --bg: color-mix(in srgb, var(--secondary) 7%, transparent);
+  }
+
+  /* === Quote / example → neutral surface === */
+  &[data-callout="quote"],
+  &[data-callout="example"] {
+    --color: var(--gray);
+    --border: var(--kb-border-soft);
+    --bg: var(--kb-surface-1);
+  }
 }
 
 /* -----------------------------------------------------------------------------
