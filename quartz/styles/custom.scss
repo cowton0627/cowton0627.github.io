@@ -1105,6 +1105,13 @@ footer {
   margin-top: 4rem;
   padding-top: 1.25rem;
   padding-bottom: 1.5rem;
+  /* Quartz default is text-align:left; override to centre the
+     "Created with Quartz vX · © YEAR · GitHub" line under the article. */
+  text-align: center;
+}
+/* Centre the social/links list inside the footer too */
+footer ul {
+  justify-content: center;
 }
 footer a {
   color: var(--gray);
@@ -1150,6 +1157,73 @@ input:focus-visible {
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--kb-border) transparent;
+}
+
+/* -----------------------------------------------------------------------------
+   23.b  Reader mode — make the toggle visible
+   Quartz's stock reader-mode (book icon, top of left rail) only sets
+   sidebar opacity to 0 (and to 1 on hover). That's a real change but
+   too subtle — easy to think the toggle did nothing.
+   Augment: in reader-mode also widen the article column to 920px so
+   prose visibly expands into the cleared space.
+   ----------------------------------------------------------------------------- */
+:root[reader-mode="on"] {
+  --kb-content-max: 920px;
+  /* Smooth width transition so the change reads as intentional */
+  & .page > #quartz-body .center > article,
+  & .page > #quartz-body .center > .page-header,
+  & .page > #quartz-body .center > footer {
+    transition: max-width 0.3s ease;
+  }
+  /* Disable interactions on the now-faded sidebars so they don't
+     accidentally catch hover when the cursor passes near */
+  & .sidebar.left,
+  & .sidebar.right {
+    pointer-events: none;
+    transition:
+      opacity 0.3s ease,
+      pointer-events 0s 0.3s;
+    &:hover {
+      pointer-events: auto;
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   23.c  Explorer collapse — actually hide content when collapsed
+   Quartz's `.explorer.collapsed` rule uses `flex: 0 1 1.2rem` to clamp
+   the section height. In some flex-container layouts that flex hint is
+   ignored and child content remains visible at full height. Add a hard
+   `display: none` on the content tree so collapsing the explorer
+   genuinely hides 程式 / 自媒體 / 讀書會 etc., not only the chevron.
+   ----------------------------------------------------------------------------- */
+.explorer.collapsed > .explorer-content {
+  display: none;
+}
+
+/* -----------------------------------------------------------------------------
+   23.d  Mobile explorer drawer — opaque, full viewport, on top
+   Quartz positions the drawer as `position: absolute` inside .sidebar.
+   When parent overflow / position contexts kick in, the panel can
+   end up clipped or partially transparent. Force fixed positioning
+   (relative to viewport) and elevate z-index so article text never
+   bleeds through underneath.
+   ----------------------------------------------------------------------------- */
+@media (max-width: 799.98px) {
+  .explorer .explorer-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    background-color: var(--light);
+    /* Belt-and-braces opaque fill in case any browser composites
+       the var() with alpha in a stacking context. */
+    background-image: linear-gradient(var(--light), var(--light));
+    z-index: 1000;
+  }
 }
 
 /* -----------------------------------------------------------------------------
