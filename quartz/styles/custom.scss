@@ -885,16 +885,12 @@ body[data-slug="index"] {
   --highlight: rgba(232, 165, 90, 0.12);
 }
 
-/* Claude hero typography: serif display for the H1, replacing Inter.
-   Use freely-available editorial serif fallbacks (Newsreader / Source
-   Serif 4 / Georgia) instead of paid Copernicus/Tiempos. */
-body[data-slug="index"] article.home > h1:first-child {
-  font-family:
-    "Newsreader", "Source Serif 4", "Tiempos Headline", "PingFang TC",
-    "Noto Serif TC", Georgia, serif;
-  font-weight: 400;
-  letter-spacing: -0.025em;
-}
+/* Note: previously the homepage H1 also had a custom serif (Newsreader)
+   override. Removed because the user wants UX (incl. typography) to
+   stay identical between home and inner pages — only the colour palette
+   should differ. The hero now uses the site-wide Source Serif 4 from
+   §21 below; the only thing setting the home page apart is its warm
+   Claude colour token override above. */
 
 /* -----------------------------------------------------------------------------
    21. Homepage hero (cssclasses: [home])
@@ -1234,17 +1230,40 @@ input:focus-visible {
 }
 
 /* -----------------------------------------------------------------------------
-   23.d  Mobile explorer drawer — opaque background only
-   Quartz already sets `background-color: var(--light)` and runs a
-   slide-in animation (with .lock-scroll pushing the article off-screen
-   to the right). Don't change positioning or z-index — that disrupts
-   Quartz's transform animation. Only reinforce the background fill so
-   the panel renders as a solid surface even if `var(--light)` somehow
-   composites with alpha in some browser stacking contexts.
+   23.d  Mobile explorer drawer — opaque background + backdrop scrim
+   Two pieces:
+   1. Reinforce the drawer's background fill so it renders as solid
+      even if `var(--light)` somehow composites with alpha in some
+      browser stacking contexts.
+   2. Add a fade-in backdrop scrim (semi-transparent black) that
+      covers the article when the drawer is open. Quartz already
+      tries to do this implicitly via `.lock-scroll` body class
+      transforming the article off-screen, but that mechanism can
+      fail (SPA timing, browser quirks, page-specific layout). The
+      scrim is a robust visual fallback — guarantees the article
+      content is visually receded behind the drawer, regardless of
+      whether the transform fired. Z-index 99 sits between article
+      (auto) and drawer (100).
    ----------------------------------------------------------------------------- */
 @media (max-width: 799.98px) {
   .explorer .explorer-content {
     background-image: linear-gradient(var(--light), var(--light));
+  }
+
+  /* Backdrop scrim — always present in DOM (via ::before), fades in
+     when drawer is open (`.explorer:not(.collapsed)`). */
+  .explorer::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 99;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .explorer:not(.collapsed)::before {
+    opacity: 1;
   }
 }
 

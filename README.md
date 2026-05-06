@@ -155,7 +155,7 @@ priority: ["git", "frontmatter", "filesystem"]
 
 | 檔案 | 改了什麼 |
 |---|---|
-| `quartz/styles/custom.scss` | ~1,200 行的整體視覺主題：字型（Source Serif 4 編輯風 serif 標題 + Inter humanist sans body + zh-Hant CJK fallback）、theme-factory「Sunset Boulevard」配色（暖沙 + 焦橘 + 深紫，dark mode 倒置）、響應式版型（mobile/tablet/desktop/wide）、TOC 雙模式（桌機右側、手機/平板上方卡片）、首頁 hero、scrollbars、selection、focus rings 等。**首頁 (`body[data-slug="index"]`) 套用獨立的 Anthropic Claude design 配色（暖米 + 珊瑚 + Newsreader serif）作為品牌識別**。 |
+| `quartz/styles/custom.scss` | ~1,200 行的整體視覺主題：字型（Source Serif 4 編輯風 serif 標題 + Inter humanist sans body + zh-Hant CJK fallback）、theme-factory「Sunset Boulevard」配色（暖沙 + 焦橘 + 深紫，dark mode 倒置）、響應式版型（mobile/tablet/desktop/wide）、TOC 雙模式（桌機右側、手機/平板上方卡片）、首頁 hero、scrollbars、selection、focus rings 等。**首頁 (`body[data-slug="index"]`) 套用獨立的 Anthropic Claude design 配色 token（暖米 + 珊瑚），作為品牌識別 —— 但字型、版型、響應式行為等其他 UX 一律與內頁一致**。 |
 | `quartz/styles/variables.scss` | sidebar 寬度 `320px → 260px`，`topSpacing 6rem → 4rem`。 |
 | `quartz/components/ContentMeta.tsx` | meta 行同時顯示**原始發佈日**（`created`）與**最後更新日**（`modified`）。原版只顯示 `defaultDateType` 對應的單一日期。 |
 
