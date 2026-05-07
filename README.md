@@ -265,13 +265,26 @@ git push
 
 ## 部署
 
-`main` 分支 push 即觸發 `.github/workflows/deploy.yml`：
+`.github/workflows/deploy.yml` 的觸發邏輯：
+
+| 觸發 | build 跑嗎？ | deploy 跑嗎？ |
+|---|---|---|
+| push 到 `main` | ✅ | ✅ —— 上 GitHub Pages |
+| push 到任何其他 branch | ✅（CI sanity check） | ❌ |
+| 開 PR / 更新 PR | ✅（CI sanity check） | ❌ |
+| 手動 `workflow_dispatch` | ✅ | ✅（從 main 跑時） |
+
+也就是說 **任何 branch / PR push 都會跑 build**，**只有 main push 會 deploy**。這給你一個免費的 sanity check：壞 markdown、broken wikilink、build error 在合併到 main 之前就會被擋下。
 
 ```
-checkout → npm install → npx quartz build → upload public/ as Pages artifact → deploy
+checkout → npm install → check wikilinks → npx quartz build
+                                              │
+                                              └─→ (if main) upload + deploy to Pages
 ```
 
-通常 1-2 分鐘完成。失敗看 [Actions 頁面](https://github.com/cowton0627/cowton0627.github.io/actions)。
+通常 1–2 分鐘完成。失敗看 [Actions 頁面](https://github.com/cowton0627/cowton0627.github.io/actions)。
+
+> **想要每個 branch 一個預覽 URL？** GitHub Pages 一個 repo 只有一份部署，做不到。要的話把 repo 同時連到 [Cloudflare Pages](https://pages.cloudflare.com/)：production 留在 GitHub Pages，CF 自動幫每個 branch / PR 生 `*.<project>.pages.dev` 預覽連結。免費、無 vendor lock-in。本 repo 目前沒接，想接再說。
 
 ---
 

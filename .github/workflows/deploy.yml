@@ -1,16 +1,28 @@
-name: Deploy Quartz site
+name: Build & deploy Quartz site
 
+# Trigger logic
+# -------------
+# - push (any branch)        → build runs (CI sanity-check)
+# - pull_request (any base)  → build runs (CI sanity-check)
+# - push to main             → build + deploy to GitHub Pages
+# - manual workflow_dispatch → build + deploy to GitHub Pages
+#
+# Reason: GitHub Pages only supports ONE deployment per repository.
+# We can't give every branch its own preview URL natively. What we
+# CAN do is run `npx quartz build` on every push so broken builds /
+# bad wikilinks fail before they reach main.
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+  pull_request:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Only one deploy can run at a time. Other branches' build jobs run
+# without contesting this lock (they don't touch Pages).
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -31,16 +43,34 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Belt-and-braces sanity check — wikilink validator. Cheap (<1s)
+      # and catches typos before the build runs. Skip silently if the
+      # script doesn't exist (older clones / fresh forks).
+      - name: Check wikilinks
+        run: |
+          if [ -f scripts/check-wikilinks.mjs ]; then
+            node scripts/check-wikilinks.mjs
+          else
+            echo "scripts/check-wikilinks.mjs not present, skipping."
+          fi
+
       - name: Build Quartz
         run: npx quartz build
 
+      # === Deploy steps below run ONLY on main branch pushes ===
+      # Other branches stop after the build above — exit 0 means CI
+      # green; build failure means CI red.
+
       - name: Setup Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/deploy-pages@v4
