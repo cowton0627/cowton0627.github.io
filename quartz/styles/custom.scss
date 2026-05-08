@@ -498,9 +498,14 @@ input[type="search"]:focus,
   grid-template-rows: auto 0fr;
 }
 .toc > .toc-content {
-  /* Required so the grid track can collapse to 0 */
+  /* `min-height: 0` so the grid track can collapse to 0fr.
+     `overflow-y: auto` so long TOCs in the right rail (height-capped by
+     `.sidebar.right { height: 100vh }` + flex-shrink) scroll within
+     themselves instead of being clipped behind Backlinks/Graph below.
+     Collapse animation stays clean: when grid track is 0fr, element
+     height is 0 → no scrollbar visible. */
   min-height: 0;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .toc > button.toc-header {
   width: 100%;
@@ -508,8 +513,8 @@ input[type="search"]:focus,
 }
 
 /* Article-top TOC: rendered as a quiet card.
-   Don't override flex / overflow / max-height here — those would
-   defeat the grid-template-rows collapse animation above. */
+   Don't override flex / overflow here — those would defeat the
+   grid-template-rows collapse animation above. */
 .page-header .toc {
   margin: 1.5rem 0 0.5rem;
   padding: 0.85rem 1.1rem 0.95rem;
@@ -517,6 +522,17 @@ input[type="search"]:focus,
   border-radius: 10px;
   background: var(--kb-surface-1);
   box-shadow: var(--kb-shadow-sm);
+}
+
+/* Top-card TOC: kill Quartz's `max-height: calc(100% - 2rem)` so a long
+   TOC on mobile/tablet grows the card naturally. Without this, the card
+   keeps its intrinsic height but content is capped, leaving lower
+   anchor links visually clipped behind subsequent article content (or
+   scroll-stuck inside a tiny inner scrollbar that mobile users don't
+   discover). Right-rail TOC keeps the cap because the rail has a
+   constrained height (sidebar = 100vh, sticky). */
+.page-header .toc > .toc-content {
+  max-height: none;
 }
 .page-header .toc button.toc-header {
   justify-content: space-between;
