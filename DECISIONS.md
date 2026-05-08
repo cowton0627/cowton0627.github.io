@@ -7,6 +7,24 @@
 
 ---
 
+## D-009 · 文章路徑保留純中文（不切英文 slug）
+
+- **日期**：2026-05-08
+- **背景**：`content/` 用中文資料夾名（`自媒體/工具/...`）會 build 出 `/自媒體/工具/Suno%20AI/` 這種 percent-encoded URL。早期 audit 把這列為「該修」項目
+- **選項考慮過**：
+  - 純中文路徑（現況）— URL 出現 `%20` 跟 percent-encoded 中文，部分舊版 LINE / Slack 預覽會截斷
+  - 全切英文 slug（`/self-media/tools/suno-ai/`）+ 用 frontmatter `title:` 顯示中文 — 跨平台最 robust，但寫作時資料夾名變陌生
+  - 用 frontmatter `permalink:` 個別覆寫成 ASCII slug — 折衷，但每篇都要記得設
+- **決定**：維持純中文路徑
+- **理由**：
+  - 讀者是中文使用者，URL 中文比 ASCII 拼音更直觀
+  - Obsidian vault 也是這個結構，寫作時心智模型一致
+  - 現代瀏覽器、Twitter / Threads / Bluesky 已正確處理 UTF-8 percent-encoded URL
+  - `%20` 出現的少數場景（含空白檔名）可改用 dash 命名解決
+- **未解**：若未來發現 LINE / FB 預覽圖大量壞掉，或 SEO 受影響，再回頭檢討（可能改用 `permalink:` 局部處理而非全站切換）
+
+---
+
 ## D-008 · Branch preview 採用 Cloudflare Pages，production 仍留 GitHub Pages
 
 - **日期**：2026-05-08
