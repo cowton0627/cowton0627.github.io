@@ -1521,6 +1521,41 @@ input:focus-visible {
 }
 
 /* -----------------------------------------------------------------------------
+   25.e  Defensive grid layout
+   Lightning CSS minify drops Quartz's deeply-nested base.scss declaration
+   `.page > #quartz-body { display: grid; grid-template-areas: ...; ... }`,
+   so #quartz-body falls back to block flow. Three direct children
+   (.sidebar.left / .center / .sidebar.right) then stack vertically and the
+   right rail (TOC + backlinks + graph) ends up at the bottom of every page,
+   on every viewport. Re-declare here at top level so the rule survives.
+   ----------------------------------------------------------------------------- */
+.page > #quartz-body {
+  display: grid;
+}
+.page > #quartz-body > .sidebar.left {
+  grid-area: grid-sidebar-left;
+}
+.page > #quartz-body > .center {
+  grid-area: grid-center;
+}
+.page > #quartz-body > .sidebar.right {
+  grid-area: grid-sidebar-right;
+}
+
+@media (min-width: 800px) and (max-width: 1199.98px) {
+  .page > #quartz-body {
+    grid-template-areas:
+      "grid-sidebar-left grid-center"
+      "grid-sidebar-left grid-sidebar-right";
+  }
+}
+@media (min-width: 1200px) {
+  .page > #quartz-body {
+    grid-template-areas: "grid-sidebar-left grid-center grid-sidebar-right";
+  }
+}
+
+/* -----------------------------------------------------------------------------
    26. Dark mode adjustments
    ----------------------------------------------------------------------------- */
 :root[saved-theme="dark"] {
