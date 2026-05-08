@@ -1478,13 +1478,30 @@ input:focus-visible {
     --kb-content-max: 760px;
   }
 
-  /* Same selector as Quartz's `$desktopGrid` rule, source order wins. */
+  /* Same selector as Quartz's `$desktopGrid` rule, source order wins.
+     `display: grid` and `grid-template-areas` are defensive: Lightning CSS
+     drops them when they're inside Quartz's deeply-nested base.scss block,
+     so #quartz-body falls back to block flow → right rail (TOC + backlinks
+     + graph) ends up at page bottom. We re-declare here so it survives.
+     Scoped to desktop only — mobile/tablet were never affected by the drop
+     because their layouts happen to look right under block flow. */
   .page > #quartz-body {
+    display: grid;
     grid-template-columns:
       clamp(200px, 16vw, 260px)
       minmax(0, 1fr)
       clamp(200px, 16vw, 260px);
+    grid-template-areas: "grid-sidebar-left grid-center grid-sidebar-right";
     column-gap: 1.75rem;
+  }
+  .page > #quartz-body > .sidebar.left {
+    grid-area: grid-sidebar-left;
+  }
+  .page > #quartz-body > .center {
+    grid-area: grid-center;
+  }
+  .page > #quartz-body > .sidebar.right {
+    grid-area: grid-sidebar-right;
   }
 
   /* Hairline rails on both sides */
