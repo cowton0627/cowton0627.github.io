@@ -162,17 +162,9 @@ modified: 2025-03-20       # 強制鎖死「最後更新日」（覆蓋 git 計�
 
 通常**不需要**手動設 `modified`。git commit 已經自動追蹤了。只在「修一個錯字不想讓更新日跳到今天」這種情境才會用到。
 
-### Quartz 內部運作
+### Quartz CreatedModifiedDate priority
 
-`quartz.config.ts` 的 `Plugin.CreatedModifiedDate` 用了非預設的 priority：
-
-```ts
-priority: ["git", "frontmatter", "filesystem"]
-```
-
-**為什麼不用 Quartz 預設的 `["frontmatter", "git", "filesystem"]`？** 因為 Quartz 的 frontmatter transformer 有一行 `data.modified ||= created`：當你只設 `created:` 沒設 `modified:` 時，它會把 `modified` 也填成 `created`。如果 frontmatter 在 priority 中先跑，這個自動填值會 short-circuit 後續 git pass，「最後更新日」永遠卡在發佈日不會動。
-
-把 git 排在 frontmatter 前面，git 先把 `modified` 填好，frontmatter pass 才不會覆蓋。`created` 仍然從 frontmatter 取（git 不負責填 `created`）。
+`quartz.config.ts` 用了 `priority: ["git", "frontmatter", "filesystem"]`（非預設），原因見 [DECISIONS.md#D-003](./DECISIONS.md)。
 
 ---
 
@@ -201,10 +193,7 @@ priority: ["git", "frontmatter", "filesystem"]
 
 `.prettierignore` 把 `quartz/` 排除在 `npm run format` 之外，避免格式化雜訊污染 fork diff。
 
-> ⚠️ **不要把 `quartz/` 從 `.prettierignore` 拿掉。**
-> 踩過：早期一次 `npm run format` 把整個 `quartz/` 加了分號，
-> 造成 156 個檔對 upstream diff（純格式雜訊），未來 merge 一定崩。
-> 已花一輪 reset 清掉，請保持現狀。
+> ⚠️ 不要把 `quartz/` 從 `.prettierignore` 拿掉，理由見 [DECISIONS.md#D-002](./DECISIONS.md)。
 
 ### 從 upstream 升級 Quartz
 
@@ -284,7 +273,7 @@ checkout → npm install → check wikilinks → npx quartz build
 
 通常 1–2 分鐘完成。失敗看 [Actions 頁面](https://github.com/cowton0627/cowton0627.github.io/actions)。
 
-> **想要每個 branch 一個預覽 URL？** GitHub Pages 一個 repo 只有一份部署，做不到。要的話把 repo 同時連到 [Cloudflare Pages](https://pages.cloudflare.com/)：production 留在 GitHub Pages，CF 自動幫每個 branch / PR 生 `*.<project>.pages.dev` 預覽連結。免費、無 vendor lock-in。本 repo 目前沒接，想接再說。
+> 本 repo 同時掛 GitHub Pages（production）+ Cloudflare Pages（branch preview）。任何 branch push 上去，CF 會自動產生 `https://<branch>.<project>.pages.dev`。設定流程與踩坑見 [DECISIONS.md#D-008](./DECISIONS.md) 與 [Cloudflare Pages 設定 Branch Preview](./content/程式/Cloudflare%20Pages%20設定%20Branch%20Preview.md)。
 
 ---
 
