@@ -77,7 +77,6 @@ chmod +x .git/hooks/pre-commit
 ```
 KnowledgeBase/
 ├── content/              ← 公開內容（Quartz 從這裡 build）
-│   ├── _assets/          ← 文章用的圖片
 │   ├── index.md          ← 首頁
 │   └── 自媒體/           ← 唯一目前在用的頂層分類
 │       ├── 工具/
