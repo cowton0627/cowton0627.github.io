@@ -47,8 +47,8 @@ created: 2026-05-04
 
 ### 使用
 
-1. [Stable Diffusion 3.5 Large (8B)](https://huggingface.co/spaces/stabilityai/stable-diffusion-3.5-large)
-2. [Stable Diffusion 3 Medium Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium)
+1. [Stable Diffusion 3.5 Large](https://huggingface.co/spaces/multimodalart/stable-diffusion-3.5-large-turboX)（社群 demo: turboX 變體）
+2. [Stable Diffusion 3 Medium Demo](https://huggingface.co/spaces/Nick088/Stable-Diffusion-3-Medium-SuperPrompt)（社群 demo: 含 SuperPrompt）
 3. [Stable Diffusion Online](https://stablediffusionweb.com/)
 
 ### 注意事項
