@@ -45,6 +45,12 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v2
         with:
+          # --base: resolve root-relative links (`/static/_assets/foo.png`)
+          # against the deployed site. Without this, lychee treats them as
+          # local file paths and fails with "provide a root dir" — every
+          # Medium-imported article that uses absolute asset URLs would
+          # generate dozens of false positives.
+          #
           # --accept 403,429: many sites bot-block scrapers (Cloudflare,
           # Medium, LinkedIn). These codes mean "I see you, I just won't
           # serve you" — the link is alive for humans, so don't flag it.
@@ -53,6 +59,7 @@ jobs:
             --cache
             --max-cache-age 7d
             --no-progress
+            --base https://cowton0627.github.io
             --accept 200,204,206,301,302,403,429,999
             --exclude-path node_modules
             --exclude-path public
