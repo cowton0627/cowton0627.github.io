@@ -47,8 +47,8 @@ created: 2026-05-04
 
 ### 使用
 
-1. [Stable Diffusion 3.5 Large (8B)](https://stabilityai-stable-diffusion-3-5-large.hf.space/)
-2. [Stable Diffusion 2.1 Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion)
+1. [Stable Diffusion 3.5 Large (8B)](https://huggingface.co/spaces/stabilityai/stable-diffusion-3.5-large)
+2. [Stable Diffusion 3 Medium Demo](https://huggingface.co/spaces/stabilityai/stable-diffusion-3-medium)
 3. [Stable Diffusion Online](https://stablediffusionweb.com/)
 
 ### 注意事項
