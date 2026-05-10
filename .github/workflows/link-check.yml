@@ -51,16 +51,21 @@ jobs:
           # Medium-imported article that uses absolute asset URLs would
           # generate dozens of false positives.
           #
-          # --accept 403,429: many sites bot-block scrapers (Cloudflare,
-          # Medium, LinkedIn). These codes mean "I see you, I just won't
-          # serve you" — the link is alive for humans, so don't flag it.
-          # 999 is LinkedIn's custom "no scrapers" code, same idea.
+          # --accept extras:
+          #   401 — Hugging Face Spaces that gate inference behind login.
+          #         The Space page itself loads fine for humans.
+          #   403,429 — Cloudflare / Medium / LinkedIn anti-scraper walls.
+          #         "I see you, I just won't serve you" — alive for humans.
+          #   503 — Hugging Face Spaces that auto-sleep when idle. Clicking
+          #         the link wakes them; lychee's HEAD request gets the
+          #         sleeping shell, not the real Space.
+          #   999 — LinkedIn's custom "no scrapers" code, same as 403.
           args: >-
             --cache
             --max-cache-age 7d
             --no-progress
             --base https://cowton0627.github.io
-            --accept 200,204,206,301,302,403,429,999
+            --accept 200,204,206,301,302,401,403,429,503,999
             --exclude-path node_modules
             --exclude-path public
             --exclude-path _upstream-docs
