@@ -38,6 +38,8 @@ npm run format             # prettier --write（已透過 .prettierignore 排除
 npm run docs               # 在本機跑 Quartz 官方文件（_upstream-docs/）
 ```
 
+> `check` / `check:links` 只檢查 `[[wikilink]]` 內部連結。**外部 URL** 由 weekly CI cron（lychee）負責，本機不提供 npm script —— 詳見後面「連結完整性檢查」段。
+
 ### 想要 push 前自動檢查 wikilink？
 
 加一個 pre-commit hook（**不會進 git**，每台電腦各自設定一次）。下面這個版本在 **CLI、Sourcetree、GitHub Desktop、GitKraken、VS Code 內建 git** 都會擋住壞 wikilink：
@@ -78,10 +80,12 @@ chmod +x .git/hooks/pre-commit
 KnowledgeBase/
 ├── content/              ← 公開內容（Quartz 從這裡 build）
 │   ├── index.md          ← 首頁
-│   └── 自媒體/           ← 唯一目前在用的頂層分類
-│       ├── 工具/
-│       ├── 器材/
-│       └── 平台/
+│   ├── 自媒體/           ← 自媒體創作：工具、器材、平台
+│   │   ├── 工具/
+│   │   ├── 器材/
+│   │   └── 平台/
+│   ├── 程式/             ← 程式相關筆記
+│   └── 讀書會/           ← 讀書會討論紀錄
 ├── sources/              ← 原始資料（HackMD / Medium 匯出，本機用、不進 git）
 ├── drafts/               ← 未整理草稿（本機用、不進 git）
 ├── quartz/               ← Quartz 框架原始碼（vendored）
@@ -273,6 +277,26 @@ checkout → npm install → check wikilinks → npx quartz build
 通常 1–2 分鐘完成。失敗看 [Actions 頁面](https://github.com/cowton0627/cowton0627.github.io/actions)。
 
 > 本 repo 同時掛 GitHub Pages（production）+ Cloudflare Pages（branch preview）。任何 branch push 上去，CF 會自動產生 `https://<branch>.<project>.pages.dev`。設定流程與踩坑見 [DECISIONS.md#D-008](./DECISIONS.md) 與 [Cloudflare Pages 設定 Branch Preview](./content/程式/Cloudflare%20Pages%20設定%20Branch%20Preview.md)。
+
+---
+
+## 連結完整性檢查
+
+兩條獨立 CI 各自負責一類連結：
+
+| Workflow | 觸發 | 檢查範圍 | 失敗時 |
+|---|---|---|---|
+| `deploy.yml`（`check-wikilinks` step） | 每次 push / PR | `[[wikilink]]` 是否解析到存在的 `.md` | 擋 build → main 不 deploy |
+| `link-check.yml`（lychee） | 週一 03:00 UTC + 手動觸發 | `content/**/*.md` 中所有 `http(s)://` 外部連結 | 自動在 Issues 開一張 `link-check` label 的 issue，不擋 deploy |
+
+分工邏輯：
+
+- **wikilink** 是內部資料完整性 — 壞了會讓站內導航失效，所以擋 build。
+- **外部連結會自然腐爛**（YouTube 下架、改網址、買域名），跟 commit 無關，每 push 跑反而會打到外站。weekly 跑搭 lychee cache 既輕量、又能在問題擴大前抓到。
+
+lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Space idle sleep）；保留 `401` 為真壞訊號（被刪除的 HF Space 會以 401 出現）。完整參數與註解見 `.github/workflows/link-check.yml`。
+
+手動觸發：[Actions → External link check → Run workflow](https://github.com/cowton0627/cowton0627.github.io/actions/workflows/link-check.yml)。
 
 ---
 
