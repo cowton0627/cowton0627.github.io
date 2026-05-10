@@ -56,7 +56,7 @@ Suno AI 可以直接透過「歌曲描述」產生音樂或歌曲，不過如果
 
 在進入 Lyrics 的標籤設定之前，可以先了解音樂風格的作用。
 
-進到 [music style 官方文件](https://www.suno.wiki/faq/style-and-lyrics/styles-and-genres/) 後，可以看到裡面列出了各種音樂風格。不過官方文件也有說明，不可能涵蓋世界上所有音樂類型。
+進到 [music style 文件](https://sunoaiwiki.com/resources/2024-05-03-list-of-music-genres-and-styles/) 後，可以看到裡面列出了各種音樂風格。不過官方文件也有說明，不可能涵蓋世界上所有音樂類型。
 
 ![image](https://hackmd.io/_uploads/H1o_lJ7Myg.png)
 
@@ -324,7 +324,7 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 
 接著是 Instrumental Tags，也就是用來調整樂器的 Meta Tags。
 
-可以參照：[Suno AI Docs - Instrumental Tags](https://www.suno.wiki/faq/metatags/instrumental-tags/)
+可以參照：[Suno AI Wiki - List of Metatags](https://sunoaiwiki.com/resources/2024-05-13-list-of-metatags/)
 
 在樂器標籤裡面，有些不只是透過描述來調整樂器，還可以讓樂器產生節奏感。
 
@@ -360,7 +360,7 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 
 #### Voice Tags
 
-剩下的可以參照：[Suno AI Docs - Voice Tags](https://www.suno.wiki/faq/metatags/voice-tags/)
+剩下的可以參照：[Suno AI Wiki - How to Get Specific Vocal Styles](https://sunoaiwiki.com/tips/2024-05-07-how-to-get-specific-vocal-styles-in-suno-ai/)
 
 Voice Tags 可以直接提示模型換掉預設的人聲，例如：
 
@@ -379,7 +379,7 @@ Voice Tags 可以直接提示模型換掉預設的人聲，例如：
 >
 > 如果不指定，人聲可能會受到模型預設風格影響。
 
-最後，如果想知道更多 Suno AI 的技巧，可以參照 [Suno Wiki](https://www.suno.wiki/)。
+最後，如果想知道更多 Suno AI 的技巧，可以參照 [Suno AI Wiki](https://sunoaiwiki.com/)。
 
 ---
 
