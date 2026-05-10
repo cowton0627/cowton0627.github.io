@@ -1,0 +1,76 @@
+name: External link check
+
+# Scope
+# -----
+# Catches external URLs in content/**/*.md that have rotted (404, DNS gone,
+# redirected to spam, etc.). Wikilinks and internal markdown links are
+# already covered by scripts/check-wikilinks.mjs in deploy.yml — this is
+# only about the *external* web.
+#
+# Why scheduled, not per-push
+# ---------------------------
+# External link health drifts independently of commits — a link can rot
+# without anyone touching the repo. Running this on every push would also
+# hammer third-party sites and risk getting throttled (429). Weekly catches
+# rot quickly enough; manual dispatch is there when we want an on-demand
+# sweep.
+on:
+  schedule:
+    # Mondays 03:00 UTC = 11:00 Asia/Taipei. Issue lands at the start of
+    # the work week so it doesn't get buried over the weekend.
+    - cron: "0 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # lychee dedupes + caches successful URLs across runs. Without this,
+      # every weekly run re-hits ~400 URLs from scratch.
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Run lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # --accept 403,429: many sites bot-block scrapers (Cloudflare,
+          # Medium, LinkedIn). These codes mean "I see you, I just won't
+          # serve you" — the link is alive for humans, so don't flag it.
+          # 999 is LinkedIn's custom "no scrapers" code, same idea.
+          args: >-
+            --cache
+            --max-cache-age 7d
+            --no-progress
+            --accept 200,204,206,301,302,403,429,999
+            --exclude-path node_modules
+            --exclude-path public
+            --exclude-path _upstream-docs
+            'content/**/*.md'
+          # Don't fail the workflow on broken links — we want the issue
+          # creation step below to run instead. The job is "green" as long
+          # as lychee itself ran successfully.
+          fail: false
+
+      # Opens a fresh issue per failing run. peter-evans/create-issue-from-file
+      # doesn't dedupe automatically — if rot persists across weeks, issues
+      # will accumulate. Acceptable while we see how often it fires; swap
+      # to JasonEtco/create-an-issue with update_existing if it gets noisy.
+      - name: Create issue from report
+        if: env.lychee_exit_code != 0
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Link check report"
+          content-filepath: ./lychee/out.md
+          labels: link-check
