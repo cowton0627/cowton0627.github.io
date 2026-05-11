@@ -7,6 +7,50 @@
 
 ---
 
+## D-011 · git history 統一作者為 GitHub noreply email（隱私清理）
+
+- **日期**：2026-05-11
+- **背景**：原本本機 `git config user.email` 是公司身分 `[redacted]`，77 個 commits 的 author + committer 全部用該 email。此 repo 是 public GitHub Pages 站，公司 email 隨 `git log` 完全公開
+- **選項考慮過**：
+  - 不管它 — 接受公司 email 永遠暴露
+  - 加 `.mailmap` 蓋顯示 — cosmetic only，GitHub UI 不看 `.mailmap`，commit object 仍可被挖
+  - `git filter-repo` 改寫 + force push — 徹底但破壞性，所有 SHA 變、若有其他 clone 會破
+- **決定**：用 `git filter-repo --mailmap` 改寫所有 77 個 commits 的 author/committer 為 `cowton0627 <83654992+cowton0627@users.noreply.github.com>`（GitHub 新版 noreply email，含 numeric ID）；`git push --force-with-lease` 到 main；順手刪掉 GitHub 上廢棄的 `theme/modern-minimalist` branch；本機 `git config --global user.email` 也改成新版 noreply
+- **理由**：
+  - public repo 不應暴露公司 email
+  - 新版 noreply 含不可變 ID，將來改 GitHub username 也照樣 attribute
+  - 沒有 GPG signing → 不會被 strip 簽章
+  - 已確認沒有其他 clone，副作用範圍可控
+- **mailmap 規則**（供未來再做時參考）：
+
+  ```
+  cowton0627 <83654992+cowton0627@users.noreply.github.com> <[redacted]>
+  ```
+
+- **未解**：
+  - GitHub 端原舊 commit objects 在沒有 ref 指向後會被 GC，時間不固定（幾天到幾週）；若有外部 fork / 第三方 cache 抓過舊 SHA，理論上仍能找到。對個人 repo 不必要聯絡 GitHub support 強制清
+  - 日後在新 repo 沒 `git config --local` 覆蓋的話會繼承 global 的 noreply；但借電腦 / 不同帳號 commit 仍可能用到其他身分 → 新 repo 第一個 commit 前先 `git config user.email` 確認
+
+---
+
+## D-010 · 連結檢查雙 CI 分工（wikilink 擋 build + 外部連結 weekly cron）
+
+- **日期**：2026-05-10
+- **背景**：原本 `deploy.yml` 已有 `scripts/check-wikilinks.mjs` 在每 push 跑、擋掉壞的 `[[wikilink]]`；但**外部 URL**（`https://…`）完全沒被檢查，文章引用的網站關站 / 改網址 / 404 沒人發現
+- **選項考慮過**：
+  - 在 `deploy.yml` 加 lychee step、每 push 跑外部連結 — 簡單，但每 push 都打外部站，可能被 429，build 變慢
+  - 排程 weekly cron + lychee cache + 失敗自動開 issue — 與 commit 解耦、輕量
+  - 不做，靠手動偶爾檢查 — 容易遺忘
+- **決定**：新增 `.github/workflows/link-check.yml`，週一 03:00 UTC 跑 lychee + `workflow_dispatch` 手動觸發；失敗用 `peter-evans/create-issue-from-file@v5` 開 issue（label `link-check`）；wikilink 仍維持每 push 由 `deploy.yml` 跑、擋 build
+- **理由**：
+  - **wikilink 是內部資料完整性** — 壞了讓站內導航失效，必須擋 build
+  - **外部連結會自然腐爛** — 跟 commit 無關，每 push 跑反而打外站；weekly + cache 是平衡點
+  - lychee `--accept` 放行 `403/429/503/999`（擋 bot 或 HF Space idle sleep），**故意保留 401** 為真壞訊號（被刪除的 HF Space 會以 401 出現）。曾踩過誤把 401 加進 accept、放過已被 stabilityai 下架的 SD 2.1 demo，這個教訓另寫進 memory
+- **未解**：
+  - `peter-evans/create-issue-from-file` 沒自動 dedupe，連續多週仍有壞連結會累積 issue。若太吵可換 `JasonEtco/create-an-issue` + `update_existing: true`
+
+---
+
 ## D-009 · 文章路徑保留純中文（不切英文 slug）
 
 - **日期**：2026-05-08
