@@ -5,6 +5,10 @@ quartz/.quartz-cache/
 **/.obsidian/
 .DS_Store
 
+# Obsidian 未命名暫存：新建檔的預設名是 Untitled / Untitled 1 / Untitled 2 …
+# 命名後會改名，自然脫離這個 pattern。
+Untitled*
+
 # === Local-only working folders ===
 # Keep folder structure (.gitkeep + README.md) but ignore actual content.
 
