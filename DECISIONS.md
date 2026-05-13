@@ -7,6 +7,44 @@
 
 ---
 
+## D-012 · git history 清除 Claude 協作署名（commit message trailer）
+
+- **日期**：2026-05-13
+- **背景**：全域 `~/.claude/CLAUDE.md` 已規定 commit message 不要加 `Co-Authored-By: Claude ...` 與 `🤖 Generated with [Claude Code]` 行，但早期 session 那條規則還沒加，留下 53 個 commits 有 `Co-Authored-By: Claude` trailer；另有 2 個從上游 jackyzha0/quartz merge 進來的 commits 帶 `🤖 Generated with [Claude Code]`
+- **選項考慮過**：
+  - 不管它 — 接受 Claude trailer 永遠留在 public history
+  - 只在新 commit 不加、舊的不動 — 規則生效，但 `git log` 還是看得到歷史協作痕跡
+  - `git filter-repo --message-callback` 改寫 commit message body、移除指定 trailer 行 — 徹底，但所有 SHA 再變一次（D-011 後第二次）
+- **決定**：用 `git filter-repo --refs main --message-callback` 跑 Python regex 移除三種 pattern（`Co-Authored-By: Claude*` / `Co-authored-by: Claude*` / `🤖 Generated with [Claude Code]*`），collapse 結尾多餘空行；`git push --force-with-lease origin main`；連上游 2 個 `#2231` CJK tokenization commits 的 🤖 行也一起清掉（範圍包含整個 main reachable history）
+- **理由**：
+  - public repo 把 Claude 協作行留在 commit message 不符合個人偏好（D-011 同邏輯：歷史看得到的東西要乾淨）
+  - 只動 commit message body，不動 author/committer（D-011 已處理那層）
+  - 單人 repo + 無其他 clone，破壞性 force-push 範圍可控
+- **作法**（供未來再做時參考）：
+
+  ```bash
+  # 1. 安全網
+  git tag backup-before-claude-strip main
+
+  # 2. Python callback (/tmp/strip_claude.py)
+  #    pattern: ^(Co-Authored-By: Claude|Co-authored-by: Claude|🤖 Generated with \[Claude Code\])
+  #    刪掉匹配行 + collapse 結尾連續空行
+
+  # 3. filter-repo（previous-run 提示要餵 Y）
+  yes Y | git filter-repo --refs main \
+    --message-callback "$(cat /tmp/strip_claude.py)" --force
+
+  # 4. push & 清 backup tag
+  git push --force-with-lease origin main
+  git tag -d backup-before-claude-strip
+  ```
+
+- **未解**：
+  - 同 D-011：舊 commit objects 在 GitHub 端要等 GC，外部 fork / cache 抓過舊 SHA 仍可能找到舊內容
+  - 上游 quartz `#2231` 兩個 commits 在我們 fork 上 SHA 已偏離 upstream，未來 `git pull upstream` 可能再帶回原版 SHA 造成歷史重複；可接受（D-011 已造成同樣狀況）
+
+---
+
 ## D-011 · git history 統一作者為 GitHub noreply email（隱私清理）
 
 - **日期**：2026-05-11
