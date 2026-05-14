@@ -7,6 +7,40 @@
 
 ---
 
+## D-013 · KnowledgeBase → HackMD 單向同步（API + hash-based skip）
+
+- **日期**：2026-05-14
+- **背景**：`content/` 是 Obsidian vault + Quartz source，已 deploy 到 GitHub Pages。想把同樣內容鏡到 HackMD 多一個閱讀通路（行動裝置易讀、有留言系統）；不希望兩邊各自維護
+- **選項考慮過**：
+  - 不做，只在 GitHub Pages
+  - 方向：**GitHub → HackMD** vs HackMD → GitHub vs 雙向
+  - 機制：**HackMD API + GitHub Actions** vs HackMD 內建 GitHub Sync（Book 形態）vs 本地手動 CLI
+  - 部署位置：**個人 workspace** vs Team
+- **決定**：
+  - 單向 GitHub → HackMD（repo 永遠是 source of truth）
+  - 自建 `scripts/sync-hackmd.mjs` 走 HackMD API v1
+  - GitHub Actions 自動觸發（push to main, paths: `content/**/*.md`）
+  - 部署到個人 workspace、`readPermission: guest`
+  - mapping 用 `path → {id, hash}` 存 `.hackmd-sync/mapping.json`，CI 自動 commit 回 repo
+  - Wikilink 轉成 Quartz public site 連結（spaces → `-`、Unicode 保留）
+- **理由**：
+  - 雙向衝突解決複雜，且文章主要在 Obsidian 寫、HackMD 只是鏡像
+  - HackMD 內建 GitHub Sync 是 Book 形態、不支援我們的目錄結構，且部分功能付費
+  - hash-based skip 比每次都 PATCH 省 API 配額（25 篇沒改 → 0 API calls）
+  - 個人 workspace 而非 Team：HackMD API **不支援把 note 從個人移到 team**（`UpdateNoteOptions` 沒 `teamPath` 欄位），未來真要搬團隊得整批重建（新 ID、新 URL），現在不付這個成本
+- **踩雷紀錄**（供未來再做時參考）：
+  - 建立 note 的 endpoint 是 `POST /notes`，**不是** `POST /me/notes`。官方 Swagger 沒列、要看 `hackmdio/api-client` 的 Node client source 才確定：
+    - `createNote`: `POST notes`
+    - `updateNote`: `PATCH notes/{noteId}`
+    - `createTeamNote`: `POST teams/{teamPath}/notes`
+  - `parentFolderId` 可在 create / update 時設定，未來要在 HackMD 用資料夾分類只要改 script、不必動 mapping
+- **未解**：
+  - 檔案在 repo 刪掉、HackMD 端不自動 delete（mapping 保留 orphan）。要加 `--prune` 旗標得評估誤刪風險
+  - 改檔名 = 新建 note + 舊 note 變孤兒；想保留歷史得手動改 mapping.json 的 key
+  - Quartz callout `> [!note]`、image embed `![[...]]` 在 HackMD 端不 render（沒同步轉換邏輯）
+
+---
+
 ## D-012 · git history 清除 Claude 協作署名（commit message trailer）
 
 - **日期**：2026-05-13

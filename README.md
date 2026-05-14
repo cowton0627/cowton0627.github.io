@@ -300,6 +300,46 @@ lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Sp
 
 ---
 
+## HackMD 同步
+
+`content/` 所有 `.md` 自動鏡像到 HackMD 個人 workspace 對應 note，作為第二閱讀通路。**repo 永遠是 source of truth**，HackMD 端 `readPermission: guest`、不開放編輯。
+
+### 觸發
+
+`.github/workflows/sync-hackmd.yml`：
+
+| 觸發 | 行為 |
+|---|---|
+| push 到 `main` 且改了 `content/**/*.md`、`scripts/sync-hackmd.mjs` 或 sync workflow | 自動同步 |
+| 手動 `workflow_dispatch` | 強制同步 |
+| 其他（push 別的 branch、PR、改 README 等） | 不觸發 |
+
+`scripts/sync-hackmd.mjs` 對每個 `.md` 算內容 hash，跟 `.hackmd-sync/mapping.json` 對照——新檔 POST、變動 PATCH、無變動 skip。完成後 mapping.json 由 CI 自動 commit 回 repo（`[skip ci]`）。
+
+### Wikilink 處理
+
+`[[X]]` 轉成 Quartz public site 連結（`https://cowton0627.github.io/...`，spaces → `-`、Unicode 保留）；無法解析的 wikilink 原樣留在 HackMD（CI 會 warn 但不擋）。
+
+### 邊角案例
+
+| 動作 | HackMD 端 |
+|---|---|
+| 新增 `.md` | 自動建立新 note |
+| 改內容 | 自動 PATCH 對應 note |
+| **刪 `.md`** | ⚠️ **不會自動刪** HackMD 那篇，要手動到 HackMD 砍 |
+| **改檔名** | ⚠️ 被當新檔建新 note，舊的變孤兒；想保留歷史要手動改 mapping 的 key |
+| 圖片內嵌 `![[xxx.png]]` | ⚠️ HackMD 不會 render，顯示原始文字 |
+
+### Token rotate / revoke
+
+1. 到 https://hackmd.io/settings/api 把舊 token revoke
+2. 產新 token、更新 1Password
+3. 到 repo Settings → Secrets and variables → Actions → 更新 `HACKMD_API_TOKEN`
+
+完整架構選擇與 API 踩雷見 [DECISIONS.md#D-013](./DECISIONS.md)。
+
+---
+
 ## License
 
 - 內容（`content/` 下）— © 春麗，保留所有權利
