@@ -120,6 +120,7 @@
   - lychee `--accept` 放行 `403/429/503/999`（擋 bot 或 HF Space idle sleep），**故意保留 401** 為真壞訊號（被刪除的 HF Space 會以 401 出現）。曾踩過誤把 401 加進 accept、放過已被 stabilityai 下架的 SD 2.1 demo，這個教訓另寫進 memory
 - **未解**：
   - `peter-evans/create-issue-from-file` 沒自動 dedupe，連續多週仍有壞連結會累積 issue。若太吵可換 `JasonEtco/create-an-issue` + `update_existing: true`
+  - cron workflow 受 GitHub「repo 60 天無 activity 自動停用排程」政策影響（2026-07-14 首次觸發預警，已用 `gh workflow enable` 續命）。repo 長期不動時 weekly 檢查會默默停掉，處理方式見 README「連結完整性檢查」段
 
 ---
 

@@ -298,6 +298,8 @@ lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Sp
 
 手動觸發：[Actions → External link check → Run workflow](https://github.com/cowton0627/cowton0627.github.io/actions/workflows/link-check.yml)。
 
+> **注意**：GitHub 會在 repo **60 天無任何 activity** 後自動停用「排程觸發」的 workflow（只影響 cron 的 `link-check.yml`；push 觸發的 `deploy.yml` / `sync-hackmd.yml` 不受影響）。滿 60 天前會先收到預警信。處理方式任一：收到信時點「Keep this workflow enabled」、跑 `gh workflow enable link-check.yml -R cowton0627/cowton0627.github.io`（被停用後也可用同指令復活）、或任意 push 一個 commit 重置計時。2026-07-14 曾發生一次，已用 gh 指令續命。
+
 ---
 
 ## HackMD 同步
