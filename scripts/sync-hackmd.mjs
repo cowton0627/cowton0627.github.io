@@ -119,7 +119,12 @@ async function api(method, path, body) {
   if (!r.ok) {
     throw new Error(`${method} ${path} → ${r.status} ${await r.text()}`);
   }
-  return r.status === 204 ? null : await r.json();
+  // Not every success comes back with a body: POST /notes returns the note
+  // JSON, but PATCH /notes/:id answers 202 with an EMPTY body. Calling
+  // r.json() on that throws "Unexpected end of JSON input", so read as text
+  // and only parse when there is something to parse.
+  const text = await r.text();
+  return text ? JSON.parse(text) : null;
 }
 
 const mapping = await readFile(MAPPING_PATH, "utf8")
