@@ -16,6 +16,7 @@ sources/  →  drafts/  →  content/
 **內容不進 git**（見專案根 `.gitignore`）。只有 `README.md` 和 `.gitkeep` 會被追蹤。
 
 理由：
+
 - repo 是公開的（GitHub Pages 來源），未完成的草稿不該被外人看到
 - 草稿來來去去，commit 歷史會充滿無意義的 WIP
 

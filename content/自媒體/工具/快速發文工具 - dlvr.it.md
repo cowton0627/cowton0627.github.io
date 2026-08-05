@@ -57,7 +57,7 @@ https://app.dlvrit.com/
 
 ![FB設定](https://hackmd.io/_uploads/ByAeK6bWJx.png)
 
->請選擇「你要經營的粉絲專頁」，再點擊 Connect
+> 請選擇「你要經營的粉絲專頁」，再點擊 Connect
 
 ---
 
@@ -110,8 +110,7 @@ https://app.dlvrit.com/
 
 ![選平台](https://hackmd.io/_uploads/HyX-4xMW1e.png)
 
->選擇你剛剛已連結的社群帳號
-
+> 選擇你剛剛已連結的社群帳號
 
 ---
 
@@ -119,33 +118,34 @@ https://app.dlvrit.com/
 
 ![字數限制](https://hackmd.io/_uploads/rk0mNxzbyx.png)
 
->每個平台都有不同限制，例如：
->- X（Twitter）：280 字元（含標點）
->- IG：圖片為主
->- Threads：偏短內容
->  
->👉 請依提示調整內容
+> 每個平台都有不同限制，例如：
+>
+> - X（Twitter）：280 字元（含標點）
+> - IG：圖片為主
+> - Threads：偏短內容
+>
+> 👉 請依提示調整內容
 
 ---
 
 ### ⚠️ 特別注意：X（Twitter）預覽問題
 
->如果你發「網站連結」到 X：
+> 如果你發「網站連結」到 X：
 >
->👉 該網站必須支援 **Twitter Card**
+> 👉 該網站必須支援 **Twitter Card**
 >
->否則會出現：
+> 否則會出現：
 >
->- 沒有預覽圖
->- 只有純連結
+> - 沒有預覽圖
+> - 只有純連結
 >
->📌 補充：
+> 📌 補充：
 >
->- X 使用的是 `twitter:card`
->- Medium 不支援 → 無法顯示內文圖片
+> - X 使用的是 `twitter:card`
+> - Medium 不支援 → 無法顯示內文圖片
 >
->👉 參考說明：
->[網頁的結構化資料，JSON-LD、RDFa、Microdata](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E6%95%99%E5%AE%A4/%E7%B6%B2%E9%A0%81%E7%9A%84%E7%B5%90%E6%A7%8B%E5%8C%96%E8%B3%87%E6%96%99-json-ld-rdfa-microdata-2882b4109ad0#800f)
+> 👉 參考說明：
+> [網頁的結構化資料，JSON-LD、RDFa、Microdata](https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E6%95%99%E5%AE%A4/%E7%B6%B2%E9%A0%81%E7%9A%84%E7%B5%90%E6%A7%8B%E5%8C%96%E8%B3%87%E6%96%99-json-ld-rdfa-microdata-2882b4109ad0#800f)
 
 ---
 
@@ -163,14 +163,14 @@ https://app.dlvrit.com/
 
 ![結果](https://hackmd.io/_uploads/Syr5yGM-1x.png)
 
->請逐一檢查每個平台是否成功發佈
+> 請逐一檢查每個平台是否成功發佈
 >
->⚠️ 注意：
+> ⚠️ 注意：
 >
->- X（Twitter）可能無法正常發文
->- 原因：可能需要 Premium+
+> - X（Twitter）可能無法正常發文
+> - 原因：可能需要 Premium+
 >
->👉 建議：先測其他平台（FB / Threads / IG）
+> 👉 建議：先測其他平台（FB / Threads / IG）
 
 ---
 

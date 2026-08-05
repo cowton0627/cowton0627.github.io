@@ -35,10 +35,10 @@ CF 在 2024 把 Workers 跟 Pages 兩個產品的入口合併成 **Workers & Pag
 
 ### 證據 1：deployment URL 結尾
 
-| 結尾 | 產品類型 | 對 SSG 的需求 |
-|------|---------|--------------|
-| `<name>.workers.dev` | Workers | ❌ 錯了 |
-| `<name>.pages.dev` | Pages | ✅ 對了 |
+| 結尾                 | 產品類型 | 對 SSG 的需求 |
+| -------------------- | -------- | ------------- |
+| `<name>.workers.dev` | Workers  | ❌ 錯了       |
+| `<name>.pages.dev`   | Pages    | ✅ 對了       |
 
 > [!warning] 唯一可信的判斷依據
 > 不要看 dashboard 標題寫 "Workers & Pages" 就以為什麼都行 — 看實際 deploy 出來的網址結尾。
@@ -83,21 +83,21 @@ https://dash.cloudflare.com/?to=/:account/workers-and-pages/create/pages
 2. 選 repo
 3. **Set up builds and deployments** 頁面填：
 
-| 欄位 | 值（以 Quartz 4 為例） |
-|------|---------------------|
-| Project name | `knowledgebase`（這個會變成 `<name>.pages.dev`） |
-| Production branch | `main` |
-| Framework preset | `None` |
-| Build command | `npx quartz build` |
-| Build output directory | `public` |
+| 欄位                   | 值（以 Quartz 4 為例）                           |
+| ---------------------- | ------------------------------------------------ |
+| Project name           | `knowledgebase`（這個會變成 `<name>.pages.dev`） |
+| Production branch      | `main`                                           |
+| Framework preset       | `None`                                           |
+| Build command          | `npx quartz build`                               |
+| Build output directory | `public`                                         |
 
 ### Step 4 · 加 Environment variable
 
 展開 **Environment variables**，加一筆：
 
-| Name | Value |
-|------|-------|
-| `NODE_VERSION` | `22` |
+| Name           | Value |
+| -------------- | ----- |
+| `NODE_VERSION` | `22`  |
 
 CF build 預設 Node 版本可能跟你本地不同。指定 `NODE_VERSION` 確保兩邊一致。Quartz 4 要求 Node 22+，沒指定的話 CF 用舊版 Node 會 build 失敗。
 
@@ -156,13 +156,13 @@ Preview:    https://<branch>.<project>.pages.dev
 
 老實說 — 對個人單人專案，CF Pages 不一定值得這 30 分鐘。
 
-| 場景 | 用什麼夠 |
-|------|---------|
-| 自己改、自己看 | 本機 `quartz build --serve` |
-| 自己改、想在手機 / 平板看 | `ngrok http 8080` |
-| 一次性丟連結給朋友 review | `ngrok` |
-| 多人協作、每個 PR 要視覺 review | **CF Pages** |
-| 想抓「本機 OK、production 壞」的 bug | **CF Pages** |
+| 場景                                 | 用什麼夠                    |
+| ------------------------------------ | --------------------------- |
+| 自己改、自己看                       | 本機 `quartz build --serve` |
+| 自己改、想在手機 / 平板看            | `ngrok http 8080`           |
+| 一次性丟連結給朋友 review            | `ngrok`                     |
+| 多人協作、每個 PR 要視覺 review      | **CF Pages**                |
+| 想抓「本機 OK、production 壞」的 bug | **CF Pages**                |
 
 CF Pages 真正發揮價值是有第三人 review、或想在 production-like 環境驗 bug。如果是單人花園，本機其實夠。
 

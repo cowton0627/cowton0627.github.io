@@ -78,19 +78,19 @@ $ aws iot list-certificates --query 'certificates[?status==`PENDING_ACTIVATION`]
 拆解這條查詢：
 
 - `certificates` —— 進入頂層的 `certificates` 陣列
-- `[?status==\`PENDING_ACTIVATION\`]` —— 過濾條件：只留下 `status` 等於 `PENDING_ACTIVATION` 的元素
+- `[?status==\`PENDING_ACTIVATION\`]`—— 過濾條件：只留下`status`等於`PENDING_ACTIVATION` 的元素
 - 反引號 `` ` `` 用來包裹 JMESPath 字面量字串（**不是** shell 的反引號）
 
 執行結果：
 
 ```json
 [
-    {
-        "certificateArn": "arn:aws:iot:ap-southeast-2:AccountID:cert/certificateID",
-        "certificateId": "certificateID",
-        "status": "PENDING_ACTIVATION",
-        "creationDate": "2024-02-21T15:40:27.343000+08:00"
-    }
+  {
+    "certificateArn": "arn:aws:iot:ap-southeast-2:AccountID:cert/certificateID",
+    "certificateId": "certificateID",
+    "status": "PENDING_ACTIVATION",
+    "creationDate": "2024-02-21T15:40:27.343000+08:00"
+  }
 ]
 ```
 
@@ -98,19 +98,19 @@ $ aws iot list-certificates --query 'certificates[?status==`PENDING_ACTIVATION`]
 
 ## 三、常用語法速查
 
-| 語法 | 用途 | 範例 |
-|---|---|---|
-| `a.b.c` | 嵌套欄位存取 | `metadata.name` |
-| `[0]` | 陣列索引（從 0 起） | `users[0]` |
-| `[-1]` | 倒數第一個 | `users[-1]` |
-| `[0:5]` | 切片 | `users[0:5]` |
-| `[*]` | 攤平整個陣列 | `users[*].email` |
-| `[?expr]` | 條件過濾 | `users[?age > \`18\`]` |
-| `[].{...}` | 投影：重組欄位 | `users[].{n: name, e: email}` |
-| `\|` | 管線（前段結果交給後段） | `users[?active] \| [0]` |
-| `length(@)` | 計數 | `length(users)` |
-| `sort_by(@, &k)` | 依某欄位排序 | `sort_by(users, &age)` |
-| `keys(@)` / `values(@)` | 取所有 key / value | `keys(metadata)` |
+| 語法                    | 用途                     | 範例                          |
+| ----------------------- | ------------------------ | ----------------------------- |
+| `a.b.c`                 | 嵌套欄位存取             | `metadata.name`               |
+| `[0]`                   | 陣列索引（從 0 起）      | `users[0]`                    |
+| `[-1]`                  | 倒數第一個               | `users[-1]`                   |
+| `[0:5]`                 | 切片                     | `users[0:5]`                  |
+| `[*]`                   | 攤平整個陣列             | `users[*].email`              |
+| `[?expr]`               | 條件過濾                 | `users[?age > \`18\`]`        |
+| `[].{...}`              | 投影：重組欄位           | `users[].{n: name, e: email}` |
+| `\|`                    | 管線（前段結果交給後段） | `users[?active] \| [0]`       |
+| `length(@)`             | 計數                     | `length(users)`               |
+| `sort_by(@, &k)`        | 依某欄位排序             | `sort_by(users, &age)`        |
+| `keys(@)` / `values(@)` | 取所有 key / value       | `keys(metadata)`              |
 
 > [!warning] Shell 的反引號陷阱
 > 反引號 `` ` `` 在 JMESPath 裡用來包裹**字面量**（字串、數字）。在 shell 裡記得用**單引號** `'…'` 把整個 JMESPath 表達式包起來，避免反引號被 shell 當成 command substitution。

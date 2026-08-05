@@ -15,6 +15,7 @@ Suno AI 可以直接透過「歌曲描述」產生音樂或歌曲，不過如果
 如果想要更精準地控制歌曲內容、段落、風格與人聲，就需要使用 **Custom** 模式。
 
 ---
+
 #### Instrumental
 
 **Instrumental** 這個 Switch 是用來切換是否只產生樂器聲。
@@ -276,14 +277,14 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 [End]
 ```
 
-| 標籤 | 說明 |
-| --- | --- |
-| `[Intro]` | 開場 |
-| `[Hook]` | 歌曲中最有記憶點的句子或段落 |
-| `[Break]` | 停頓、節奏中斷或轉換 |
-| `[Interlude]` | 間奏 |
-| `[Outro]` | 結尾段落 |
-| `[End]` | 指定歌曲結束 |
+| 標籤          | 說明                         |
+| ------------- | ---------------------------- |
+| `[Intro]`     | 開場                         |
+| `[Hook]`      | 歌曲中最有記憶點的句子或段落 |
+| `[Break]`     | 停頓、節奏中斷或轉換         |
+| `[Interlude]` | 間奏                         |
+| `[Outro]`     | 結尾段落                     |
+| `[End]`       | 指定歌曲結束                 |
 
 `[Hook]` 是一首歌的代表性印記。
 
@@ -348,13 +349,13 @@ Type 裡面則會出現像 **Composer** 這類比較偏功能或類別式的項�
 [Fingerstyle Guitar Solo]
 ```
 
-| 標籤 | 說明 |
-| --- | --- |
-| `[Break]` | 停頓處 |
-| `[Instrumental Interlude]` | 樂器間奏 |
-| `[Melodic Bass]` | 有旋律的貝斯 |
-| `[Percussion Break]` | 擊打的停頓 |
-| `[Fingerstyle Guitar Solo]` | 吉他的指技 |
+| 標籤                        | 說明         |
+| --------------------------- | ------------ |
+| `[Break]`                   | 停頓處       |
+| `[Instrumental Interlude]`  | 樂器間奏     |
+| `[Melodic Bass]`            | 有旋律的貝斯 |
+| `[Percussion Break]`        | 擊打的停頓   |
+| `[Fingerstyle Guitar Solo]` | 吉他的指技   |
 
 ---
 

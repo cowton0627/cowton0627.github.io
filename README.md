@@ -105,10 +105,10 @@ KnowledgeBase/
 
 ### 兩層 tag
 
-| 層級 | 用途 | 例子 |
-|---|---|---|
-| **領域 (Domain)** | 對應頂層資料夾的概念，每篇至少 1 個 | `自媒體`、`影視`、`部落格`、`開箱`、`程式`、`生活` |
-| **主題 (Topic)** | 細粒度題材 | `AI`、`Podcast`、`RSS`、`音樂`、`器材`、`社群`、`工具`、`自動化` |
+| 層級              | 用途                                | 例子                                                             |
+| ----------------- | ----------------------------------- | ---------------------------------------------------------------- |
+| **領域 (Domain)** | 對應頂層資料夾的概念，每篇至少 1 個 | `自媒體`、`影視`、`部落格`、`開箱`、`程式`、`生活`               |
+| **主題 (Topic)**  | 細粒度題材                          | `AI`、`Podcast`、`RSS`、`音樂`、`器材`、`社群`、`工具`、`自動化` |
 
 ### 規則
 
@@ -140,10 +140,10 @@ tags: [自媒體, Podcast, 平台]
 2024年8月15日 · 更新於 2026年5月05日 · 閱讀時間約 14 分鐘
 ```
 
-| 欄位 | 來源 | 行為 |
-|---|---|---|
-| **原始發佈日**（前面那個） | frontmatter `created:` | 沒設就 fallback 到 git 第一次 commit 的時間 |
-| **最後更新日**（更新於） | git 最後一次 commit 此檔的時間 | 自動，不需要手動維護 |
+| 欄位                       | 來源                           | 行為                                        |
+| -------------------------- | ------------------------------ | ------------------------------------------- |
+| **原始發佈日**（前面那個） | frontmatter `created:`         | 沒設就 fallback 到 git 第一次 commit 的時間 |
+| **最後更新日**（更新於）   | git 最後一次 commit 此檔的時間 | 自動，不需要手動維護                        |
 
 兩個日期落在同一天時，**「更新於」段會自動隱藏**（剛發佈的文章只顯示一個日期）。
 
@@ -153,14 +153,14 @@ tags: [自媒體, Podcast, 平台]
 ---
 title: 上架 Podcast
 tags: [自媒體, Podcast, 平台]
-created: 2024-08-15        # ← YYYY-MM-DD，文章在原平台首次發佈那天
+created: 2024-08-15 # ← YYYY-MM-DD，文章在原平台首次發佈那天
 ---
 ```
 
 其他可選欄位：
 
 ```yaml
-modified: 2025-03-20       # 強制鎖死「最後更新日」（覆蓋 git 計算結果）
+modified: 2025-03-20 # 強制鎖死「最後更新日」（覆蓋 git 計算結果）
 ```
 
 通常**不需要**手動設 `modified`。git commit 已經自動追蹤了。只在「修一個錯字不想讓更新日跳到今天」這種情境才會用到。
@@ -181,17 +181,17 @@ modified: 2025-03-20       # 強制鎖死「最後更新日」（覆蓋 git 計�
 
 對 upstream `v4.5.2` 的實質改動：
 
-| 檔案 | 改了什麼 |
-|---|---|
-| `quartz/styles/custom.scss` | ~1,200 行的整體視覺主題：字型（Source Serif 4 編輯風 serif 標題 + Inter humanist sans body + zh-Hant CJK fallback）、theme-factory「Sunset Boulevard」配色（暖沙 + 焦橘 + 深紫，dark mode 倒置）、響應式版型（mobile/tablet/desktop/wide）、TOC 雙模式（桌機右側、手機/平板上方卡片）、首頁 hero、scrollbars、selection、focus rings 等。**首頁 (`body[data-slug="index"]`) 套用獨立的 Anthropic Claude design 配色 token（暖米 + 珊瑚），作為品牌識別 —— 但字型、版型、響應式行為等其他 UX 一律與內頁一致**。 |
-| `quartz/styles/variables.scss` | sidebar 寬度 `320px → 260px`，`topSpacing 6rem → 4rem`。 |
-| `quartz/components/ContentMeta.tsx` | meta 行同時顯示**原始發佈日**（`created`）與**最後更新日**（`modified`）。原版只顯示 `defaultDateType` 對應的單一日期。 |
+| 檔案                                | 改了什麼                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `quartz/styles/custom.scss`         | ~1,200 行的整體視覺主題：字型（Source Serif 4 編輯風 serif 標題 + Inter humanist sans body + zh-Hant CJK fallback）、theme-factory「Sunset Boulevard」配色（暖沙 + 焦橘 + 深紫，dark mode 倒置）、響應式版型（mobile/tablet/desktop/wide）、TOC 雙模式（桌機右側、手機/平板上方卡片）、首頁 hero、scrollbars、selection、focus rings 等。**首頁 (`body[data-slug="index"]`) 套用獨立的 Anthropic Claude design 配色 token（暖米 + 珊瑚），作為品牌識別 —— 但字型、版型、響應式行為等其他 UX 一律與內頁一致**。 |
+| `quartz/styles/variables.scss`      | sidebar 寬度 `320px → 260px`，`topSpacing 6rem → 4rem`。                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `quartz/components/ContentMeta.tsx` | meta 行同時顯示**原始發佈日**（`created`）與**最後更新日**（`modified`）。原版只顯示 `defaultDateType` 對應的單一日期。                                                                                                                                                                                                                                                                                                                                                                                        |
 
 **站台層級設定**（不算 quartz core，但會影響行為）：
 
-| 檔案 | 用途 |
-|---|---|
-| `quartz.config.ts` | 站台設定：`pageTitle`、`locale: zh-TW`、配色 token、字型、`baseUrl`、plugins 開關 |
+| 檔案               | 用途                                                                                                     |
+| ------------------ | -------------------------------------------------------------------------------------------------------- |
+| `quartz.config.ts` | 站台設定：`pageTitle`、`locale: zh-TW`、配色 token、字型、`baseUrl`、plugins 開關                        |
 | `quartz.layout.ts` | 頁面組裝：左 sidebar 內容、右 sidebar 內容、`beforeBody` 中的 TOC 雙置策略、`isHome` conditional renders |
 
 `.prettierignore` 把 `quartz/` 排除在 `npm run format` 之外，避免格式化雜訊污染 fork diff。
@@ -259,12 +259,12 @@ git push
 
 `.github/workflows/deploy.yml` 的觸發邏輯：
 
-| 觸發 | build 跑嗎？ | deploy 跑嗎？ |
-|---|---|---|
-| push 到 `main` | ✅ | ✅ —— 上 GitHub Pages |
-| push 到任何其他 branch | ✅（CI sanity check） | ❌ |
-| 開 PR / 更新 PR | ✅（CI sanity check） | ❌ |
-| 手動 `workflow_dispatch` | ✅ | ✅（從 main 跑時） |
+| 觸發                     | build 跑嗎？          | deploy 跑嗎？         |
+| ------------------------ | --------------------- | --------------------- |
+| push 到 `main`           | ✅                    | ✅ —— 上 GitHub Pages |
+| push 到任何其他 branch   | ✅（CI sanity check） | ❌                    |
+| 開 PR / 更新 PR          | ✅（CI sanity check） | ❌                    |
+| 手動 `workflow_dispatch` | ✅                    | ✅（從 main 跑時）    |
 
 也就是說 **任何 branch / PR push 都會跑 build**，**只有 main push 會 deploy**。這給你一個免費的 sanity check：壞 markdown、broken wikilink、build error 在合併到 main 之前就會被擋下。
 
@@ -284,10 +284,10 @@ checkout → npm install → check wikilinks → npx quartz build
 
 兩條獨立 CI 各自負責一類連結：
 
-| Workflow | 觸發 | 檢查範圍 | 失敗時 |
-|---|---|---|---|
-| `deploy.yml`（`check-wikilinks` step） | 每次 push / PR | `[[wikilink]]` 是否解析到存在的 `.md` | 擋 build → main 不 deploy |
-| `link-check.yml`（lychee） | 週一 03:00 UTC + 手動觸發 | `content/**/*.md` 中所有 `http(s)://` 外部連結 | 自動在 Issues 開一張 `link-check` label 的 issue，不擋 deploy |
+| Workflow                               | 觸發                      | 檢查範圍                                       | 失敗時                                                        |
+| -------------------------------------- | ------------------------- | ---------------------------------------------- | ------------------------------------------------------------- |
+| `deploy.yml`（`check-wikilinks` step） | 每次 push / PR            | `[[wikilink]]` 是否解析到存在的 `.md`          | 擋 build → main 不 deploy                                     |
+| `link-check.yml`（lychee）             | 週一 03:00 UTC + 手動觸發 | `content/**/*.md` 中所有 `http(s)://` 外部連結 | 自動在 Issues 開一張 `link-check` label 的 issue，不擋 deploy |
 
 分工邏輯：
 
@@ -310,11 +310,11 @@ lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Sp
 
 `.github/workflows/sync-hackmd.yml`：
 
-| 觸發 | 行為 |
-|---|---|
+| 觸發                                                                                | 行為     |
+| ----------------------------------------------------------------------------------- | -------- |
 | push 到 `main` 且改了 `content/**/*.md`、`scripts/sync-hackmd.mjs` 或 sync workflow | 自動同步 |
-| 手動 `workflow_dispatch` | 強制同步 |
-| 其他（push 別的 branch、PR、改 README 等） | 不觸發 |
+| 手動 `workflow_dispatch`                                                            | 強制同步 |
+| 其他（push 別的 branch、PR、改 README 等）                                          | 不觸發   |
 
 `scripts/sync-hackmd.mjs` 對每個 `.md` 算內容 hash，跟 `.hackmd-sync/mapping.json` 對照——新檔 POST、變動 PATCH、無變動 skip。完成後 mapping.json 由 CI 自動 commit 回 repo（`[skip ci]`）。
 
@@ -324,13 +324,13 @@ lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Sp
 
 ### 邊角案例
 
-| 動作 | HackMD 端 |
-|---|---|
-| 新增 `.md` | 自動建立新 note |
-| 改內容 | 自動 PATCH 對應 note |
-| **刪 `.md`** | ⚠️ **不會自動刪** HackMD 那篇，要手動到 HackMD 砍 |
-| **改檔名** | ⚠️ 被當新檔建新 note，舊的變孤兒；想保留歷史要手動改 mapping 的 key |
-| 圖片內嵌 `![[xxx.png]]` | ⚠️ HackMD 不會 render，顯示原始文字 |
+| 動作                    | HackMD 端                                                           |
+| ----------------------- | ------------------------------------------------------------------- |
+| 新增 `.md`              | 自動建立新 note                                                     |
+| 改內容                  | 自動 PATCH 對應 note                                                |
+| **刪 `.md`**            | ⚠️ **不會自動刪** HackMD 那篇，要手動到 HackMD 砍                   |
+| **改檔名**              | ⚠️ 被當新檔建新 note，舊的變孤兒；想保留歷史要手動改 mapping 的 key |
+| 圖片內嵌 `![[xxx.png]]` | ⚠️ HackMD 不會 render，顯示原始文字                                 |
 
 ### Token rotate / revoke
 

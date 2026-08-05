@@ -16,6 +16,7 @@ sources/  →  drafts/  →  content/
 **內容不進 git**（見專案根 `.gitignore`）。只有 `README.md` 和 `.gitkeep` 會被追蹤，用來保留資料夾結構與用途說明。
 
 理由：
+
 - HackMD 原稿可能含私人筆記、學員資訊、未編輯措辭
 - 匯出常含 base64 內嵌圖或外部圖連，commit 進去會肥
 - 是單向流程，搬到 `content/` 之後就不再回頭改原稿

@@ -21,10 +21,10 @@ fatal: Authentication failed for 'https://github.com/...'
 
 剩下兩條路：
 
-| 方式 | 優點 | 缺點 |
-|------|------|------|
-| **HTTPS + Personal Access Token (PAT)** | 設定快，跟密碼一樣輸入 | Token 有期限，到期要換；複雜密碼難記、難存 |
-| **SSH 金鑰** | 一次設定終身用，命令列不用輸入任何密碼 | 第一次有點概念門檻 |
+| 方式                                    | 優點                                   | 缺點                                       |
+| --------------------------------------- | -------------------------------------- | ------------------------------------------ |
+| **HTTPS + Personal Access Token (PAT)** | 設定快，跟密碼一樣輸入                 | Token 有期限，到期要換；複雜密碼難記、難存 |
+| **SSH 金鑰**                            | 一次設定終身用，命令列不用輸入任何密碼 | 第一次有點概念門檻                         |
 
 對長期使用者，**SSH 是正解**。而且如果你同時有公司、個人帳號（多 GitHub account），SSH 透過 `~/.ssh/config` 切換比 PAT 乾淨太多。
 
@@ -85,13 +85,13 @@ Host github.com
 
 各行解讀：
 
-| 設定 | 作用 |
-|------|------|
-| `Host github.com` | 之後遇到 `git@github.com` 就套這個 block |
-| `IdentityFile` | 指定要用哪把 key |
+| 設定                 | 作用                                                                                           |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| `Host github.com`    | 之後遇到 `git@github.com` 就套這個 block                                                       |
+| `IdentityFile`       | 指定要用哪把 key                                                                               |
 | `IdentitiesOnly yes` | **只用** `IdentityFile` 指定的這把，不要試其他 key（避免「Too many authentication failures」） |
-| `UseKeychain yes` | macOS 專用：把 passphrase 存到 Keychain，每次自動解鎖 |
-| `AddKeysToAgent yes` | 開機後自動把 key 加進 ssh-agent |
+| `UseKeychain yes`    | macOS 專用：把 passphrase 存到 Keychain，每次自動解鎖                                          |
+| `AddKeysToAgent yes` | 開機後自動把 key 加進 ssh-agent                                                                |
 
 存檔後設權限（一定要）：
 

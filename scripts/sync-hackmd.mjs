@@ -105,8 +105,7 @@ function convertWikilinks(text) {
   return { text: lines.join("\n"), warnings };
 }
 
-const hashOf = (s) =>
-  createHash("sha256").update(s).digest("hex").slice(0, 16);
+const hashOf = (s) => createHash("sha256").update(s).digest("hex").slice(0, 16);
 
 async function api(method, path, body) {
   const r = await fetch(`${API}${path}`, {
