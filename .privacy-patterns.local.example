@@ -1,0 +1,25 @@
+# Extra privacy patterns for `npm run check:privacy`
+#
+# Copy to `.privacy-patterns.local` (gitignored) and fill in the strings
+# that are specific to you. They stay on your machine — the scanner reads
+# this file at runtime, so the repo never learns what it is looking for.
+#
+# One JavaScript regex per line, matched case-insensitively.
+# Blank lines and lines starting with # are ignored.
+#
+# The built-in rules in scripts/check-privacy.mjs already cover the
+# structural stuff (styled Unicode, emails, home paths, private IPs,
+# phone numbers, tokens). This file is for literal strings only:
+#
+#   - your real name, in every spelling you have ever used
+#     (Chinese, English, initials, and the romanisation on your passport)
+#   - employer / client / brand names that are not yours to publish
+#   - old usernames and domains you no longer want associated with you
+#   - family members' and colleagues' names
+#
+# Examples (delete these, they are placeholders):
+#
+# \b王小明\b
+# \bxiaoming\b
+# \bacme[-\s]?corp\b
+# old-blog-subdomain

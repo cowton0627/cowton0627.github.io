@@ -32,8 +32,9 @@ npx quartz build --serve   # http://localhost:8080，watch + hot reload
 
 ```bash
 npx quartz build           # 一次性 build → public/
-npm run check              # tsc + prettier check + wikilink 完整性檢查
+npm run check              # tsc + prettier + wikilink + 個資掃描（全部）
 npm run check:links        # 只檢查 wikilink 是否都對應到存在的檔案
+npm run check:privacy      # 只掃 content/ 有沒有個資或憑證外洩
 npm run format             # prettier --write（已透過 .prettierignore 排除 quartz/）
 npm run docs               # 在本機跑 Quartz 官方文件（_upstream-docs/）
 ```
@@ -299,6 +300,41 @@ lychee `--accept` 放行 `403 / 429 / 503 / 999`（站還在但擋 bot 或 HF Sp
 手動觸發：[Actions → External link check → Run workflow](https://github.com/cowton0627/cowton0627.github.io/actions/workflows/link-check.yml)。
 
 > **注意**：GitHub 會在 repo **60 天無任何 activity** 後自動停用「排程觸發」的 workflow（只影響 cron 的 `link-check.yml`；push 觸發的 `deploy.yml` / `sync-hackmd.yml` 不受影響）。滿 60 天前會先收到預警信。處理方式任一：收到信時點「Keep this workflow enabled」、跑 `gh workflow enable link-check.yml -R cowton0627/cowton0627.github.io`（被停用後也可用同指令復活）、或任意 push 一個 commit 重置計時。2026-07-14 曾發生一次，已用 gh 指令續命。
+
+---
+
+## 個資外洩檢查
+
+`scripts/check-privacy.mjs` 掃 `content/**/*.md`，在 push 時由 `deploy.yml` 執行，**發現就擋 deploy**。
+
+擋 build 而不是開 issue，是因為個資一旦發佈就同時被 HackMD 鏡像與搜尋引擎索引，**revert commit 兩邊都收不回來**——寧可讓 build 失敗。
+
+### 內建規則（都是「形狀」，不是字串）
+
+| 規則               | 抓什麼                                                             |
+| ------------------ | ------------------------------------------------------------------ |
+| `styled-unicode`   | 花體 / 全形英文字母（U+1D400、U+FF21 區段）                        |
+| `personal-email`   | 真實 email                                                         |
+| `home-path`        | `/Users/xxx`、`/home/xxx` 這種含帳號名的絕對路徑                   |
+| `private-ip`       | RFC1918 內網 IP 與 100.64/10 CGNAT（Tailscale 配發的位址）         |
+| `tw-mobile`        | 台灣手機號碼，含黏在網域上的形式（`abc0912345678.example.com`）    |
+| `credential`       | `ghp_` / `github_pat_` / `sk-` / `AKIA` / `xox?-` 開頭的真實 token |
+| `cloud-project-id` | GCP 專案 ID                                                        |
+
+`styled-unicode` 這條是有來歷的：SEO 筆記裡的英文本名是用數學粗體字元（𝐂𝗵𝐚𝗿𝗹𝗲𝘀）寫的，**純 ASCII grep 完全搜不到**——那些字元根本不是它們看起來的字母。純靠肉眼或字串搜尋不會發現這類洩漏。
+
+### 本機自訂樣式
+
+腳本本身在**公開 repo** 裡，所以規則一律寫成結構樣式，絕不寫死真名之類的字串——否則掃描器本身就是洩漏源。只能用字面字串表達的（本名、雇主名、舊帳號），放在：
+
+```bash
+cp .privacy-patterns.local.example .privacy-patterns.local
+# 編輯後填入你自己的字串，這個檔在 .gitignore 裡，不會進 git
+```
+
+### 誤判怎麼辦
+
+刻意公開的字串（例如自己的 Medium handle）加進 `scripts/check-privacy.mjs` 的 `ALLOW` 陣列，**並附一行理由**。每加一筆就是在網子上開一個洞，不要為了讓 CI 過就亂加——真正敏感的字串一律放本機 local 檔。
 
 ---
 

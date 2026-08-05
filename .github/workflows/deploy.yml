@@ -54,6 +54,18 @@ jobs:
             echo "scripts/check-wikilinks.mjs not present, skipping."
           fi
 
+      # Blocks the deploy if content/ contains a personal identifier or a
+      # credential. Deliberately a hard failure: once a leak is published
+      # it is also mirrored to HackMD and indexed, and reverting the commit
+      # does not unpublish either. Cheaper to fail the build.
+      - name: Check for privacy leaks
+        run: |
+          if [ -f scripts/check-privacy.mjs ]; then
+            node scripts/check-privacy.mjs
+          else
+            echo "scripts/check-privacy.mjs not present, skipping."
+          fi
+
       - name: Build Quartz
         run: npx quartz build
 
