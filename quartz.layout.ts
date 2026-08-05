@@ -1,20 +1,10 @@
 import { PageLayout, SharedLayout } from "./quartz/cfg";
 import * as Component from "./quartz/components";
 
-// Components shared across all pages
-export const sharedPageComponents: SharedLayout = {
-  head: Component.Head(),
-  header: [],
-  afterBody: [],
-  footer: Component.Footer({
-    links: {
-      GitHub: "https://github.com/cowton0627/cowton0627.github.io",
-    },
-  }),
-};
-
 // Home page only: auto-listed recent notes after article body.
 // Replaces the manually-curated "開始閱讀" list — scales without maintenance.
+// Declared before sharedPageComponents because it is referenced there (const
+// is not hoisted).
 const homeAfterBody = [
   Component.ConditionalRender({
     component: Component.RecentNotes({
@@ -31,6 +21,23 @@ const homeAfterBody = [
     condition: (page) => (page.fileData.slug ?? "") === "index",
   }),
 ];
+
+// Components shared across all pages
+export const sharedPageComponents: SharedLayout = {
+  head: Component.Head(),
+  header: [],
+  // `afterBody` belongs to SharedLayout, not PageLayout — declaring it on
+  // defaultContentPageLayout type-errors (it still rendered at runtime via the
+  // spread in the emitters, which is why it went unnoticed). The component is
+  // ConditionalRender'd on slug === "index", so living here is still
+  // home-page-only.
+  afterBody: homeAfterBody,
+  footer: Component.Footer({
+    links: {
+      GitHub: "https://github.com/cowton0627/cowton0627.github.io",
+    },
+  }),
+};
 
 // Left rail: identity + search bar + tools + explorer
 const leftSidebar = [
@@ -77,7 +84,6 @@ export const defaultContentPageLayout: PageLayout = {
       condition: (page) => !isHome(page),
     }),
   ],
-  afterBody: homeAfterBody,
   left: leftSidebar,
   right: [
     Component.ConditionalRender({
