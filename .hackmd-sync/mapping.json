@@ -5,7 +5,7 @@
   },
   "content/程式/Cloudflare Pages 設定 Branch Preview.md": {
     "id": "lg-bNt8QQl2TgDGHLyD-ZQ",
-    "hash": "1b42202a520a0fd1"
+    "hash": "e3b67b7b77869d81"
   },
   "content/程式/Git.md": {
     "id": "UAcdvo61RdWQ4yAcRteJGg",
@@ -13,11 +13,11 @@
   },
   "content/程式/GitHub SSH 設定.md": {
     "id": "sU98YI3gS6iveVNZwWOVYQ",
-    "hash": "6f2e50762ed9721c"
+    "hash": "ae9a9b35751c471e"
   },
   "content/程式/JMESPath.md": {
     "id": "D-POtNXDQemSR5-sIbMvFA",
-    "hash": "1763862d40530354"
+    "hash": "036ef1011a5185ac"
   },
   "content/程式/index.md": {
     "id": "ctnauXInREKSfB_21wYAuA",
@@ -29,7 +29,7 @@
   },
   "content/自媒體/index.md": {
     "id": "cutcySS2RHa1lI0yKGQJlA",
-    "hash": "1654d10ce114d6f0"
+    "hash": "ddcfbeaa9f5dacb8"
   },
   "content/自媒體/器材/index.md": {
     "id": "dOhP-VXbStyWk9nqVRauUQ",
@@ -37,11 +37,11 @@
   },
   "content/自媒體/器材/自媒體器材.md": {
     "id": "1t6tINEqTPqnVrLtlm5RQg",
-    "hash": "cd310239f3eb3d39"
+    "hash": "9208ae6646c9e955"
   },
   "content/自媒體/工具/RSS Reader.md": {
     "id": "mwL9ISyKS5OYC6f62Q1xwQ",
-    "hash": "cb199bf300641a93"
+    "hash": "e995c366a402f19b"
   },
   "content/自媒體/工具/index.md": {
     "id": "dulmwfhTRCaH9PYyk20HOQ",
@@ -49,19 +49,19 @@
   },
   "content/自媒體/工具/工具集.md": {
     "id": "EuWOScC-T8W2nduPh05z8g",
-    "hash": "7216bdac2d7d2aa6"
+    "hash": "cf9a72234159721f"
   },
   "content/自媒體/工具/快速發文工具 - dlvr.it.md": {
     "id": "m6hQh5nwS2WQmwanti7WUg",
-    "hash": "945c75e554fa6792"
+    "hash": "c076bbb06aecbb17"
   },
   "content/自媒體/工具/生成式 AI - Suno AI.md": {
     "id": "WhlDlzJeQFqMyzzkFarUjw",
-    "hash": "2dc37b3473b789c4"
+    "hash": "79b5d4eef19b53bc"
   },
   "content/自媒體/工具/生成式 AI 概論.md": {
     "id": "dTBahj-uTti9mJXPW5eLfQ",
-    "hash": "4c06b3b8c9822317"
+    "hash": "c4ffbebbff06f9ee"
   },
   "content/自媒體/平台/SEO.md": {
     "id": "NTgtHmQOSDiRYQTmve2f3Q",
@@ -69,19 +69,19 @@
   },
   "content/自媒體/平台/index.md": {
     "id": "O06WVQmcSe6noTBN4n2jjQ",
-    "hash": "a6152b70b71808a1"
+    "hash": "b9e7019a9774d98d"
   },
   "content/自媒體/平台/上架 Podcast.md": {
     "id": "c9MH-icfQGSXzYFhS3hqlw",
-    "hash": "55817a83a58008e4"
+    "hash": "3d378daf7e1f5700"
   },
   "content/自媒體/平台/社群第一步.md": {
     "id": "B3ZDb01GQrSsDmOQT9Ojrg",
-    "hash": "b32ed5a11617ed6e"
+    "hash": "3515655fe9eaebe3"
   },
   "content/讀書會/Space Bound.md": {
     "id": "pQi5iV1GR3yqApS1qEi3Zg",
-    "hash": "aa52869f149535ec"
+    "hash": "d34b3d3e5ebbfbed"
   },
   "content/讀書會/index.md": {
     "id": "zhu853lCQ5CjepMfBZKX-A",
@@ -89,7 +89,7 @@
   },
   "content/讀書會/分眾行銷與永續發展.md": {
     "id": "ZxvA6EgpS2-ervfW75xwPA",
-    "hash": "596c69af9fce4ee3"
+    "hash": "35680c312ace02d6"
   },
   "content/讀書會/反托辣斯.md": {
     "id": "YqwpUZbdQgq8noHa1Kj0RA",
@@ -97,6 +97,22 @@
   },
   "content/讀書會/後設戲劇.md": {
     "id": "_3a7m2s_SumxOiOVBVLtyA",
-    "hash": "60e1b0c1988d5edc"
+    "hash": "3fb1ffd02a93be14"
+  },
+  "content/自媒體/平台/LinkedIn 經營起手式.md": {
+    "id": "JZCYfc75SGOgp5D2Z60IBg",
+    "hash": "5f222757c81bdbe6"
+  },
+  "content/自媒體/後製/index.md": {
+    "id": "6gtgGLgqRRKdYF5K8HUvCg",
+    "hash": "27c0bc2e565f0eda"
+  },
+  "content/自媒體/後製/字幕清理與台灣字幕慣例.md": {
+    "id": "0lx4HPEGTtyFJtC2FrTKNQ",
+    "hash": "f56b1c80bcb68d0e"
+  },
+  "content/自媒體/後製/響度正規化與降噪.md": {
+    "id": "-txyNZc5T6S09at3rmzbcg",
+    "hash": "32e9ffb3c0dd261a"
   }
 }
