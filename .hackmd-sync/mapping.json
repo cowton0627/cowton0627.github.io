@@ -21,11 +21,11 @@
   },
   "content/程式/index.md": {
     "id": "ctnauXInREKSfB_21wYAuA",
-    "hash": "82a389f9991390d2"
+    "hash": "0ebe6e37bc69d898"
   },
   "content/程式/用 GWS + Claude Code 整理 Gmail.md": {
     "id": "mbyd-4puQYuBEgzkpjMCRw",
-    "hash": "5e4f65e85f223c0f"
+    "hash": "14dada07b28b1180"
   },
   "content/自媒體/index.md": {
     "id": "cutcySS2RHa1lI0yKGQJlA",
@@ -114,5 +114,21 @@
   "content/自媒體/後製/響度正規化與降噪.md": {
     "id": "-txyNZc5T6S09at3rmzbcg",
     "hash": "32e9ffb3c0dd261a"
+  },
+  "content/程式/從外面連回家裡的內網服務.md": {
+    "id": "QMFeSQs8T82b1cQ-rTpRNA",
+    "hash": "8e499d67ba42b75c"
+  },
+  "content/程式/手機用 obsidian-git 同步筆記.md": {
+    "id": "EUf0EXT_Tn-T9p8MZaXB5w",
+    "hash": "295d7e42735d715c"
+  },
+  "content/程式/自架服務要開給誰用.md": {
+    "id": "v4rZHIezRHe669imClxWJQ",
+    "hash": "8526f41fd6bfb041"
+  },
+  "content/程式/開源密碼管理器選擇.md": {
+    "id": "cJmGf8QDSe23wn-8OjKEQQ",
+    "hash": "fed55dcbea49bf71"
   }
 }
