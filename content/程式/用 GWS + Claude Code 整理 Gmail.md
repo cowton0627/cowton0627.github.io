@@ -107,8 +107,8 @@ Please enter numeric choice or text value (must exactly match list item):
 ```
 ┌ gws auth setup ────────────────────────────────────────────────────────────┐
 │ ✓ Step 1/5: gcloud CLI — found                                              │
-│ ✓ Step 2/5: Authentication — cowton0517@gmail.com                           │
-│ ✓ Step 3/5: GCP project — gen-lang-client-0328037602                        │
+│ ✓ Step 2/5: Authentication — yourMail@gmail.com                             │
+│ ✓ Step 3/5: GCP project — gen-lang-client-XXXXXXXXXX                        │
 │ ▸ Step 4/5: Workspace APIs                                                  │
 │ ○ Step 5/5: OAuth credentials                                               │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -199,7 +199,7 @@ gws gmail users messages list --params '{"userId":"me","labelIds":["INBOX"],"max
 From、Subject、Date、labelIds、snippet、sizeEstimate。
 
 請輸出：
-/Users/chunlicheng/Desktop/inbox_cleanup_review.csv
+~/Desktop/inbox_cleanup_review.csv
 
 分類成：
 1. keep
