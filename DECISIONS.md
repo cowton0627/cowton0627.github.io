@@ -7,6 +7,33 @@
 
 ---
 
+## D-014 · 個資外洩掃描擋 deploy（規則寫「形狀」，字面字串走 local 檔）
+
+- **日期**：2026-08-05
+- **背景**：整理 `content/` 時發現 SEO 筆記夾帶了個人識別資訊，其中英文本名是用**數學粗體 Unicode**（U+1D400 區段）寫的——連續幾輪 `grep` 都掃不到，因為那些字元根本不是它們看起來的 ASCII 字母。同一篇還有疑似手機號碼的 wordpress 子網域、以及點名第三方公司當反例。另在 Gmail 教學文找到個人 email、GCP 專案 ID、含使用者名的絕對路徑（都是貼 CLI 輸出時連帶帶進去的）
+- **選項考慮過**：
+  - 不做，靠人工 review — 已證明無效，這次就是人工看了好幾輪才發現
+  - 只在本機做 pre-commit hook — hook 不進 git，換機器就失效，也擋不住 GUI client 以外的路徑
+  - weekly cron 開 issue（比照 D-010 的外部連結）— 發現時已經發佈了
+  - **CI 擋 deploy**（選這個）
+- **決定**：
+  - `scripts/check-privacy.mjs` 掃 `content/**/*.md`，接進 `deploy.yml`、`npm run check`、`npm run check:privacy`
+  - **發現就擋 build，main 不 deploy**
+  - 七條內建規則全部是結構樣式：花體/全形 Unicode、email 文法、`/Users|/home/<帳號>` 路徑、RFC1918 + 100.64/10 CGNAT IP、台灣手機號碼、token 前綴、GCP 專案 ID
+  - 字面字串（本名、雇主名、舊帳號）走 gitignored 的 `.privacy-patterns.local`，附 `.example` 範本
+  - 刻意公開的字串（Medium handle、`git@github.com`、noreply email、佔位符）進腳本的 `ALLOW` 陣列，每筆附理由
+- **理由**：
+  - **擋 build 而不是開 issue**：個資一發佈就同時被 HackMD 鏡像（D-013）與搜尋引擎索引，**revert commit 兩邊都收不回來**。外部連結腐爛可以慢慢修，這個不行
+  - **規則寫形狀不寫字串**：這個腳本本身在 public repo，把真名硬編進去等於掃描器自己就是洩漏源。這是設計上的硬約束，不是風格偏好
+  - 結構規則才抓得到「看起來像字母但不是字母」這類洩漏，純字串搜尋抓不到——這正是本次的起因
+- **驗證**：用 fixture 測 13 種洩漏樣態全部命中；同時確認 Medium handle、`git@github.com`、noreply email、`yourMail@gmail.com`、CGNAT 範圍外 IP、一般九位數字都正確放行。第一版的 ALLOW 比對用「整行位置」判斷，會誤殺 noreply email，是這個測試抓出來的
+- **未解**：
+  - `.privacy-patterns.local` 目前只有英文名與雇主網域，**中文本名尚未填**
+  - 只掃 `content/`。README、DECISIONS、commit message 不在範圍內
+  - HackMD 端已發佈的內容不會因為 repo 修好而回溯——真要撤下得另外去 HackMD 刪，並清掉 `.hackmd-sync/mapping.json` 對應條目
+
+---
+
 ## D-013 · KnowledgeBase → HackMD 單向同步（API + hash-based skip）
 
 - **日期**：2026-05-14
