@@ -22,3 +22,6 @@ drafts/*
 
 # Personal privacy patterns for scripts/check-privacy.mjs (never committed)
 .privacy-patterns.local
+
+# TypeScript 增量編譯快取（跑 tsc --noEmit 就會產生）
+tsconfig.tsbuildinfo

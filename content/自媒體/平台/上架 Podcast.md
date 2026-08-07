@@ -10,7 +10,12 @@ created: 2026-05-04
 
 未免與自己本來的帳號相衝突，或社群操作時，影響到本來的帳號，建議申請一個新的 Google 帳號，每當使用新服務時，就利用此帳號登入。
 
-## 透過 SoundOn、Fistory、Anchor 上架多平台，以 SoundOn 為例。
+## 透過 SoundOn、Firstory 等託管平台上架多平台，以 SoundOn 為例
+
+> [!note] 關於 Anchor
+> 早期的教學常提到 **Anchor** 這個免費託管服務。它已被 Spotify 收購並收掉品牌，功能併入 Spotify 自家的創作者後台（現名 **Spotify for Creators**）。
+>
+> 現在看到寫著「用 Anchor 上架」的文章，一律當成過時資料處理。台灣創作者常用的託管平台是 **SoundOn** 與 **Firstory**。
 
 ### 什麼是 RSS Feed?
 

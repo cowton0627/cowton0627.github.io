@@ -41,7 +41,12 @@ created: 2026-05-04
 ### 緣起
 
 1. 對話機器人是 text to text (文字轉文字)的機器學習模型的應用，而**繪圖機器人**則是 text to image (文生圖)，或 image to image (圖生圖)的應用。
-2. 在這個前提下，有一個相當有名的模型叫做 stable diffusion，就連著名的 Midjourney 繪圖機器人的基底也是 stable diffusion。
+2. 在這個前提下，有一個相當有名的開源模型叫做 **Stable Diffusion**。
+
+   > [!warning] 常見誤解：Midjourney 不是基於 Stable Diffusion
+   > 兩者同屬 **latent diffusion（潛在擴散）** 這一大類技術，但 Midjourney 是自研架構、用自己的訓練叢集訓練的閉源模型，並非建立在 Stable Diffusion 之上。
+   > 「同一類技術」跟「基於同一個模型」是兩回事。
+
 3. 生圖模型的原理可理解為，對像素分類並作矩陣運算，接著處理，這是 CNN (卷積神經網路)在做的事。
 4. 我們在圖像加上遮罩，接著還原，重複這個過程，即是重繪生成。
 
