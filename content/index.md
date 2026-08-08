@@ -22,6 +22,11 @@ cssclasses:
 - [[程式/|💻 程式]]
 - [[讀書會/|📚 讀書會]]
 
+## 我在別的地方
+
+- 🐙 GitHub：[@cowton0627](https://github.com/cowton0627) — iOS App、AI 內容管線、個人工具，這裡寫的東西大多有對應的實作
+- 🧵 Threads：[@Cowton0627](https://www.threads.net/@Cowton0627)
+
 ## 關於
 
 - 來源：[Obsidian](https://obsidian.md) Vault
