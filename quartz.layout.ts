@@ -35,7 +35,7 @@ export const sharedPageComponents: SharedLayout = {
   footer: Component.Footer({
     links: {
       GitHub: "https://github.com/cowton0627",
-      Threads: "https://www.threads.net/@Cowton0627",
+      Threads: "https://www.threads.com/@charles.cheng.0627",
       "本站原始碼": "https://github.com/cowton0627/cowton0627.github.io",
     },
   }),
