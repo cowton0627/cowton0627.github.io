@@ -140,7 +140,8 @@
 ## D-011 · git history 統一作者為 GitHub noreply email（隱私清理）
 
 - **日期**：2026-05-11
-- **背景**：原本本機 `git config user.email` 是公司身分 `[redacted]`，77 個 commits 的 author + committer 全部用該 email。此 repo 是 public GitHub Pages 站，公司 email 隨 `git log` 完全公開
+- **背景**：原本本機 `git config user.email` 是公司網域的工作信箱，77 個 commits 的 author + committer 全部用該 email。此 repo 是 public GitHub Pages 站，公司 email 隨 `git log` 完全公開
+  - 註：這則紀錄刻意不寫出該信箱本身。清理紀錄若把被清掉的字串原樣抄進來，等於又把它公開一次 —— 寫類別不寫值就夠讀懂了
 - **選項考慮過**：
   - 不管它 — 接受公司 email 永遠暴露
   - 加 `.mailmap` 蓋顯示 — cosmetic only，GitHub UI 不看 `.mailmap`，commit object 仍可被挖
@@ -154,7 +155,7 @@
 - **mailmap 規則**（供未來再做時參考）：
 
   ```
-  cowton0627 <83654992+cowton0627@users.noreply.github.com> <[redacted]>
+  cowton0627 <83654992+cowton0627@users.noreply.github.com> <舊的工作信箱>
   ```
 
 - **未解**：
